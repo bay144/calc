@@ -2,13 +2,51 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
-<meta name="google-site-verification" content="zlZDkaL7xllJMbF5pT5XYuc5QPNmrZuw60bYfVO2em8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Ledger — Savings &amp; Growth Calculator</title>
+<meta name="google-site-verification" content="zlZDkaL7xllJMbF5pT5XYuc5QPNmrZuw60bYfVO2em8" />
+
+<title>Ledger — Savings Target &amp; Compound Growth Calculator</title>
+<meta name="description" content="Use Ledgr's free interactive savings target and compound growth calculator to map out your wealth goals, evaluate monthly contributions, and track compound interest." />
+<meta name="robots" content="index, follow" />
+<link rel="canonical" href="https://www.ledgrcalc.com/" /> 
+
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="Ledger" />
+<meta property="og:title" content="Ledger — Savings Target & Compound Growth Calculator" />
+<meta property="og:description" content="Use Ledgr's free interactive savings target and compound growth calculator to map out your wealth goals, evaluate monthly contributions, and track compound interest." />
+<meta property="og:url" content="https://www.ledgrcalc.com/" /> 
+<meta property="og:image" content="https://www.example.com/og-image.png" /> <!-- TODO: add a 1200x630 preview image -->
+
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Ledger — Savings Target & Compound Growth Calculator" />
+<meta name="twitter:description" content="Use Ledgr's free interactive savings target and compound growth calculator to map out your wealth goals, evaluate monthly contributions, and track compound interest." />
+
+<meta name="theme-color" content="#0A0E13" />
 
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,500;0,600;1,500;1,600&family=Inter:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Ledger",
+  "url": "https://www.example.com/",
+  "description": "Use Ledgr's free interactive savings target and compound growth calculator to map out your wealth goals, evaluate monthly contributions, and track compound interest.",
+  "applicationCategory": "FinanceApplication",
+  "operatingSystem": "Any",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  }
+}
+</script>
+
+<!-- AD NETWORK SCRIPT: drop your ad provider's loader tag here, e.g. Google AdSense:
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX" crossorigin="anonymous"></script>
+-->
 
 <script src="https://cdn.tailwindcss.com"></script>
 <script>
@@ -187,6 +225,45 @@
   }
 
   ::selection { background: rgba(212,178,103,0.3); }
+
+  /* Ad slots — responsive, fluid-width banners with reserved height to avoid layout shift */
+  .ad-slot {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    border: 1px dashed rgba(212,178,103,0.25);
+    background: rgba(255,255,255,0.02);
+    border-radius: 12px;
+    min-height: 100px;
+  }
+  @media (min-width: 640px) {
+    .ad-slot { min-height: 120px; }
+  }
+  .ad-slot .ad-label {
+    font-family: 'Inter', sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #6B7484;
+  }
+
+  /* SEO content prose */
+  .seo-copy h2 {
+    font-family: 'Fraunces', serif;
+  }
+  .seo-copy p, .seo-copy li {
+    line-height: 1.75;
+  }
+  .seo-copy ul {
+    list-style: disc;
+    padding-left: 1.25rem;
+  }
+  .seo-copy li::marker {
+    color: #D4B267;
+  }
 </style>
 </head>
 
@@ -203,6 +280,13 @@
       </div>
       <p class="text-sm sm:text-base text-slate-400 max-w-md">See exactly what your money will become — and exactly what it takes to get there.</p>
     </header>
+
+    <!-- Google AdSense Slot A -->
+    <div class="w-full max-w-4xl mx-auto mb-10 sm:mb-14">
+      <div class="ad-slot" data-ad-slot="slot-a-header-banner">
+        <span class="ad-label">Advertisement</span>
+      </div>
+    </div>
 
     <!-- Tab switcher -->
     <div class="flex justify-center mb-8 sm:mb-10">
@@ -387,9 +471,53 @@
       </div>
     </main>
 
-    <footer class="text-center mt-12 sm:mt-16">
-      <p class="text-xs text-slate-500">Estimates assume a constant monthly return compounded over time. For planning purposes only — not financial advice.</p>
+    <!-- Google AdSense Slot B -->
+    <div class="w-full max-w-4xl mx-auto mt-10 sm:mt-14">
+      <div class="ad-slot" data-ad-slot="slot-b-below-calculator">
+        <span class="ad-label">Advertisement</span>
+      </div>
+    </div>
+
+    <p class="text-xs text-slate-500 text-center max-w-2xl mx-auto mt-6">Estimates assume a constant monthly return compounded over time. For planning purposes only — not financial advice.</p>
+
+    <!-- SEO / educational content -->
+    <section class="seo-copy max-w-3xl mx-auto mt-14 sm:mt-20">
+      <h2 class="text-2xl sm:text-3xl font-medium text-slate-100 tracking-tight mb-6">How to Calculate and Reach Your Financial Savings Goals</h2>
+
+      <p class="text-slate-300 mb-5">
+        Every dollar you save does two jobs: it adds to your balance, and it earns a return that itself starts earning a return. That second effect — interest earning interest — is compounding, and it's the reason a plan started at 25 needs a much smaller monthly contribution than the same goal started at 40. The math doesn't care how the money got there; it only cares how long it's had to compound.
+      </p>
+
+      <p class="text-slate-300 mb-5">
+        A savings target is really three variables in tension: how much you want, how long you're willing to wait, and the annual return you can reasonably expect along the way. Stretch the timeline and the required monthly contribution drops fast, because more of the goal gets carried by growth instead of by new deposits. Shorten it, and contributions have to do more of the work. The Savings Target calculator above solves for the one number most people actually want answered: the monthly amount that makes the other two true.
+      </p>
+
+      <p class="text-slate-300 mb-8">
+        It's worth separating what you put in from what your money earns on its own. Total contributions are simply the sum of every deposit, with no growth assumed. Compound growth is everything above that — the return earned on your balance, then the return earned on that return, repeated every month. In the Growth Projector above, the bar breaking down total saved versus interest earned makes this split concrete. Over a long enough timeline, the growth segment can end up larger than everything you personally contributed.
+      </p>
+
+      <h3 class="text-lg sm:text-xl font-semibold text-slate-100 tracking-tight mb-4">Practical Strategies for Hitting Your Targets</h3>
+
+      <ul class="space-y-3 text-slate-300 mb-2">
+        <li><span class="text-slate-100 font-medium">Break the timeline into monthly milestones.</span> A ten-year, $50,000 goal is abstract; a fixed amount due on the 1st of every month is not. Milestones turn a distant number into a routine.</li>
+        <li><span class="text-slate-100 font-medium">Automate the transfer.</span> Move the contribution the day you're paid, before it reaches an account where it's easy to spend. Automated transfers remove the monthly decision entirely.</li>
+        <li><span class="text-slate-100 font-medium">Track progress somewhere visual.</span> A tracking sheet, a savings binder with a printed progress bar, or a simple spreadsheet works because it turns an invisible balance into something you check and mark off — the same way any habit tracker works.</li>
+        <li><span class="text-slate-100 font-medium">Revisit the plan annually.</span> A raise, a rate change, or a new expense should trigger a five-minute recheck of the calculator above, not a full re-plan from scratch.</li>
+        <li><span class="text-slate-100 font-medium">Start before it feels comfortable.</span> Because of compounding, the earliest contributions in a timeline carry the most weight — waiting for the "right" moment to start is usually the most expensive decision in the whole plan.</li>
+      </ul>
+    </section>
+
+    <!-- Google AdSense Slot C -->
+    <div class="w-full max-w-4xl mx-auto mt-14 sm:mt-16">
+      <div class="ad-slot" data-ad-slot="slot-c-page-bottom">
+        <span class="ad-label">Advertisement</span>
+      </div>
+    </div>
+
+    <footer class="text-center mt-10">
+      <p class="text-xs text-slate-600">© 2026 Ledger. All calculations are estimates for educational purposes only.</p>
     </footer>
+
   </div>
 
 <script>
