@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="google-site-verification" content="zlZDkaL7xllJMbF5pT5XYuc5QPNmrZuw60bYfVO2em8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Ledger — Savings &amp; Growth Calculator</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,500;0,600;1,500;1,600&family=Inter:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          ink: {
+            950: '#0A0E13',
+            900: '#10151C',
+            800: '#171E27',
+            700: '#212A35',
+            600: '#2B3542',
+          },
+          gold: {
+            300: '#E8CD8E',
+            400: '#D4B267',
+            500: '#B8935A',
+          },
+          emerald: {
+            400: '#59B79A',
+            500: '#3E9C82',
+          },
+          slate: {
+            300: '#B7C0CC',
+            400: '#8B93A0',
+            500: '#6B7484',
+          },
+        },
+        fontFamily: {
+          display: ['Fraunces', 'serif'],
+          sans: ['Inter', 'sans-serif'],
+          mono: ['IBM Plex Mono', 'monospace'],
+        },
+      },
+    },
+  };
+</script>
+
+<style>
+  :root {
+    --gold-400: #D4B267;
+    --ink-700: #212A35;
+  }
+
+  * { -webkit-tap-highlight-color: transparent; }
+
+  html, body {
+    background-color: #0A0E13;
+  }
+
+  body {
+    background-image:
+      linear-gradient(rgba(212,178,103,0.035) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(212,178,103,0.035) 1px, transparent 1px);
+    background-size: 28px 28px;
+    background-position: center top;
+  }
+
+  .font-tnum { font-variant-numeric: tabular-nums; }
+
+  /* Custom range slider */
+  input[type="range"] {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 100%;
+    height: 6px;
+    border-radius: 999px;
+    background: var(--ink-700);
+    outline: none;
+    cursor: pointer;
+  }
+  input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 18px;
+    height: 18px;
+    margin-top: -6px;
+    border-radius: 50%;
+    background: var(--gold-400);
+    border: 3px solid #0A0E13;
+    box-shadow: 0 0 0 1px rgba(212,178,103,0.6), 0 2px 8px rgba(0,0,0,0.5);
+    transition: transform 0.15s ease;
+  }
+  input[type="range"]::-webkit-slider-thumb:hover { transform: scale(1.18); }
+  input[type="range"]::-webkit-slider-thumb:active { transform: scale(1.05); }
+  input[type="range"]::-moz-range-thumb {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: var(--gold-400);
+    border: 3px solid #0A0E13;
+    box-shadow: 0 0 0 1px rgba(212,178,103,0.6), 0 2px 8px rgba(0,0,0,0.5);
+    cursor: pointer;
+    transition: transform 0.15s ease;
+  }
+  input[type="range"]::-moz-range-thumb:hover { transform: scale(1.18); }
+  input[type="range"]::-moz-range-track {
+    background: transparent;
+    height: 6px;
+    border-radius: 999px;
+  }
+  input[type="range"]:focus-visible {
+    outline: 2px solid #E8CD8E;
+    outline-offset: 4px;
+  }
+
+  /* Number inputs styled as inline value displays */
+  .val-input {
+    background: transparent;
+    border: none;
+    text-align: right;
+    color: #E8CD8E;
+    font-family: 'IBM Plex Mono', monospace;
+    font-weight: 600;
+    outline: none;
+    width: 100%;
+  }
+  .val-input:focus-visible {
+    outline: 1px solid rgba(212,178,103,0.5);
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+  .val-input::-webkit-inner-spin-button,
+  .val-input::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+  .val-input[type="number"] { -moz-appearance: textfield; }
+
+  /* Tab pill */
+  .tab-btn {
+    position: relative;
+    z-index: 1;
+    transition: color 0.35s ease;
+  }
+  #tab-indicator {
+    transition: transform 0.35s cubic-bezier(0.65, 0, 0.35, 1);
+  }
+
+  /* Ledger bar segments */
+  .ledger-seg {
+    transition: width 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  /* Panel fade/slide on mode switch */
+  .mode-panel {
+    transition: opacity 0.35s ease, transform 0.35s ease;
+  }
+  .mode-panel[data-hidden="true"] {
+    opacity: 0;
+    transform: translateY(6px);
+    position: absolute;
+    pointer-events: none;
+  }
+  .mode-panel[data-hidden="false"] {
+    opacity: 1;
+    transform: translateY(0);
+    position: relative;
+  }
+
+  .pulse-once {
+    animation: pulseGlow 0.7s ease;
+  }
+  @keyframes pulseGlow {
+    0% { text-shadow: 0 0 0px rgba(232,205,142,0); }
+    30% { text-shadow: 0 0 22px rgba(232,205,142,0.45); }
+    100% { text-shadow: 0 0 0px rgba(232,205,142,0); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .ledger-seg, .mode-panel, #tab-indicator, .pulse-once {
+      transition: none !important;
+      animation: none !important;
+    }
+  }
+
+  ::selection { background: rgba(212,178,103,0.3); }
+</style>
+</head>
+
+<body class="min-h-screen font-sans text-slate-300 antialiased">
+
+  <div class="max-w-5xl mx-auto px-5 sm:px-8 py-10 sm:py-14">
+
+    <!-- Header -->
+    <header class="flex flex-col items-center text-center mb-10 sm:mb-14">
+      <div class="flex items-center gap-2 mb-3">
+        <span class="w-1.5 h-1.5 rounded-full bg-gold-400"></span>
+        <h1 class="font-display italic font-medium text-2xl sm:text-3xl text-slate-100 tracking-tight">Ledger</h1>
+        <span class="w-1.5 h-1.5 rounded-full bg-gold-400"></span>
+      </div>
+      <p class="text-sm sm:text-base text-slate-400 max-w-md">See exactly what your money will become — and exactly what it takes to get there.</p>
+    </header>
+
+    <!-- Tab switcher -->
+    <div class="flex justify-center mb-8 sm:mb-10">
+      <div class="relative inline-flex bg-ink-900 border border-ink-700 rounded-full p-1 w-full max-w-md">
+        <div id="tab-indicator" class="absolute top-1 bottom-1 left-1 w-[calc(50%-4px)] rounded-full bg-gold-400"></div>
+        <button id="tab-target" class="tab-btn flex-1 py-2.5 text-sm sm:text-[15px] font-medium rounded-full text-ink-950" data-mode="target">
+          Savings Target
+        </button>
+        <button id="tab-growth" class="tab-btn flex-1 py-2.5 text-sm sm:text-[15px] font-medium rounded-full text-slate-400" data-mode="growth">
+          Growth Projector
+        </button>
+      </div>
+    </div>
+
+    <!-- Main grid -->
+    <main class="grid lg:grid-cols-2 gap-6 lg:gap-8 items-start">
+
+      <!-- INPUT PANELS -->
+      <div class="relative">
+
+        <!-- Savings Target inputs -->
+        <section id="panel-target-inputs" class="mode-panel bg-ink-900 border border-ink-700 rounded-2xl p-6 sm:p-7" data-hidden="false">
+          <p class="text-xs font-semibold tracking-widest text-gold-500 uppercase mb-5">Your Goal</p>
+
+          <div class="mb-6">
+            <div class="flex items-center justify-between mb-2">
+              <label for="t-amount-num" class="text-sm font-medium text-slate-300">Target amount</label>
+              <div class="flex items-center gap-0.5 w-32">
+                <span class="text-slate-500 font-mono text-sm">$</span>
+                <input type="number" id="t-amount-num" class="val-input text-base" value="50000" min="1000" max="2000000" step="500" aria-label="Target amount in dollars" />
+              </div>
+            </div>
+            <input type="range" id="t-amount-slider" min="1000" max="500000" step="1000" value="50000" class="slider" aria-hidden="true" />
+          </div>
+
+          <div class="mb-6">
+            <div class="flex items-center justify-between mb-2">
+              <label for="t-years-num" class="text-sm font-medium text-slate-300">Time to reach it</label>
+              <div class="flex items-center gap-1 w-32 justify-end">
+                <input type="number" id="t-years-num" class="val-input text-base" value="10" min="1" max="50" step="1" style="width:2.5rem" aria-label="Years to reach target" />
+                <span class="text-slate-500 font-mono text-sm">yrs</span>
+              </div>
+            </div>
+            <input type="range" id="t-years-slider" min="1" max="40" step="1" value="10" class="slider" aria-hidden="true" />
+          </div>
+
+          <div>
+            <div class="flex items-center justify-between mb-2">
+              <label for="t-rate-num" class="text-sm font-medium text-slate-300">Expected annual return</label>
+              <div class="flex items-center gap-1 w-32 justify-end">
+                <input type="number" id="t-rate-num" class="val-input text-base" value="7" min="0" max="20" step="0.1" style="width:3rem" aria-label="Expected annual return percent" />
+                <span class="text-slate-500 font-mono text-sm">%</span>
+              </div>
+            </div>
+            <input type="range" id="t-rate-slider" min="0" max="15" step="0.1" value="7" class="slider" aria-hidden="true" />
+          </div>
+        </section>
+
+        <!-- Growth Projector inputs -->
+        <section id="panel-growth-inputs" class="mode-panel bg-ink-900 border border-ink-700 rounded-2xl p-6 sm:p-7" data-hidden="true">
+          <p class="text-xs font-semibold tracking-widest text-gold-500 uppercase mb-5">Your Plan</p>
+
+          <div class="mb-6">
+            <div class="flex items-center justify-between mb-2">
+              <label for="g-initial-num" class="text-sm font-medium text-slate-300">Starting balance</label>
+              <div class="flex items-center gap-0.5 w-32">
+                <span class="text-slate-500 font-mono text-sm">$</span>
+                <input type="number" id="g-initial-num" class="val-input text-base" value="5000" min="0" max="1000000" step="100" aria-label="Starting balance in dollars" />
+              </div>
+            </div>
+            <input type="range" id="g-initial-slider" min="0" max="200000" step="500" value="5000" class="slider" aria-hidden="true" />
+          </div>
+
+          <div class="mb-6">
+            <div class="flex items-center justify-between mb-2">
+              <label for="g-monthly-num" class="text-sm font-medium text-slate-300">Monthly contribution</label>
+              <div class="flex items-center gap-0.5 w-32">
+                <span class="text-slate-500 font-mono text-sm">$</span>
+                <input type="number" id="g-monthly-num" class="val-input text-base" value="500" min="0" max="20000" step="25" aria-label="Monthly contribution in dollars" />
+              </div>
+            </div>
+            <input type="range" id="g-monthly-slider" min="0" max="5000" step="25" value="500" class="slider" aria-hidden="true" />
+          </div>
+
+          <div class="mb-6">
+            <div class="flex items-center justify-between mb-2">
+              <label for="g-years-num" class="text-sm font-medium text-slate-300">Time horizon</label>
+              <div class="flex items-center gap-1 w-32 justify-end">
+                <input type="number" id="g-years-num" class="val-input text-base" value="20" min="1" max="50" step="1" style="width:2.5rem" aria-label="Years of growth" />
+                <span class="text-slate-500 font-mono text-sm">yrs</span>
+              </div>
+            </div>
+            <input type="range" id="g-years-slider" min="1" max="40" step="1" value="20" class="slider" aria-hidden="true" />
+          </div>
+
+          <div>
+            <div class="flex items-center justify-between mb-2">
+              <label for="g-rate-num" class="text-sm font-medium text-slate-300">Expected annual return</label>
+              <div class="flex items-center gap-1 w-32 justify-end">
+                <input type="number" id="g-rate-num" class="val-input text-base" value="7" min="0" max="20" step="0.1" style="width:3rem" aria-label="Expected annual return percent" />
+                <span class="text-slate-500 font-mono text-sm">%</span>
+              </div>
+            </div>
+            <input type="range" id="g-rate-slider" min="0" max="15" step="0.1" value="7" class="slider" aria-hidden="true" />
+          </div>
+        </section>
+      </div>
+
+      <!-- RESULT PANELS -->
+      <div class="relative lg:sticky lg:top-8">
+
+        <!-- Savings Target result -->
+        <section id="panel-target-result" class="mode-panel bg-gradient-to-b from-ink-900 to-ink-950 border border-gold-500/25 rounded-2xl p-7 sm:p-8 shadow-2xl shadow-black/40" data-hidden="false">
+          <p class="text-xs font-semibold tracking-widest text-slate-400 uppercase mb-3">You need to save</p>
+          <div class="flex items-baseline gap-2 mb-1">
+            <span id="t-result-pmt" class="font-mono font-tnum text-4xl sm:text-5xl font-semibold text-gold-300">$0</span>
+            <span class="text-slate-400 font-mono text-lg sm:text-xl">/mo</span>
+          </div>
+          <p id="t-result-sub" class="text-sm text-slate-500 mb-7">for 120 months at 7.0% annual return</p>
+
+          <div class="mb-3">
+            <div class="w-full h-2.5 rounded-full bg-ink-800 overflow-hidden flex">
+              <div id="t-bar-contrib" class="ledger-seg h-full bg-slate-400" style="width:50%"></div>
+              <div id="t-bar-interest" class="ledger-seg h-full bg-emerald-500" style="width:50%"></div>
+            </div>
+          </div>
+          <div class="flex justify-between text-sm">
+            <div class="flex items-center gap-1.5">
+              <span class="w-2 h-2 rounded-full bg-slate-400"></span>
+              <span class="text-slate-400">Contributions</span>
+            </div>
+            <span id="t-legend-contrib" class="font-mono font-tnum text-slate-200">$0</span>
+          </div>
+          <div class="flex justify-between text-sm mt-1.5">
+            <div class="flex items-center gap-1.5">
+              <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+              <span class="text-slate-400">Interest earned</span>
+            </div>
+            <span id="t-legend-interest" class="font-mono font-tnum text-slate-200">$0</span>
+          </div>
+
+          <div class="mt-6 pt-5 border-t border-ink-700 flex justify-between text-sm">
+            <span class="text-slate-500">Goal</span>
+            <span id="t-legend-goal" class="font-mono font-tnum text-slate-300">$50,000</span>
+          </div>
+        </section>
+
+        <!-- Growth Projector result -->
+        <section id="panel-growth-result" class="mode-panel bg-gradient-to-b from-ink-900 to-ink-950 border border-gold-500/25 rounded-2xl p-7 sm:p-8 shadow-2xl shadow-black/40" data-hidden="true">
+          <p class="text-xs font-semibold tracking-widest text-slate-400 uppercase mb-3">Your balance grows to</p>
+          <div class="mb-1">
+            <span id="g-result-fv" class="font-mono font-tnum text-4xl sm:text-5xl font-semibold text-gold-300">$0</span>
+          </div>
+          <p id="g-result-sub" class="text-sm text-slate-500 mb-7">over 20 years at 7.0% annual return</p>
+
+          <div class="mb-3">
+            <div class="w-full h-2.5 rounded-full bg-ink-800 overflow-hidden flex">
+              <div id="g-bar-contrib" class="ledger-seg h-full bg-slate-400" style="width:50%"></div>
+              <div id="g-bar-growth" class="ledger-seg h-full bg-emerald-500" style="width:50%"></div>
+            </div>
+          </div>
+          <div class="flex justify-between text-sm">
+            <div class="flex items-center gap-1.5">
+              <span class="w-2 h-2 rounded-full bg-slate-400"></span>
+              <span class="text-slate-400">Total saved</span>
+            </div>
+            <span id="g-legend-contrib" class="font-mono font-tnum text-slate-200">$0</span>
+          </div>
+          <div class="flex justify-between text-sm mt-1.5">
+            <div class="flex items-center gap-1.5">
+              <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+              <span class="text-slate-400">Compound interest earned</span>
+            </div>
+            <span id="g-legend-growth" class="font-mono font-tnum text-slate-200">$0</span>
+          </div>
+
+          <div class="mt-6 pt-5 border-t border-ink-700 flex justify-between text-sm">
+            <span class="text-slate-500">Starting balance</span>
+            <span id="g-legend-initial" class="font-mono font-tnum text-slate-300">$5,000</span>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <footer class="text-center mt-12 sm:mt-16">
+      <p class="text-xs text-slate-500">Estimates assume a constant monthly return compounded over time. For planning purposes only — not financial advice.</p>
+    </footer>
+  </div>
+
+<script>
+(function () {
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  const fmtCurrency = (n, decimals = 0) =>
+    '$' + n.toLocaleString('en-US', { minimumFractionDigits: decimals, maximumFractionDigits: decimals });
+
+  /* ---------- Slider <-> number linking ---------- */
+  function linkPair(sliderId, numId, onChange) {
+    const slider = document.getElementById(sliderId);
+    const num = document.getElementById(numId);
+
+    function setFill() {
+      const min = parseFloat(slider.min), max = parseFloat(slider.max);
+      const pct = ((parseFloat(slider.value) - min) / (max - min)) * 100;
+      slider.style.background =
+        `linear-gradient(to right, var(--gold-400) 0%, var(--gold-400) ${pct}%, var(--ink-700) ${pct}%, var(--ink-700) 100%)`;
+    }
+
+    slider.addEventListener('input', () => {
+      num.value = slider.value;
+      setFill();
+      onChange();
+    });
+
+    num.addEventListener('input', () => {
+      let v = parseFloat(num.value);
+      if (isNaN(v)) return;
+      const sliderMax = parseFloat(slider.max);
+      // allow typing above the slider's visual max (clamped only to the field's own min/max via HTML attrs),
+      // but keep the slider handle pinned at 100% once exceeded.
+      const clampedForSlider = Math.min(Math.max(v, parseFloat(slider.min)), sliderMax);
+      slider.value = clampedForSlider;
+      setFill();
+      onChange();
+    });
+
+    setFill();
+    return { slider, num };
+  }
+
+  /* ---------- Animated number ---------- */
+  const lastValues = {};
+  function animateNumber(elId, to, decimals = 0) {
+    const el = document.getElementById(elId);
+    const from = lastValues[elId] !== undefined ? lastValues[elId] : 0;
+    lastValues[elId] = to;
+
+    if (reduceMotion) {
+      el.textContent = fmtCurrency(to, decimals);
+      return;
+    }
+
+    const duration = 500;
+    const start = performance.now();
+
+    function frame(now) {
+      const t = Math.min((now - start) / duration, 1);
+      const eased = 1 - Math.pow(1 - t, 3);
+      const val = from + (to - from) * eased;
+      el.textContent = fmtCurrency(val, decimals);
+      if (t < 1) {
+        requestAnimationFrame(frame);
+      } else {
+        el.textContent = fmtCurrency(to, decimals);
+        el.classList.remove('pulse-once');
+        void el.offsetWidth;
+        el.classList.add('pulse-once');
+      }
+    }
+    requestAnimationFrame(frame);
+  }
+
+  /* ---------- Math ---------- */
+  function computeTarget(target, years, ratePct) {
+    const n = years * 12;
+    const i = ratePct / 100 / 12;
+    let pmt;
+    if (i === 0) {
+      pmt = target / n;
+    } else {
+      pmt = (target * i) / (Math.pow(1 + i, n) - 1);
+    }
+    const totalContributed = pmt * n;
+    const totalInterest = Math.max(target - totalContributed, 0);
+    return { pmt, totalContributed, totalInterest };
+  }
+
+  function computeGrowth(initial, monthly, years, ratePct) {
+    const n = years * 12;
+    const i = ratePct / 100 / 12;
+    let fromInitial, fromContrib;
+    if (i === 0) {
+      fromInitial = initial;
+      fromContrib = monthly * n;
+    } else {
+      fromInitial = initial * Math.pow(1 + i, n);
+      fromContrib = monthly * (Math.pow(1 + i, n) - 1) / i;
+    }
+    const futureValue = fromInitial + fromContrib;
+    const totalContributed = initial + monthly * n;
+    const growth = Math.max(futureValue - totalContributed, 0);
+    return { futureValue, totalContributed, growth };
+  }
+
+  /* ---------- Render: Savings Target ---------- */
+  function renderTarget() {
+    const target = parseFloat(document.getElementById('t-amount-num').value) || 0;
+    const years = parseFloat(document.getElementById('t-years-num').value) || 1;
+    const rate = parseFloat(document.getElementById('t-rate-num').value) || 0;
+
+    const { pmt, totalContributed, totalInterest } = computeTarget(target, years, rate);
+
+    animateNumber('t-result-pmt', pmt, 2);
+    document.getElementById('t-result-sub').textContent =
+      `for ${(years * 12).toLocaleString('en-US')} months at ${rate.toFixed(1)}% annual return`;
+
+    const contribPct = target > 0 ? Math.min((totalContributed / target) * 100, 100) : 0;
+    const interestPct = Math.max(100 - contribPct, 0);
+    document.getElementById('t-bar-contrib').style.width = contribPct + '%';
+    document.getElementById('t-bar-interest').style.width = interestPct + '%';
+
+    document.getElementById('t-legend-contrib').textContent = fmtCurrency(totalContributed, 0);
+    document.getElementById('t-legend-interest').textContent = fmtCurrency(totalInterest, 0);
+    document.getElementById('t-legend-goal').textContent = fmtCurrency(target, 0);
+  }
+
+  /* ---------- Render: Growth Projector ---------- */
+  function renderGrowth() {
+    const initial = parseFloat(document.getElementById('g-initial-num').value) || 0;
+    const monthly = parseFloat(document.getElementById('g-monthly-num').value) || 0;
+    const years = parseFloat(document.getElementById('g-years-num').value) || 1;
+    const rate = parseFloat(document.getElementById('g-rate-num').value) || 0;
+
+    const { futureValue, totalContributed, growth } = computeGrowth(initial, monthly, years, rate);
+
+    animateNumber('g-result-fv', futureValue, 0);
+    document.getElementById('g-result-sub').textContent =
+      `over ${years} year${years == 1 ? '' : 's'} at ${rate.toFixed(1)}% annual return`;
+
+    const contribPct = futureValue > 0 ? Math.min((totalContributed / futureValue) * 100, 100) : 0;
+    const growthPct = Math.max(100 - contribPct, 0);
+    document.getElementById('g-bar-contrib').style.width = contribPct + '%';
+    document.getElementById('g-bar-growth').style.width = growthPct + '%';
+
+    document.getElementById('g-legend-contrib').textContent = fmtCurrency(totalContributed, 0);
+    document.getElementById('g-legend-growth').textContent = fmtCurrency(growth, 0);
+    document.getElementById('g-legend-initial').textContent = fmtCurrency(initial, 0);
+  }
+
+  /* ---------- Wire up fields ---------- */
+  linkPair('t-amount-slider', 't-amount-num', renderTarget);
+  linkPair('t-years-slider', 't-years-num', renderTarget);
+  linkPair('t-rate-slider', 't-rate-num', renderTarget);
+
+  linkPair('g-initial-slider', 'g-initial-num', renderGrowth);
+  linkPair('g-monthly-slider', 'g-monthly-num', renderGrowth);
+  linkPair('g-years-slider', 'g-years-num', renderGrowth);
+  linkPair('g-rate-slider', 'g-rate-num', renderGrowth);
+
+  /* ---------- Tabs ---------- */
+  const tabTarget = document.getElementById('tab-target');
+  const tabGrowth = document.getElementById('tab-growth');
+  const indicator = document.getElementById('tab-indicator');
+
+  const panels = {
+    target: [document.getElementById('panel-target-inputs'), document.getElementById('panel-target-result')],
+    growth: [document.getElementById('panel-growth-inputs'), document.getElementById('panel-growth-result')],
+  };
+
+  function setMode(mode) {
+    const isTarget = mode === 'target';
+    panels.target.forEach(p => p.setAttribute('data-hidden', isTarget ? 'false' : 'true'));
+    panels.growth.forEach(p => p.setAttribute('data-hidden', isTarget ? 'true' : 'false'));
+
+    tabTarget.classList.toggle('text-ink-950', isTarget);
+    tabTarget.classList.toggle('text-slate-400', !isTarget);
+    tabGrowth.classList.toggle('text-ink-950', !isTarget);
+    tabGrowth.classList.toggle('text-slate-400', isTarget);
+
+    indicator.style.transform = isTarget ? 'translateX(0%)' : 'translateX(100%)';
+  }
+
+  tabTarget.addEventListener('click', () => setMode('target'));
+  tabGrowth.addEventListener('click', () => setMode('growth'));
+
+  /* ---------- Init ---------- */
+  setMode('target');
+  renderTarget();
+  renderGrowth();
+})();
+</script>
+</body>
+</html>
