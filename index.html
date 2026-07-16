@@ -14,19 +14,19 @@
 <meta property="og:site_name" content="Ledger" />
 <meta property="og:title" content="Ledger — Savings Target & Compound Growth Calculator" />
 <meta property="og:description" content="Use Ledgr's free interactive savings target and compound growth calculator to map out your wealth goals, evaluate monthly contributions, and track compound interest." />
-<meta property="og:url" content="https://www.ledgrcalc.com/" /> 
+<meta property="og:url" content="https://www.ledgrcalc.com/" /> <!-- TODO: replace with your live domain -->
 <meta property="og:image" content="https://www.example.com/og-image.png" /> <!-- TODO: add a 1200x630 preview image -->
-
+ 
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content="Ledger — Savings Target & Compound Growth Calculator" />
 <meta name="twitter:description" content="Use Ledgr's free interactive savings target and compound growth calculator to map out your wealth goals, evaluate monthly contributions, and track compound interest." />
-
+ 
 <meta name="theme-color" content="#0A0E13" />
-
+ 
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,500;0,600;1,500;1,600&family=Inter:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet" />
-
+ 
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -43,11 +43,11 @@
   }
 }
 </script>
-
+ 
 <!-- AD NETWORK SCRIPT: drop your ad provider's loader tag here, e.g. Google AdSense:
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX" crossorigin="anonymous"></script>
 -->
-
+ 
 <script src="https://cdn.tailwindcss.com"></script>
 <script>
   tailwind.config = {
@@ -85,19 +85,19 @@
     },
   };
 </script>
-
+ 
 <style>
   :root {
     --gold-400: #D4B267;
     --ink-700: #212A35;
   }
-
+ 
   * { -webkit-tap-highlight-color: transparent; }
-
+ 
   html, body {
     background-color: #0A0E13;
   }
-
+ 
   body {
     background-image:
       linear-gradient(rgba(212,178,103,0.035) 1px, transparent 1px),
@@ -105,9 +105,9 @@
     background-size: 28px 28px;
     background-position: center top;
   }
-
+ 
   .font-tnum { font-variant-numeric: tabular-nums; }
-
+ 
   /* Custom range slider */
   input[type="range"] {
     -webkit-appearance: none;
@@ -153,7 +153,7 @@
     outline: 2px solid #E8CD8E;
     outline-offset: 4px;
   }
-
+ 
   /* Number inputs styled as inline value displays */
   .val-input {
     background: transparent;
@@ -176,7 +176,7 @@
     margin: 0;
   }
   .val-input[type="number"] { -moz-appearance: textfield; }
-
+ 
   /* Tab pill */
   .tab-btn {
     position: relative;
@@ -186,12 +186,12 @@
   #tab-indicator {
     transition: transform 0.35s cubic-bezier(0.65, 0, 0.35, 1);
   }
-
+ 
   /* Ledger bar segments */
   .ledger-seg {
     transition: width 0.6s cubic-bezier(0.22, 1, 0.36, 1);
   }
-
+ 
   /* Panel fade/slide on mode switch */
   .mode-panel {
     transition: opacity 0.35s ease, transform 0.35s ease;
@@ -207,7 +207,7 @@
     transform: translateY(0);
     position: relative;
   }
-
+ 
   .pulse-once {
     animation: pulseGlow 0.7s ease;
   }
@@ -216,16 +216,16 @@
     30% { text-shadow: 0 0 22px rgba(232,205,142,0.45); }
     100% { text-shadow: 0 0 0px rgba(232,205,142,0); }
   }
-
+ 
   @media (prefers-reduced-motion: reduce) {
     .ledger-seg, .mode-panel, #tab-indicator, .pulse-once {
       transition: none !important;
       animation: none !important;
     }
   }
-
+ 
   ::selection { background: rgba(212,178,103,0.3); }
-
+ 
   /* Ad slots — responsive, fluid-width banners with reserved height to avoid layout shift */
   .ad-slot {
     width: 100%;
@@ -249,7 +249,7 @@
     text-transform: uppercase;
     color: #6B7484;
   }
-
+ 
   /* SEO content prose */
   .seo-copy h2 {
     font-family: 'Fraunces', serif;
@@ -266,11 +266,11 @@
   }
 </style>
 </head>
-
+ 
 <body class="min-h-screen font-sans text-slate-300 antialiased">
-
+ 
   <div class="max-w-5xl mx-auto px-5 sm:px-8 py-10 sm:py-14">
-
+ 
     <!-- Header -->
     <header class="flex flex-col items-center text-center mb-10 sm:mb-14">
       <div class="flex items-center gap-2 mb-3">
@@ -280,14 +280,14 @@
       </div>
       <p class="text-sm sm:text-base text-slate-400 max-w-md">See exactly what your money will become — and exactly what it takes to get there.</p>
     </header>
-
+ 
     <!-- Google AdSense Slot A -->
     <div class="w-full max-w-4xl mx-auto mb-10 sm:mb-14">
       <div class="ad-slot" data-ad-slot="slot-a-header-banner">
         <span class="ad-label">Advertisement</span>
       </div>
     </div>
-
+ 
     <!-- Tab switcher -->
     <div class="flex justify-center mb-8 sm:mb-10">
       <div class="relative inline-flex bg-ink-900 border border-ink-700 rounded-full p-1 w-full max-w-md">
@@ -300,17 +300,17 @@
         </button>
       </div>
     </div>
-
+ 
     <!-- Main grid -->
     <main class="grid lg:grid-cols-2 gap-6 lg:gap-8 items-start">
-
+ 
       <!-- INPUT PANELS -->
       <div class="relative">
-
+ 
         <!-- Savings Target inputs -->
         <section id="panel-target-inputs" class="mode-panel bg-ink-900 border border-ink-700 rounded-2xl p-6 sm:p-7" data-hidden="false">
           <p class="text-xs font-semibold tracking-widest text-gold-500 uppercase mb-5">Your Goal</p>
-
+ 
           <div class="mb-6">
             <div class="flex items-center justify-between mb-2">
               <label for="t-amount-num" class="text-sm font-medium text-slate-300">Target amount</label>
@@ -321,7 +321,7 @@
             </div>
             <input type="range" id="t-amount-slider" min="1000" max="500000" step="1000" value="50000" class="slider" aria-hidden="true" />
           </div>
-
+ 
           <div class="mb-6">
             <div class="flex items-center justify-between mb-2">
               <label for="t-years-num" class="text-sm font-medium text-slate-300">Time to reach it</label>
@@ -332,7 +332,7 @@
             </div>
             <input type="range" id="t-years-slider" min="1" max="40" step="1" value="10" class="slider" aria-hidden="true" />
           </div>
-
+ 
           <div>
             <div class="flex items-center justify-between mb-2">
               <label for="t-rate-num" class="text-sm font-medium text-slate-300">Expected annual return</label>
@@ -344,11 +344,11 @@
             <input type="range" id="t-rate-slider" min="0" max="15" step="0.1" value="7" class="slider" aria-hidden="true" />
           </div>
         </section>
-
+ 
         <!-- Growth Projector inputs -->
         <section id="panel-growth-inputs" class="mode-panel bg-ink-900 border border-ink-700 rounded-2xl p-6 sm:p-7" data-hidden="true">
           <p class="text-xs font-semibold tracking-widest text-gold-500 uppercase mb-5">Your Plan</p>
-
+ 
           <div class="mb-6">
             <div class="flex items-center justify-between mb-2">
               <label for="g-initial-num" class="text-sm font-medium text-slate-300">Starting balance</label>
@@ -359,7 +359,7 @@
             </div>
             <input type="range" id="g-initial-slider" min="0" max="200000" step="500" value="5000" class="slider" aria-hidden="true" />
           </div>
-
+ 
           <div class="mb-6">
             <div class="flex items-center justify-between mb-2">
               <label for="g-monthly-num" class="text-sm font-medium text-slate-300">Monthly contribution</label>
@@ -370,7 +370,7 @@
             </div>
             <input type="range" id="g-monthly-slider" min="0" max="5000" step="25" value="500" class="slider" aria-hidden="true" />
           </div>
-
+ 
           <div class="mb-6">
             <div class="flex items-center justify-between mb-2">
               <label for="g-years-num" class="text-sm font-medium text-slate-300">Time horizon</label>
@@ -381,7 +381,7 @@
             </div>
             <input type="range" id="g-years-slider" min="1" max="40" step="1" value="20" class="slider" aria-hidden="true" />
           </div>
-
+ 
           <div>
             <div class="flex items-center justify-between mb-2">
               <label for="g-rate-num" class="text-sm font-medium text-slate-300">Expected annual return</label>
@@ -394,10 +394,10 @@
           </div>
         </section>
       </div>
-
+ 
       <!-- RESULT PANELS -->
       <div class="relative lg:sticky lg:top-8">
-
+ 
         <!-- Savings Target result -->
         <section id="panel-target-result" class="mode-panel bg-gradient-to-b from-ink-900 to-ink-950 border border-gold-500/25 rounded-2xl p-7 sm:p-8 shadow-2xl shadow-black/40" data-hidden="false">
           <p class="text-xs font-semibold tracking-widest text-slate-400 uppercase mb-3">You need to save</p>
@@ -406,7 +406,7 @@
             <span class="text-slate-400 font-mono text-lg sm:text-xl">/mo</span>
           </div>
           <p id="t-result-sub" class="text-sm text-slate-500 mb-7">for 120 months at 7.0% annual return</p>
-
+ 
           <div class="mb-3">
             <div class="w-full h-2.5 rounded-full bg-ink-800 overflow-hidden flex">
               <div id="t-bar-contrib" class="ledger-seg h-full bg-slate-400" style="width:50%"></div>
@@ -427,13 +427,13 @@
             </div>
             <span id="t-legend-interest" class="font-mono font-tnum text-slate-200">$0</span>
           </div>
-
+ 
           <div class="mt-6 pt-5 border-t border-ink-700 flex justify-between text-sm">
             <span class="text-slate-500">Goal</span>
             <span id="t-legend-goal" class="font-mono font-tnum text-slate-300">$50,000</span>
           </div>
         </section>
-
+ 
         <!-- Growth Projector result -->
         <section id="panel-growth-result" class="mode-panel bg-gradient-to-b from-ink-900 to-ink-950 border border-gold-500/25 rounded-2xl p-7 sm:p-8 shadow-2xl shadow-black/40" data-hidden="true">
           <p class="text-xs font-semibold tracking-widest text-slate-400 uppercase mb-3">Your balance grows to</p>
@@ -441,7 +441,7 @@
             <span id="g-result-fv" class="font-mono font-tnum text-4xl sm:text-5xl font-semibold text-gold-300">$0</span>
           </div>
           <p id="g-result-sub" class="text-sm text-slate-500 mb-7">over 20 years at 7.0% annual return</p>
-
+ 
           <div class="mb-3">
             <div class="w-full h-2.5 rounded-full bg-ink-800 overflow-hidden flex">
               <div id="g-bar-contrib" class="ledger-seg h-full bg-slate-400" style="width:50%"></div>
@@ -462,7 +462,7 @@
             </div>
             <span id="g-legend-growth" class="font-mono font-tnum text-slate-200">$0</span>
           </div>
-
+ 
           <div class="mt-6 pt-5 border-t border-ink-700 flex justify-between text-sm">
             <span class="text-slate-500">Starting balance</span>
             <span id="g-legend-initial" class="font-mono font-tnum text-slate-300">$5,000</span>
@@ -470,34 +470,34 @@
         </section>
       </div>
     </main>
-
+ 
     <!-- Google AdSense Slot B -->
     <div class="w-full max-w-4xl mx-auto mt-10 sm:mt-14">
       <div class="ad-slot" data-ad-slot="slot-b-below-calculator">
         <span class="ad-label">Advertisement</span>
       </div>
     </div>
-
+ 
     <p class="text-xs text-slate-500 text-center max-w-2xl mx-auto mt-6">Estimates assume a constant monthly return compounded over time. For planning purposes only — not financial advice.</p>
-
+ 
     <!-- SEO / educational content -->
     <section class="seo-copy max-w-3xl mx-auto mt-14 sm:mt-20">
       <h2 class="text-2xl sm:text-3xl font-medium text-slate-100 tracking-tight mb-6">How to Calculate and Reach Your Financial Savings Goals</h2>
-
+ 
       <p class="text-slate-300 mb-5">
         Every dollar you save does two jobs: it adds to your balance, and it earns a return that itself starts earning a return. That second effect — interest earning interest — is compounding, and it's the reason a plan started at 25 needs a much smaller monthly contribution than the same goal started at 40. The math doesn't care how the money got there; it only cares how long it's had to compound.
       </p>
-
+ 
       <p class="text-slate-300 mb-5">
         A savings target is really three variables in tension: how much you want, how long you're willing to wait, and the annual return you can reasonably expect along the way. Stretch the timeline and the required monthly contribution drops fast, because more of the goal gets carried by growth instead of by new deposits. Shorten it, and contributions have to do more of the work. The Savings Target calculator above solves for the one number most people actually want answered: the monthly amount that makes the other two true.
       </p>
-
+ 
       <p class="text-slate-300 mb-8">
         It's worth separating what you put in from what your money earns on its own. Total contributions are simply the sum of every deposit, with no growth assumed. Compound growth is everything above that — the return earned on your balance, then the return earned on that return, repeated every month. In the Growth Projector above, the bar breaking down total saved versus interest earned makes this split concrete. Over a long enough timeline, the growth segment can end up larger than everything you personally contributed.
       </p>
-
+ 
       <h3 class="text-lg sm:text-xl font-semibold text-slate-100 tracking-tight mb-4">Practical Strategies for Hitting Your Targets</h3>
-
+ 
       <ul class="space-y-3 text-slate-300 mb-2">
         <li><span class="text-slate-100 font-medium">Break the timeline into monthly milestones.</span> A ten-year, $50,000 goal is abstract; a fixed amount due on the 1st of every month is not. Milestones turn a distant number into a routine.</li>
         <li><span class="text-slate-100 font-medium">Automate the transfer.</span> Move the contribution the day you're paid, before it reaches an account where it's easy to spend. Automated transfers remove the monthly decision entirely.</li>
@@ -506,45 +506,50 @@
         <li><span class="text-slate-100 font-medium">Start before it feels comfortable.</span> Because of compounding, the earliest contributions in a timeline carry the most weight — waiting for the "right" moment to start is usually the most expensive decision in the whole plan.</li>
       </ul>
     </section>
-
+ 
     <!-- Google AdSense Slot C -->
     <div class="w-full max-w-4xl mx-auto mt-14 sm:mt-16">
       <div class="ad-slot" data-ad-slot="slot-c-page-bottom">
         <span class="ad-label">Advertisement</span>
       </div>
     </div>
-
+ 
     <footer class="text-center mt-10">
+      <div class="flex items-center justify-center gap-4 mb-3 text-xs text-slate-500">
+        <a href="about.html" class="hover:text-gold-400 transition-colors">About</a>
+        <span class="text-ink-700">•</span>
+        <a href="privacy-policy.html" class="hover:text-gold-400 transition-colors">Privacy Policy</a>
+      </div>
       <p class="text-xs text-slate-600">© 2026 Ledger. All calculations are estimates for educational purposes only.</p>
     </footer>
-
+ 
   </div>
-
+ 
 <script>
 (function () {
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
+ 
   const fmtCurrency = (n, decimals = 0) =>
     '$' + n.toLocaleString('en-US', { minimumFractionDigits: decimals, maximumFractionDigits: decimals });
-
+ 
   /* ---------- Slider <-> number linking ---------- */
   function linkPair(sliderId, numId, onChange) {
     const slider = document.getElementById(sliderId);
     const num = document.getElementById(numId);
-
+ 
     function setFill() {
       const min = parseFloat(slider.min), max = parseFloat(slider.max);
       const pct = ((parseFloat(slider.value) - min) / (max - min)) * 100;
       slider.style.background =
         `linear-gradient(to right, var(--gold-400) 0%, var(--gold-400) ${pct}%, var(--ink-700) ${pct}%, var(--ink-700) 100%)`;
     }
-
+ 
     slider.addEventListener('input', () => {
       num.value = slider.value;
       setFill();
       onChange();
     });
-
+ 
     num.addEventListener('input', () => {
       let v = parseFloat(num.value);
       if (isNaN(v)) return;
@@ -556,26 +561,26 @@
       setFill();
       onChange();
     });
-
+ 
     setFill();
     return { slider, num };
   }
-
+ 
   /* ---------- Animated number ---------- */
   const lastValues = {};
   function animateNumber(elId, to, decimals = 0) {
     const el = document.getElementById(elId);
     const from = lastValues[elId] !== undefined ? lastValues[elId] : 0;
     lastValues[elId] = to;
-
+ 
     if (reduceMotion) {
       el.textContent = fmtCurrency(to, decimals);
       return;
     }
-
+ 
     const duration = 500;
     const start = performance.now();
-
+ 
     function frame(now) {
       const t = Math.min((now - start) / duration, 1);
       const eased = 1 - Math.pow(1 - t, 3);
@@ -592,7 +597,7 @@
     }
     requestAnimationFrame(frame);
   }
-
+ 
   /* ---------- Math ---------- */
   function computeTarget(target, years, ratePct) {
     const n = years * 12;
@@ -607,7 +612,7 @@
     const totalInterest = Math.max(target - totalContributed, 0);
     return { pmt, totalContributed, totalInterest };
   }
-
+ 
   function computeGrowth(initial, monthly, years, ratePct) {
     const n = years * 12;
     const i = ratePct / 100 / 12;
@@ -624,88 +629,88 @@
     const growth = Math.max(futureValue - totalContributed, 0);
     return { futureValue, totalContributed, growth };
   }
-
+ 
   /* ---------- Render: Savings Target ---------- */
   function renderTarget() {
     const target = parseFloat(document.getElementById('t-amount-num').value) || 0;
     const years = parseFloat(document.getElementById('t-years-num').value) || 1;
     const rate = parseFloat(document.getElementById('t-rate-num').value) || 0;
-
+ 
     const { pmt, totalContributed, totalInterest } = computeTarget(target, years, rate);
-
+ 
     animateNumber('t-result-pmt', pmt, 2);
     document.getElementById('t-result-sub').textContent =
       `for ${(years * 12).toLocaleString('en-US')} months at ${rate.toFixed(1)}% annual return`;
-
+ 
     const contribPct = target > 0 ? Math.min((totalContributed / target) * 100, 100) : 0;
     const interestPct = Math.max(100 - contribPct, 0);
     document.getElementById('t-bar-contrib').style.width = contribPct + '%';
     document.getElementById('t-bar-interest').style.width = interestPct + '%';
-
+ 
     document.getElementById('t-legend-contrib').textContent = fmtCurrency(totalContributed, 0);
     document.getElementById('t-legend-interest').textContent = fmtCurrency(totalInterest, 0);
     document.getElementById('t-legend-goal').textContent = fmtCurrency(target, 0);
   }
-
+ 
   /* ---------- Render: Growth Projector ---------- */
   function renderGrowth() {
     const initial = parseFloat(document.getElementById('g-initial-num').value) || 0;
     const monthly = parseFloat(document.getElementById('g-monthly-num').value) || 0;
     const years = parseFloat(document.getElementById('g-years-num').value) || 1;
     const rate = parseFloat(document.getElementById('g-rate-num').value) || 0;
-
+ 
     const { futureValue, totalContributed, growth } = computeGrowth(initial, monthly, years, rate);
-
+ 
     animateNumber('g-result-fv', futureValue, 0);
     document.getElementById('g-result-sub').textContent =
       `over ${years} year${years == 1 ? '' : 's'} at ${rate.toFixed(1)}% annual return`;
-
+ 
     const contribPct = futureValue > 0 ? Math.min((totalContributed / futureValue) * 100, 100) : 0;
     const growthPct = Math.max(100 - contribPct, 0);
     document.getElementById('g-bar-contrib').style.width = contribPct + '%';
     document.getElementById('g-bar-growth').style.width = growthPct + '%';
-
+ 
     document.getElementById('g-legend-contrib').textContent = fmtCurrency(totalContributed, 0);
     document.getElementById('g-legend-growth').textContent = fmtCurrency(growth, 0);
     document.getElementById('g-legend-initial').textContent = fmtCurrency(initial, 0);
   }
-
+ 
   /* ---------- Wire up fields ---------- */
   linkPair('t-amount-slider', 't-amount-num', renderTarget);
   linkPair('t-years-slider', 't-years-num', renderTarget);
   linkPair('t-rate-slider', 't-rate-num', renderTarget);
-
+ 
   linkPair('g-initial-slider', 'g-initial-num', renderGrowth);
   linkPair('g-monthly-slider', 'g-monthly-num', renderGrowth);
   linkPair('g-years-slider', 'g-years-num', renderGrowth);
   linkPair('g-rate-slider', 'g-rate-num', renderGrowth);
-
+ 
   /* ---------- Tabs ---------- */
   const tabTarget = document.getElementById('tab-target');
   const tabGrowth = document.getElementById('tab-growth');
   const indicator = document.getElementById('tab-indicator');
-
+ 
   const panels = {
     target: [document.getElementById('panel-target-inputs'), document.getElementById('panel-target-result')],
     growth: [document.getElementById('panel-growth-inputs'), document.getElementById('panel-growth-result')],
   };
-
+ 
   function setMode(mode) {
     const isTarget = mode === 'target';
     panels.target.forEach(p => p.setAttribute('data-hidden', isTarget ? 'false' : 'true'));
     panels.growth.forEach(p => p.setAttribute('data-hidden', isTarget ? 'true' : 'false'));
-
+ 
     tabTarget.classList.toggle('text-ink-950', isTarget);
     tabTarget.classList.toggle('text-slate-400', !isTarget);
     tabGrowth.classList.toggle('text-ink-950', !isTarget);
     tabGrowth.classList.toggle('text-slate-400', isTarget);
-
+ 
     indicator.style.transform = isTarget ? 'translateX(0%)' : 'translateX(100%)';
   }
-
+ 
   tabTarget.addEventListener('click', () => setMode('target'));
   tabGrowth.addEventListener('click', () => setMode('growth'));
-
+ 
   /* ---------- Init ---------- */
   setMode('target');
   renderTarget();
@@ -714,3 +719,4 @@
 </script>
 </body>
 </html>
+ 

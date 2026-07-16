@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<title>About Ledger — Savings & Growth Calculator</title>
+<meta name="description" content="Ledger is a free, no-signup savings target and compound growth calculator. Learn how the numbers are calculated and how to get in touch." />
+<meta name="robots" content="index, follow" />
+<link rel="canonical" href="https://www.ledgrcalc.com/" /> 
+<meta name="theme-color" content="#0A0E13" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,500;0,600;1,500;1,600&family=Inter:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          ink: { 950: '#0A0E13', 900: '#10151C', 800: '#171E27', 700: '#212A35', 600: '#2B3542' },
+          gold: { 300: '#E8CD8E', 400: '#D4B267', 500: '#B8935A' },
+          emerald: { 400: '#59B79A', 500: '#3E9C82' },
+          slate: { 300: '#B7C0CC', 400: '#8B93A0', 500: '#6B7484' },
+        },
+        fontFamily: {
+          display: ['Fraunces', 'serif'],
+          sans: ['Inter', 'sans-serif'],
+          mono: ['IBM Plex Mono', 'monospace'],
+        },
+      },
+    },
+  };
+</script>
+
+<style>
+  html, body { background-color: #0A0E13; }
+  body {
+    background-image:
+      linear-gradient(rgba(212,178,103,0.035) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(212,178,103,0.035) 1px, transparent 1px);
+    background-size: 28px 28px;
+    background-position: center top;
+  }
+  .prose-copy p { line-height: 1.75; }
+  .prose-copy h2 { font-family: 'Fraunces', serif; }
+  ::selection { background: rgba(212,178,103,0.3); }
+</style>
+</head>
+
+<body class="min-h-screen font-sans text-slate-300 antialiased">
+
+  <div class="max-w-3xl mx-auto px-5 sm:px-8 py-10 sm:py-14">
+
+    <header class="flex items-center justify-between mb-14 sm:mb-16">
+      <a href="index.html" class="flex items-center gap-2">
+        <span class="w-1.5 h-1.5 rounded-full bg-gold-400"></span>
+        <span class="font-display italic font-medium text-xl text-slate-100 tracking-tight">Ledger</span>
+      </a>
+      <a href="index.html" class="text-sm text-slate-400 hover:text-gold-400 transition-colors">← Back to calculator</a>
+    </header>
+
+    <main class="prose-copy">
+      <h1 class="text-2xl sm:text-3xl font-medium text-slate-100 tracking-tight mb-6">About Ledger</h1>
+
+      <p class="text-slate-300 mb-5">
+        Ledger is a small, focused tool built around one question: how much do you need to save, and what will it grow into? There's no account to create and no data to hand over — both calculators run entirely in your browser, using the numbers you type in and nothing else.
+      </p>
+
+      <p class="text-slate-300 mb-10">
+        It exists because most savings math is simple in theory and annoying in practice. Working out a monthly contribution by hand, or checking what a decade of compounding actually does to a balance, means either digging up the formula or trusting a black-box tool. Ledger tries to make that calculation instant and transparent instead.
+      </p>
+
+      <h2 class="text-lg sm:text-xl font-semibold text-slate-100 tracking-tight mb-4">How the numbers are calculated</h2>
+      <p class="text-slate-300 mb-5">
+        Both calculators use the standard future-value-of-annuity formulas used across personal finance: monthly compounding, a constant annual return applied evenly across each month, and — for the Growth Projector — an initial balance that compounds alongside the ongoing contributions. Nothing is rounded until the final display, and a 0% return is handled as a straight division rather than an edge case that breaks the math.
+      </p>
+      <p class="text-slate-300 mb-10">
+        These are projections, not guarantees. Real markets don't return a smooth, constant rate every single month — actual results will be lumpier than the calculator's straight line. Treat the output as a planning estimate, not a promise.
+      </p>
+
+      <h2 class="text-lg sm:text-xl font-semibold text-slate-100 tracking-tight mb-4">Get in touch</h2>
+      <p class="text-slate-300">
+        Found a bug, or have a suggestion for the calculators? Reach out at
+        <span class="text-gold-300 font-mono">[TODO: your contact email]</span>.
+      </p>
+    </main>
+
+    <footer class="text-center mt-16 sm:mt-20">
+      <div class="flex items-center justify-center gap-4 mb-3 text-xs text-slate-500">
+        <a href="index.html" class="hover:text-gold-400 transition-colors">Calculator</a>
+        <span class="text-ink-700">•</span>
+        <a href="privacy-policy.html" class="hover:text-gold-400 transition-colors">Privacy Policy</a>
+      </div>
+      <p class="text-xs text-slate-600">© 2026 Ledger. All calculations are estimates for educational purposes only.</p>
+    </footer>
+
+  </div>
+</body>
+</html>
