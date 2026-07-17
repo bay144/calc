@@ -16,6 +16,7 @@
 <meta property="og:title" content="Sinking Fund Calculator: Plan for Annual & Irregular Expenses" />
 <meta property="og:description" content="Calculate exactly how much to set aside each month for upcoming expenses like Christmas, car insurance, or vet bills with our free sinking fund calculator." />
 <meta property="og:url" content="https://www.ledgrcalc.com/sinking-fund-calculator.html" />
+<meta property="og:image" content="https://www.ledgrcalc.com/og-image.png" />
 
 <meta name="twitter:card" content="summary" />
 <meta name="twitter:title" content="Sinking Fund Calculator: Plan for Annual & Irregular Expenses" />
@@ -93,13 +94,12 @@
 
 <link rel="stylesheet" href="dist/output.css" />
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9444853609964104" crossorigin="anonymous"></script>
-<!-- GOOGLE ANALYTICS: paste your real Measurement ID (starts with G-) below, replacing G-XXXXXXXXXX in both places -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-LW9NNXTGK7"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
-  gtag('config', 'G-XXXXXXXXXX');
+  gtag('config', 'G-LW9NNXTGK7');
 </script>
 </head>
 
@@ -301,13 +301,21 @@
 
   function addFundRow(name = '', amount = '', dueDate = '') {
     const row = document.createElement('div');
-    row.className = 'fund-row grid items-center gap-2' ;
-    row.style.gridTemplateColumns = '1fr 100px 130px 24px';
+    row.className = 'fund-row grid grid-cols-1 sm:grid-cols-[1fr_100px_130px_24px] items-start sm:items-center gap-3 sm:gap-2 pb-4 sm:pb-0 mb-2 sm:mb-0 border-b border-ink-800 sm:border-0 last:border-0';
     row.innerHTML = `
-      <input type="text" value="${name}" placeholder="e.g. Christmas Gifts" class="fund-name val-input text-left text-sm sm:text-base bg-ink-800 rounded-lg px-2.5 py-2 border border-transparent focus:border-gold-500/40" />
-      <input type="number" value="${amount}" placeholder="0" min="0" step="1" class="fund-amount val-input text-sm sm:text-base bg-ink-800 rounded-lg px-2.5 py-2 border border-transparent focus:border-gold-500/40" />
-      <input type="date" value="${dueDate}" class="fund-date val-input text-left text-xs sm:text-sm bg-ink-800 rounded-lg px-2 py-2 border border-transparent focus:border-gold-500/40" style="color-scheme: dark;" />
-      <button class="remove-btn text-slate-500 hover:text-rose-400 transition-colors" aria-label="Remove expense">✕</button>
+      <div>
+        <span class="sm:hidden block text-xs text-slate-500 mb-1.5">Name</span>
+        <input type="text" value="${name}" placeholder="e.g. Christmas Gifts" class="fund-name val-input text-left text-sm sm:text-base bg-ink-800 rounded-lg px-2.5 py-2 border border-transparent focus:border-gold-500/40 w-full" />
+      </div>
+      <div>
+        <span class="sm:hidden block text-xs text-slate-500 mb-1.5">Amount</span>
+        <input type="number" value="${amount}" placeholder="0" min="0" step="1" class="fund-amount val-input text-sm sm:text-base bg-ink-800 rounded-lg px-2.5 py-2 border border-transparent focus:border-gold-500/40 w-full" />
+      </div>
+      <div>
+        <span class="sm:hidden block text-xs text-slate-500 mb-1.5">Due Date</span>
+        <input type="date" value="${dueDate}" class="fund-date val-input text-left text-xs sm:text-sm bg-ink-800 rounded-lg px-2 py-2 border border-transparent focus:border-gold-500/40 w-full" style="color-scheme: dark;" />
+      </div>
+      <button class="remove-btn text-slate-500 hover:text-rose-400 transition-colors justify-self-end sm:justify-self-auto" aria-label="Remove expense">✕</button>
     `;
     document.getElementById('fund-list').appendChild(row);
 
