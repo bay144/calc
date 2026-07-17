@@ -1,0 +1,14 @@
+{
+  "name": "ledger-site",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Ledgr — savings target & compound growth calculator",
+  "scripts": {
+    "watch:css": "tailwindcss -i ./src/input.css -o ./dist/output.css --watch",
+    "build:css": "tailwindcss -i ./src/input.css -o ./dist/output.css --minify"
+  },
+  "devDependencies": {
+    "@tailwindcss/cli": "^4.3.3",
+    "tailwindcss": "^4.3.3"
+  }
+}
