@@ -63,7 +63,7 @@
             <label for="income-num" class="text-sm font-medium text-slate-300">Total Monthly Income</label>
             <div class="flex items-center gap-0.5 w-32">
               <span class="text-slate-500 font-mono text-sm">$</span>
-              <input type="number" id="income-num" class="val-input text-base" value="4500" min="0" step="50" aria-label="Total Monthly Income" />
+              <input type="number" id="income-num" class="val-input text-base" value="4500" min="0" step="0.01" aria-label="Total Monthly Income" />
             </div>
           </div>
         </section>
@@ -174,14 +174,17 @@
 
 <script>
 (function () {
-  const fmtCurrency = (n, decimals = 0) =>
-    '$' + Math.abs(n).toLocaleString('en-US', { minimumFractionDigits: decimals, maximumFractionDigits: decimals });
+  // Smart currency formatter: uses 2 decimals if exact change exists, otherwise 0
+  const fmtCurrency = (n) => {
+    const hasDecimal = Math.round(n * 100) % 100 !== 0;
+    const decimals = hasDecimal ? 2 : 0;
+    return '$' + Math.abs(n).toLocaleString('en-US', { minimumFractionDigits: decimals, maximumFractionDigits: decimals });
+  };
 
   const incomeInput = document.getElementById('income-num');
   const categoryList = document.getElementById('category-list');
   const btnAddCategory = document.getElementById('btn-add-category');
 
-  // Default initial categories
   const initialCategories = [
     { name: "Rent / Mortgage", amount: 1500 },
     { name: "Groceries", amount: 450 },
@@ -190,18 +193,27 @@
     { name: "Savings Goal", amount: 500 },
   ];
 
+  // Restricts input to only numbers, decimals, and navigation/delete keys
+  function blockLetters(e) {
+    const allowedKeys = ['Backspace', 'ArrowLeft', 'ArrowRight', 'Tab', 'Delete', '.'];
+    if (allowedKeys.includes(e.key)) return;
+    
+    if (!/^[0-9]$/.test(e.key)) {
+        e.preventDefault();
+    }
+  }
+
   function calculateBudget() {
     const income = parseFloat(incomeInput.value) || 0;
     let allocated = 0;
     
-    // Sum all category inputs
     document.querySelectorAll('.cat-amount').forEach(input => {
       allocated += (parseFloat(input.value) || 0);
     });
 
-    const remaining = income - allocated;
+    // Round to 2 decimal places to completely prevent JavaScript floating-point errors
+    const remaining = Math.round((income - allocated) * 100) / 100;
 
-    // Update Text Elements
     document.getElementById('legend-income').textContent = fmtCurrency(income);
     document.getElementById('legend-allocated').textContent = fmtCurrency(allocated);
     document.getElementById('legend-remaining').textContent = fmtCurrency(remaining);
@@ -211,16 +223,14 @@
     const labelRem = document.getElementById('label-remaining');
     const barRem = document.getElementById('bar-remaining');
 
-    remEl.textContent = fmtCurrency(remaining);
+    remEl.textContent = (remaining < 0 ? "-" : "") + fmtCurrency(remaining);
     
-    // Update Progress Bar Width
     let allocPct = income > 0 ? (allocated / income) * 100 : 0;
     if (allocPct > 100) allocPct = 100;
     
     document.getElementById('bar-allocated').style.width = allocPct + '%';
     barRem.style.width = (100 - allocPct) + '%';
 
-    // State Colors (Gold for perfect zero, Emerald for positive, Red for over budget)
     remEl.classList.remove('text-emerald-400', 'text-gold-300', 'text-rose-400');
     dotRem.classList.remove('bg-emerald-500', 'bg-gold-400', 'bg-rose-500');
     barRem.classList.remove('bg-emerald-500', 'bg-gold-400', 'bg-rose-500');
@@ -237,7 +247,6 @@
       barRem.classList.add('bg-rose-500');
       labelRem.textContent = "Over budget by";
       document.getElementById('result-sub').textContent = "Reduce categories to reach zero.";
-      remEl.textContent = "-" + fmtCurrency(remaining);
     } else {
       remEl.classList.add('text-emerald-400');
       dotRem.classList.add('bg-emerald-500');
@@ -255,31 +264,56 @@
       <button class="remove-btn text-ink-600 hover:text-rose-400 transition-colors p-1" aria-label="Remove category">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
       </button>
-      <input type="text" class="flex-1 bg-transparent text-sm sm:text-base text-slate-200 border-b border-ink-700 focus:border-gold-500 outline-none pb-1 placeholder-slate-600 transition-colors" placeholder="e.g. Groceries" value="${name}" />
+      <input type="text" class="cat-name flex-1 bg-transparent text-sm sm:text-base text-slate-200 border-b border-ink-700 focus:border-gold-500 outline-none pb-1 placeholder-slate-600 transition-colors" placeholder="e.g. Groceries" value="${name}" />
       <div class="flex items-center gap-0.5 w-28 justify-end border-b border-ink-700 focus-within:border-gold-500 transition-colors pb-1">
         <span class="text-slate-500 font-mono text-sm">$</span>
-        <input type="number" class="cat-amount val-input text-sm sm:text-base" value="${amount}" min="0" step="1" placeholder="0" />
+        <input type="number" class="cat-amount val-input text-sm sm:text-base" value="${amount}" min="0" step="0.01" placeholder="0" />
       </div>
     `;
 
-    // Bind events
     row.querySelector('.remove-btn').addEventListener('click', () => {
       row.remove();
       calculateBudget();
     });
 
+    const nameInput = row.querySelector('.cat-name');
+    const amountInput = row.querySelector('.cat-amount');
+
+    nameInput.addEventListener('input', calculateBudget);
+    amountInput.addEventListener('input', calculateBudget);
+
+    // Apply strict number validation
+    amountInput.addEventListener('keydown', blockLetters);
+
+    // Listen for 'Enter' to generate a new row instantly
     row.querySelectorAll('input').forEach(input => {
-      input.addEventListener('input', calculateBudget);
+      input.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') {
+          e.preventDefault();
+          addCategoryRow('', '');
+        }
+      });
     });
 
     categoryList.appendChild(row);
+
+    // Automatically focus the new row so you can keep typing without clicking
+    if (name === '') {
+        nameInput.focus();
+    }
   }
 
-  // Event Listeners
   incomeInput.addEventListener('input', calculateBudget);
+  incomeInput.addEventListener('keydown', blockLetters);
+  incomeInput.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      addCategoryRow('', '');
+    }
+  });
+
   btnAddCategory.addEventListener('click', () => addCategoryRow('', ''));
 
-  // Initialize
   initialCategories.forEach(cat => addCategoryRow(cat.name, cat.amount));
   calculateBudget();
 })();
