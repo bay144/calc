@@ -39,7 +39,6 @@
       margin-bottom: 20px;
     }
 
-    /* Keep the teller slip boxes looking clean on paper */
     .teller-box {
       border: 1px solid #cbd5e1 !important;
       background: #ffffff !important;
@@ -199,15 +198,15 @@
           </div>
         </div>
         
-        <!-- Denomination Grid -->
-        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-3 mb-8" id="teller-slip">
+        <!-- Denomination Grid using inline native CSS to bypass uncompiled Tailwind classes -->
+        <div id="teller-slip" class="gap-3 mb-8" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));">
           <!-- Populated by JavaScript -->
         </div>
 
         <!-- Affiliate Product Recommendations (Hidden in Print Mode) -->
         <div class="pt-6 border-t border-ink-800 no-print">
           <p class="text-xs font-semibold tracking-widest text-gold-500 uppercase mb-4">Creator Recommended Tools</p>
-          <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div class="gap-4" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));">
             
             <a href="#" target="_blank" class="block p-4 rounded-xl border border-ink-700 bg-ink-950 hover:border-gold-500/50 transition-colors group">
               <span class="block text-sm font-medium text-slate-200 group-hover:text-gold-400 mb-1">Clear A6 Zipper Envelopes &rarr;</span>
@@ -305,7 +304,7 @@
     let bills = { 100: 0, 50: 0, 20: 0, 10: 0, 5: 0, 1: 0 };
     
     categories.forEach(amount => {
-      let remaining = Math.floor(amount); // Cash stuffing only applies to whole dollars
+      let remaining = Math.floor(amount); 
       
       bills[100] += Math.floor(remaining / 100);
       remaining %= 100;
@@ -334,9 +333,9 @@
       const total = count * denom;
       
       slipContainer.innerHTML += `
-        <div class="teller-box bg-ink-950 border border-ink-800 rounded-xl p-4 text-center">
+        <div class="teller-box border border-ink-800 rounded-xl p-4 text-center" style="background: #10151C;">
           <span class="block text-xs font-semibold tracking-widest text-slate-500 mb-1">$${denom} BILLS</span>
-          <span class="block font-mono font-tnum text-3xl text-slate-200 mb-1">${count}</span>
+          <span class="block font-mono font-tnum text-slate-200 mb-1" style="font-size: 1.5rem; line-height: 2rem;">${count}</span>
           <span class="block text-sm font-mono text-gold-400">= $${total}</span>
         </div>
       `;
