@@ -291,7 +291,6 @@
     if (!/^[0-9]$/.test(e.key)) e.preventDefault();
   }
 
-  // Denomination Algorithm
   function updateTellerSlip(categories) {
     let bills = { 100: 0, 50: 0, 20: 0, 10: 0, 5: 0, 1: 0 };
     categories.forEach(amount => {
@@ -325,6 +324,7 @@
     let allocated = 0, needs = 0, wants = 0, savings = 0;
     const validCategories = [];
     
+    // Select all rows and recalculate
     document.querySelectorAll('.group').forEach((row, index) => {
       const amount = parseFloat(row.querySelector('.cat-amount').value) || 0;
       const group = row.querySelector('.cat-group').value;
@@ -342,7 +342,7 @@
 
     const remaining = Math.round((income - allocated) * 100) / 100;
 
-    // Update legend totals dynamically
+    // Updates text legends
     document.getElementById('legend-income').textContent = fmtCurrency(income);
     document.getElementById('legend-needs').textContent = fmtCurrency(needs);
     document.getElementById('legend-wants').textContent = fmtCurrency(wants);
@@ -350,7 +350,7 @@
     document.getElementById('legend-remaining').textContent = fmtCurrency(remaining);
     document.getElementById('result-remaining').textContent = (remaining < 0 ? "-" : "") + fmtCurrency(remaining);
     
-    // Build the Pie Chart
+    // Updates Pie Chart
     const pieChart = document.getElementById('donut-chart');
     const base = Math.max(income, allocated); 
     if (base === 0) {
@@ -368,6 +368,7 @@
       if (currentPct < 100) gradientStops.push(`${remColor} ${currentPct}% 100%`);
       pieChart.style.backgroundImage = `conic-gradient(${gradientStops.join(', ')})`;
     }
+    
     updateTellerSlip(validCategories.map(cat => cat.amount));
   }
 
@@ -380,7 +381,7 @@
         <div class="w-2 h-2 rounded-full shrink-0 cat-color-dot bg-ink-700"></div>
         <div class="flex-1 flex gap-2 border-b border-ink-700 focus-within:border-gold-500 pb-1 min-w-0">
           <input type="text" class="cat-name w-1/2 sm:w-3/5 bg-transparent text-sm text-slate-200 outline-none" placeholder="Name" value="${name}" />
-          <select class="cat-group w-1/2 sm:w-2/5 bg-transparent text-xs text-slate-400 outline-none cursor-pointer" tabindex="-1">
+          <select class="cat-group w-1/2 sm:w-2/5 bg-transparent text-xs sm:text-sm text-slate-400 outline-none cursor-pointer" tabindex="-1">
             <option value="needs" ${group === 'needs' ? 'selected' : ''}>Need</option>
             <option value="wants" ${group === 'wants' ? 'selected' : ''}>Want</option>
             <option value="savings" ${group === 'savings' ? 'selected' : ''}>Save/Debt</option>
@@ -393,9 +394,12 @@
       </div>
     `;
 
+    // ADD EVENT LISTENERS TO NEW ROW
     row.querySelector('.remove-btn').addEventListener('click', () => { row.remove(); calculateBudget(); });
     row.querySelectorAll('input, select').forEach(el => el.addEventListener('input', calculateBudget));
     row.querySelector('.cat-amount').addEventListener('keydown', blockLetters);
+    
+    // Handle Tab/Enter navigation
     row.querySelector('.cat-name').addEventListener('keydown', (e) => { if (e.key === 'Enter') { e.preventDefault(); row.querySelector('.cat-amount').focus(); } });
     row.querySelector('.cat-amount').addEventListener('keydown', (e) => {
       if (e.key === 'Enter') {
@@ -404,13 +408,16 @@
         next ? next.querySelector('.cat-name').focus() : addCategoryRow('', 'needs', '');
       }
     });
+
     categoryList.appendChild(row);
-    calculateBudget();
+    calculateBudget(); // Recalculate once row is added
   }
 
   incomeInput.addEventListener('input', calculateBudget);
   btnAddCategory.addEventListener('click', () => addCategoryRow('', 'needs', ''));
   btnPrint.addEventListener('click', () => window.print());
+
+  // Initialize
   [
     { name: "Rent / Mortgage", group: "needs", amount: 300 },
     { name: "Groceries", group: "needs", amount: 70 },
