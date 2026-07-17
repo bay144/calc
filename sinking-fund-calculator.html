@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<title>Sinking Fund Calculator: Plan for Annual & Irregular Expenses | Ledgr</title>
+<meta name="description" content="Calculate exactly how much to set aside each month for upcoming expenses like Christmas, car insurance, or vet bills with our free sinking fund calculator." />
+<meta name="robots" content="index, follow" />
+<link rel="canonical" href="https://www.ledgrcalc.com/sinking-fund-calculator.html" />
+<link rel="icon" type="image/svg+xml" href="favicon.svg" />
+<meta name="theme-color" content="#0A0E13" />
+
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="Ledgr" />
+<meta property="og:title" content="Sinking Fund Calculator: Plan for Annual & Irregular Expenses" />
+<meta property="og:description" content="Calculate exactly how much to set aside each month for upcoming expenses like Christmas, car insurance, or vet bills with our free sinking fund calculator." />
+<meta property="og:url" content="https://www.ledgrcalc.com/sinking-fund-calculator.html" />
+
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="Sinking Fund Calculator: Plan for Annual & Irregular Expenses" />
+<meta name="twitter:description" content="Calculate exactly how much to set aside each month for upcoming expenses like Christmas, car insurance, or vet bills with our free sinking fund calculator." />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,500;0,600;1,500;1,600&family=Inter:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Ledgr Sinking Fund Calculator",
+  "url": "https://www.ledgrcalc.com/sinking-fund-calculator.html",
+  "description": "Calculate exactly how much to set aside each month for upcoming expenses like Christmas, car insurance, or vet bills with our free sinking fund calculator.",
+  "applicationCategory": "FinanceApplication",
+  "operatingSystem": "Any",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  }
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What is a sinking fund?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "A sinking fund is money set aside gradually, in small monthly amounts, to cover a specific expense you know is coming — like an annual insurance bill, holiday shopping, or a vet visit — so the full cost never has to come out of one paycheck at once."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What's the difference between a sinking fund and an emergency fund?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "An emergency fund covers expenses you can't predict — a job loss, a medical bill, a car breaking down. A sinking fund covers expenses you can predict, like an annual premium or a holiday season, just not on a monthly schedule. One is for the unexpected; the other is for the expected-but-irregular."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How many sinking funds should I have?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "There's no fixed number — most people start with two or three for their biggest irregular costs, like car maintenance or holiday spending, and add more categories once the habit feels manageable rather than starting with a long list all at once."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I keep sinking funds in cash envelopes?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes — sinking funds pair naturally with cash stuffing. Each sinking fund can simply be its own labeled envelope that you top up monthly instead of spending down, until its due date arrives."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What if my expense's due date or amount changes?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Update the amount or date in the calculator and your required monthly contribution recalculates immediately — it's normal for these numbers to shift slightly as a due date gets closer or a quoted price changes."
+      }
+    }
+  ]
+}
+</script>
+
+<link rel="stylesheet" href="dist/output.css" />
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9444853609964104" crossorigin="anonymous"></script>
+<!-- GOOGLE ANALYTICS: paste your real Measurement ID (starts with G-) below, replacing G-XXXXXXXXXX in both places -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-XXXXXXXXXX');
+</script>
+</head>
+
+<body class="min-h-screen font-sans text-slate-300 antialiased">
+
+  <div class="max-w-5xl mx-auto px-5 sm:px-8 py-10 sm:py-14">
+
+    <header class="flex items-center justify-between mb-10 sm:mb-14">
+      <a href="index.html" class="flex items-center gap-2">
+        <span class="w-1.5 h-1.5 rounded-full bg-gold-400"></span>
+        <span class="font-display italic font-medium text-xl text-slate-100 tracking-tight">Ledgr</span>
+      </a>
+      <a href="index.html" class="text-sm text-slate-400 hover:text-gold-400 transition-colors">← Back to calculator</a>
+    </header>
+
+    <!-- Google AdSense Slot A -->
+    <div class="w-full mb-10 sm:mb-14">
+      <div class="ad-slot" data-ad-slot="sinking-slot-a-header-banner">
+        <span class="ad-label">Advertisement</span>
+      </div>
+    </div>
+
+    <div class="max-w-3xl mx-auto text-center mb-10 sm:mb-14">
+      <p class="text-xs font-semibold tracking-widest text-gold-500 uppercase mb-3">Free Tool</p>
+      <h1 class="text-2xl sm:text-3xl font-medium text-slate-100 tracking-tight mb-4">Sinking Fund Calculator</h1>
+      <p class="text-sm sm:text-base text-slate-400">
+        List the big, irregular expenses you know are coming — Christmas, car insurance, a vet visit — and this tool works out exactly how much to set aside each month so the full bill never catches you off guard.
+      </p>
+    </div>
+
+    <!-- CALCULATOR -->
+    <main class="grid lg:grid-cols-2 gap-6 lg:gap-8 items-start mb-10 sm:mb-14">
+
+      <!-- INPUT PANEL -->
+      <section class="bg-ink-900 border border-ink-700 rounded-2xl p-6 sm:p-7">
+        <div class="flex items-center justify-between mb-5">
+          <p class="text-xs font-semibold tracking-widest text-gold-500 uppercase">Upcoming Expenses</p>
+          <button id="btn-add-fund" class="inline-flex items-center gap-1 px-3 py-1.5 text-xs font-medium text-slate-300 bg-ink-800 border border-ink-700 rounded-full hover:border-gold-500/50 hover:text-gold-400 transition-colors">+ Add Expense</button>
+        </div>
+
+        <div class="hidden sm:grid gap-2 mb-2 px-1" style="grid-template-columns: 1fr 100px 130px 24px;">
+          <span class="text-xs text-slate-500">Name</span>
+          <span class="text-xs text-slate-500">Amount</span>
+          <span class="text-xs text-slate-500">Due Date</span>
+          <span></span>
+        </div>
+
+        <div id="fund-list" class="space-y-2">
+          <!-- Populated by JavaScript -->
+        </div>
+      </section>
+
+      <!-- RESULT PANEL -->
+      <section class="bg-gradient-to-b from-ink-900 to-ink-950 border border-gold-500/25 rounded-2xl p-7 sm:p-8 shadow-2xl shadow-black/40 lg:sticky lg:top-8">
+        <div class="flex items-center gap-6 mb-6">
+          <div id="donut-chart" class="shrink-0 relative rounded-full bg-ink-700" style="width: 100px; height: 100px;">
+            <div class="absolute inset-2.5 rounded-full bg-ink-950"></div>
+          </div>
+          <div>
+            <p class="text-xs font-semibold tracking-widest text-slate-400 uppercase mb-1">Monthly Sinking Fund Total</p>
+            <span id="result-total" class="font-mono font-tnum text-3xl sm:text-4xl font-semibold text-gold-300">$0</span>
+            <p id="result-sub" class="text-sm text-slate-500 mt-1">Add an expense to get started.</p>
+          </div>
+        </div>
+
+        <div id="fund-breakdown" class="space-y-3 pt-5 border-t border-ink-800">
+          <!-- Populated by JavaScript -->
+        </div>
+      </section>
+    </main>
+
+    <!-- Google AdSense Slot B -->
+    <div class="w-full max-w-3xl mx-auto mb-10 sm:mb-14">
+      <div class="ad-slot" data-ad-slot="sinking-slot-b-mid-page">
+        <span class="ad-label">Advertisement</span>
+      </div>
+    </div>
+
+    <!-- EDUCATIONAL CONTENT -->
+    <div class="max-w-3xl mx-auto seo-copy">
+      <h2 class="text-lg sm:text-xl font-semibold text-slate-100 tracking-tight mb-4">What Is a Sinking Fund?</h2>
+      <p class="text-slate-300 mb-8">
+        A sinking fund is money you set aside gradually, a little each month, to cover a specific expense that isn't monthly but is completely predictable — an annual insurance premium, a holiday season, a car that'll need new tires eventually. Instead of that bill arriving as a surprise and wrecking a month's budget, the cost gets spread out and paid down slowly, in advance, on your terms.
+      </p>
+
+      <h2 class="text-lg sm:text-xl font-semibold text-slate-100 tracking-tight mb-4">Sinking Fund vs. Emergency Fund: What's the Difference?</h2>
+      <p class="text-slate-300 mb-8">
+        These two get mixed up constantly, but the distinction is simple: an emergency fund covers what you <em>can't</em> predict — a layoff, a medical bill, a car accident. A sinking fund covers what you <em>can</em> predict, just not on a tidy monthly schedule. If you already know the expense and roughly when it's due, it belongs in a sinking fund, not your emergency reserve.
+      </p>
+
+      <h2 class="text-lg sm:text-xl font-semibold text-slate-100 tracking-tight mb-4">Common Sinking Fund Categories</h2>
+      <ul class="space-y-2 text-slate-300 mb-8">
+        <li>Holiday gifts and travel</li>
+        <li>Car insurance or registration, when billed annually or semi-annually</li>
+        <li>Vet visits and pet care</li>
+        <li>Home or car maintenance</li>
+        <li>Annual subscriptions and memberships</li>
+        <li>Property taxes</li>
+        <li>Birthdays, weddings, and other gifts</li>
+      </ul>
+
+      <h2 class="text-lg sm:text-xl font-semibold text-slate-100 tracking-tight mb-4">Using Sinking Funds With Cash Stuffing</h2>
+      <p class="text-slate-300 mb-6">
+        Sinking funds pair naturally with physical cash envelopes: each fund is just another envelope you top up every payday instead of spending down, until its due date arrives. If you're new to the envelope method itself, our <a href="cash-stuffing-guide.html" class="text-gold-400 hover:text-gold-300 underline underline-offset-2">Cash Stuffing 101 guide</a> covers the basics, and the <a href="budget.html" class="text-gold-400 hover:text-gold-300 underline underline-offset-2">Zero-Based Budget Planner</a> can help you find room in your monthly numbers for these contributions alongside your regular categories.
+      </p>
+
+      <div class="bg-ink-900 border border-gold-500/25 rounded-2xl p-6 sm:p-7 mb-10 flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div>
+          <p class="text-slate-100 font-medium mb-1">Already budgeting monthly?</p>
+          <p class="text-sm text-slate-400">Use the Zero-Based Budget Planner to fit these contributions into your existing categories.</p>
+        </div>
+        <a href="budget.html" class="inline-flex items-center gap-2 px-5 py-2.5 text-sm font-medium text-ink-950 bg-gold-400 rounded-full hover:bg-gold-300 transition-colors shrink-0 whitespace-nowrap">Open the Planner</a>
+      </div>
+
+      <h2 class="text-lg sm:text-xl font-semibold text-slate-100 tracking-tight mb-6">Frequently Asked Questions</h2>
+
+      <div class="mb-6">
+        <h3 class="text-slate-100 font-medium mb-2">What is a sinking fund?</h3>
+        <p class="text-slate-300">A sinking fund is money set aside gradually, in small monthly amounts, to cover a specific expense you know is coming — like an annual insurance bill, holiday shopping, or a vet visit — so the full cost never has to come out of one paycheck at once.</p>
+      </div>
+      <div class="mb-6">
+        <h3 class="text-slate-100 font-medium mb-2">What's the difference between a sinking fund and an emergency fund?</h3>
+        <p class="text-slate-300">An emergency fund covers expenses you can't predict — a job loss, a medical bill, a car breaking down. A sinking fund covers expenses you can predict, like an annual premium or a holiday season, just not on a monthly schedule. One is for the unexpected; the other is for the expected-but-irregular.</p>
+      </div>
+      <div class="mb-6">
+        <h3 class="text-slate-100 font-medium mb-2">How many sinking funds should I have?</h3>
+        <p class="text-slate-300">There's no fixed number — most people start with two or three for their biggest irregular costs, like car maintenance or holiday spending, and add more categories once the habit feels manageable rather than starting with a long list all at once.</p>
+      </div>
+      <div class="mb-6">
+        <h3 class="text-slate-100 font-medium mb-2">Can I keep sinking funds in cash envelopes?</h3>
+        <p class="text-slate-300">Yes — sinking funds pair naturally with cash stuffing. Each sinking fund can simply be its own labeled envelope that you top up monthly instead of spending down, until its due date arrives.</p>
+      </div>
+      <div class="mb-10">
+        <h3 class="text-slate-100 font-medium mb-2">What if my expense's due date or amount changes?</h3>
+        <p class="text-slate-300">Update the amount or date in the calculator and your required monthly contribution recalculates immediately — it's normal for these numbers to shift slightly as a due date gets closer or a quoted price changes.</p>
+      </div>
+    </div>
+
+    <!-- Google AdSense Slot C -->
+    <div class="w-full max-w-3xl mx-auto mb-10 sm:mb-14">
+      <div class="ad-slot" data-ad-slot="sinking-slot-c-page-bottom">
+        <span class="ad-label">Advertisement</span>
+      </div>
+    </div>
+
+    <footer class="text-center mt-10">
+      <div class="flex flex-wrap items-center justify-center gap-x-4 gap-y-2 mb-3 text-xs text-slate-500">
+        <a href="index.html" class="hover:text-gold-400 transition-colors">Calculator</a>
+        <span class="text-ink-700">•</span>
+        <a href="budget.html" class="hover:text-gold-400 transition-colors">Budget Planner</a>
+        <span class="text-ink-700">•</span>
+        <a href="cash-stuffing-guide.html" class="hover:text-gold-400 transition-colors">Cash Stuffing Guide</a>
+        <span class="text-ink-700">•</span>
+        <a href="about.html" class="hover:text-gold-400 transition-colors">About</a>
+        <span class="text-ink-700">•</span>
+        <a href="privacy-policy.html" class="hover:text-gold-400 transition-colors">Privacy Policy</a>
+      </div>
+      <p class="text-xs text-slate-600">© 2026 Ledgr. All calculations are estimates for educational purposes only.</p>
+    </footer>
+
+  </div>
+
+<script>
+(function () {
+  const chartColors = [
+    '#3E9C82', '#D4B267', '#818CF8', '#F472B6', '#60A5FA',
+    '#FB923C', '#A78BFA', '#34D399', '#FBBF24', '#F87171',
+    '#38BDF8', '#C084FC'
+  ];
+
+  const msPerDay = 86400000;
+  const avgDaysPerMonth = 30.4368;
+
+  const fmtCurrency = (n) => {
+    const hasDecimal = Math.round(n * 100) % 100 !== 0;
+    const decimals = hasDecimal ? 2 : 0;
+    return '$' + Math.abs(n).toLocaleString('en-US', { minimumFractionDigits: decimals, maximumFractionDigits: decimals });
+  };
+
+  function blockLetters(e) {
+    const allowedKeys = ['Backspace', 'ArrowLeft', 'ArrowRight', 'Tab', 'Delete', '.'];
+    if (allowedKeys.includes(e.key)) return;
+    if (!/^[0-9]$/.test(e.key)) e.preventDefault();
+  }
+
+  function calcFund(amount, dueDateStr, todayDate) {
+    if (!dueDateStr || !amount) return null;
+    const due = new Date(dueDateStr + 'T00:00:00');
+    if (isNaN(due.getTime())) return null;
+
+    const daysRemaining = Math.round((due - todayDate) / msPerDay);
+    const isPast = daysRemaining < 0;
+    const isSoon = !isPast && daysRemaining < 30;
+    const monthsRemaining = Math.max(1, Math.round(daysRemaining / avgDaysPerMonth));
+    const monthly = amount / monthsRemaining;
+
+    return { status: isPast ? 'past' : (isSoon ? 'soon' : 'ok'), daysRemaining, monthsRemaining, monthly };
+  }
+
+  function addFundRow(name = '', amount = '', dueDate = '') {
+    const row = document.createElement('div');
+    row.className = 'fund-row grid items-center gap-2' ;
+    row.style.gridTemplateColumns = '1fr 100px 130px 24px';
+    row.innerHTML = `
+      <input type="text" value="${name}" placeholder="e.g. Christmas Gifts" class="fund-name val-input text-left text-sm sm:text-base bg-ink-800 rounded-lg px-2.5 py-2 border border-transparent focus:border-gold-500/40" />
+      <input type="number" value="${amount}" placeholder="0" min="0" step="1" class="fund-amount val-input text-sm sm:text-base bg-ink-800 rounded-lg px-2.5 py-2 border border-transparent focus:border-gold-500/40" />
+      <input type="date" value="${dueDate}" class="fund-date val-input text-left text-xs sm:text-sm bg-ink-800 rounded-lg px-2 py-2 border border-transparent focus:border-gold-500/40" style="color-scheme: dark;" />
+      <button class="remove-btn text-slate-500 hover:text-rose-400 transition-colors" aria-label="Remove expense">✕</button>
+    `;
+    document.getElementById('fund-list').appendChild(row);
+
+    row.querySelector('.fund-name').addEventListener('input', calculateFunds);
+    row.querySelector('.fund-amount').addEventListener('input', calculateFunds);
+    row.querySelector('.fund-amount').addEventListener('keydown', blockLetters);
+    row.querySelector('.fund-date').addEventListener('input', calculateFunds);
+    row.querySelector('.remove-btn').addEventListener('click', () => {
+      row.remove();
+      calculateFunds();
+    });
+
+    calculateFunds();
+  }
+
+  function calculateFunds() {
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+
+    let total = 0;
+    const validFunds = [];
+
+    document.querySelectorAll('.fund-row').forEach((row, index) => {
+      const name = row.querySelector('.fund-name').value || 'Untitled';
+      const amount = parseFloat(row.querySelector('.fund-amount').value) || 0;
+      const dueDate = row.querySelector('.fund-date').value;
+      const color = chartColors[index % chartColors.length];
+
+      const result = calcFund(amount, dueDate, today);
+      if (result && amount > 0) {
+        total += result.monthly;
+        validFunds.push({ name, color, ...result, amount });
+      }
+    });
+
+    document.getElementById('result-total').textContent = fmtCurrency(total);
+
+    const sub = document.getElementById('result-sub');
+    if (validFunds.length === 0) {
+      sub.textContent = 'Add an expense to get started.';
+    } else {
+      sub.textContent = `to cover ${validFunds.length} upcoming expense${validFunds.length === 1 ? '' : 's'}.`;
+    }
+
+    // Donut chart
+    const pieChart = document.getElementById('donut-chart');
+    if (total === 0) {
+      pieChart.style.backgroundImage = 'none';
+      pieChart.style.backgroundColor = '#212A35';
+    } else {
+      let gradientStops = [];
+      let currentPct = 0;
+      validFunds.forEach(fund => {
+        const slicePct = (fund.monthly / total) * 100;
+        gradientStops.push(`${fund.color} ${currentPct}% ${currentPct + slicePct}%`);
+        currentPct += slicePct;
+      });
+      pieChart.style.backgroundImage = `conic-gradient(${gradientStops.join(', ')})`;
+    }
+
+    // Breakdown list
+    const breakdown = document.getElementById('fund-breakdown');
+    breakdown.innerHTML = '';
+    validFunds.forEach(fund => {
+      const isWarning = fund.status === 'past' || fund.status === 'soon';
+      const noteText = fund.status === 'past'
+        ? `Overdue by ${Math.abs(fund.daysRemaining)} day${Math.abs(fund.daysRemaining) === 1 ? '' : 's'} — set aside the full amount now`
+        : fund.status === 'soon'
+          ? `Due in ${fund.daysRemaining} day${fund.daysRemaining === 1 ? '' : 's'} — set aside the full amount now`
+          : `${fund.monthsRemaining} month${fund.monthsRemaining === 1 ? '' : 's'} to go`;
+
+      breakdown.innerHTML += `
+        <div class="flex items-center justify-between text-sm gap-3">
+          <div class="flex items-center gap-2 min-w-0">
+            <span class="w-2 h-2 rounded-full shrink-0" style="background-color: ${fund.color};"></span>
+            <div class="min-w-0">
+              <p class="text-slate-200 truncate">${fund.name}</p>
+              <p class="text-xs ${isWarning ? 'text-rose-400' : 'text-slate-500'}">${noteText}</p>
+            </div>
+          </div>
+          <span class="font-mono font-tnum text-slate-200 shrink-0">${fmtCurrency(fund.monthly)}/mo</span>
+        </div>
+      `;
+    });
+  }
+
+  document.getElementById('btn-add-fund').addEventListener('click', () => addFundRow());
+
+  // Seed with example categories
+  const today = new Date();
+  const inMonths = (n) => {
+    const d = new Date(today);
+    d.setMonth(d.getMonth() + n);
+    return d.toISOString().split('T')[0];
+  };
+  addFundRow('Christmas Gifts', 600, inMonths(5));
+  addFundRow('Car Insurance (6-mo)', 720, inMonths(6));
+  addFundRow('Vet Checkup', 250, inMonths(3));
+})();
+</script>
+</body>
+</html>
