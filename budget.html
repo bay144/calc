@@ -11,18 +11,54 @@
 <link rel="icon" type="image/svg+xml" href="favicon.svg" />
 <meta name="theme-color" content="#0A0E13" />
 
-<meta property="og:type" content="website" />
-<meta property="og:site_name" content="Ledgr" />
-<meta property="og:title" content="Ledgr — Specific Category Budget Planner" />
-<meta property="og:description" content="Use Ledgr's free, zero-based budget planner to allocate your income into specific categories and track exactly where your money goes." />
-<meta property="og:url" content="https://www.ledgrcalc.com/budget.html" />
-
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,500;0,600;1,500;1,600&family=Inter:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet" />
 
 <link rel="stylesheet" href="dist/output.css" />
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9444853609964104" crossorigin="anonymous"></script>
+
+<!-- Print Styles embedded directly to bypass Tailwind compiler -->
+<style>
+  @media print {
+    html, body { 
+      background: #ffffff !important; 
+      color: #000000 !important; 
+    }
+    
+    /* Hides the Ads, Headers, Footers, and UI Buttons from the printout */
+    header, footer, .ad-slot, .ad-label, .seo-copy, .remove-btn, #btn-add-category, #btn-print, p.text-slate-400 { 
+      display: none !important; 
+    }
+    
+    .mode-panel { 
+      background: #ffffff !important; 
+      border: 1px solid #cbd5e1 !important; 
+      box-shadow: none !important;
+      color: #000000 !important;
+      page-break-inside: avoid;
+      margin-bottom: 20px;
+    }
+
+    .text-slate-200, .text-slate-300, .text-slate-400, .text-slate-500, 
+    .text-gold-300, .text-gold-400, .text-gold-500, 
+    .text-emerald-400, .text-rose-400 {
+      color: #000000 !important;
+    }
+
+    input, select { 
+      color: #000000 !important; 
+      border-bottom: 1px solid #94a3b8 !important; 
+    }
+    
+    input::placeholder { color: transparent !important; }
+
+    * { 
+      -webkit-print-color-adjust: exact !important; 
+      print-color-adjust: exact !important; 
+    }
+  }
+</style>
 </head>
 
 <body class="min-h-screen font-sans text-slate-300 antialiased">
@@ -81,6 +117,11 @@
               </button>
             </div>
           </div>
+          
+          <div class="flex justify-between text-xs text-slate-500 mb-3 px-8">
+            <span>Category Name</span>
+            <span>Amount</span>
+          </div>
 
           <div id="category-list" class="space-y-4">
             <!-- JavaScript will inject category rows here -->
@@ -93,10 +134,8 @@
         <section class="mode-panel bg-gradient-to-b from-ink-900 to-ink-950 border border-gold-500/25 rounded-2xl p-7 sm:p-8 shadow-2xl shadow-black/40">
           
           <div class="flex flex-col sm:flex-row items-center gap-6 mb-8">
-            <!-- CSS Solid Pie Chart -->
-            <div id="donut-chart" class="shrink-0 relative w-32 h-32 rounded-full flex items-center justify-center transition-all duration-300 shadow-lg shadow-black/50" style="background: #212A35;">
-              <!-- Removed the inner circle to make it a solid Pie Chart instead of a Donut -->
-            </div>
+            <!-- Hardcoded Pie Chart Dimensions to prevent shrinking -->
+            <div id="donut-chart" style="width: 120px; height: 120px; min-width: 120px; min-height: 120px;" class="shrink-0 relative rounded-full flex items-center justify-center transition-all duration-300 shadow-lg shadow-black/50 bg-ink-700"></div>
             
             <!-- Remaining Text -->
             <div class="text-center sm:text-left">
@@ -205,6 +244,7 @@
   const incomeInput = document.getElementById('income-num');
   const categoryList = document.getElementById('category-list');
   const btnAddCategory = document.getElementById('btn-add-category');
+  const btnPrint = document.getElementById('btn-print');
 
   const initialCategories = [
     { name: "Rent / Mortgage", group: "needs", amount: 1500 },
@@ -245,7 +285,7 @@
     const remEl = document.getElementById('result-remaining');
     const dotRem = document.getElementById('dot-remaining');
     const labelRem = document.getElementById('label-remaining');
-    const pieChart = document.getElementById('donut-chart'); // Works as a pie chart now
+    const pieChart = document.getElementById('donut-chart');
 
     remEl.textContent = (remaining < 0 ? "-" : "") + fmtCurrency(remaining);
     
@@ -272,22 +312,19 @@
     // Build the Pie Chart
     const base = Math.max(income, allocated); 
     if (base === 0) {
-      pieChart.style.backgroundImage = 'none'; 
-      pieChart.style.backgroundColor = '#212A35';
+      pieChart.style.background = '#212A35'; 
     } else {
       const pNeeds = (needs / base) * 100;
       const pWants = pNeeds + (wants / base) * 100;
       const pSavings = pWants + (savings / base) * 100;
       const remColor = remaining < 0 ? '#F43F5E' : '#2B3542'; 
       
-      // Kept on a single line to prevent browser parsing errors
-      pieChart.style.backgroundImage = `conic-gradient(#3E9C82 0% ${pNeeds}%, #D4B267 ${pNeeds}% ${pWants}%, #818CF8 ${pWants}% ${pSavings}%, ${remColor} ${pSavings}% 100%)`;
+      pieChart.style.background = `conic-gradient(#3E9C82 0% ${pNeeds}%, #D4B267 ${pNeeds}% ${pWants}%, #818CF8 ${pWants}% ${pSavings}%, ${remColor} ${pSavings}% 100%)`;
     }
   }
 
   function addCategoryRow(name = '', group = 'needs', amount = '') {
     const row = document.createElement('div');
-    // Removed mobile stacking classes, locked into a single row
     row.className = 'flex items-center gap-2 sm:gap-3 group';
     
     row.innerHTML = `
@@ -361,10 +398,9 @@
       }
     }
   });
-  document.getElementById('btn-print').addEventListener('click', () => {
-    window.print();
-  });
+
   btnAddCategory.addEventListener('click', () => addCategoryRow('', 'needs', ''));
+  btnPrint.addEventListener('click', () => window.print());
 
   initialCategories.forEach(cat => addCategoryRow(cat.name, cat.group, cat.amount));
   calculateBudget();
