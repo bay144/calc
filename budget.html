@@ -26,8 +26,7 @@
       color: #000000 !important; 
     }
     
-    /* Hides the Ads, Headers, Footers, and UI Buttons from the printout */
-    header, footer, .ad-slot, .ad-label, .seo-copy, .remove-btn, #btn-add-category, #btn-print, p.text-slate-400 { 
+    header, footer, .ad-slot, .ad-label, .seo-copy, .remove-btn, #btn-add-category, #btn-print, p.text-slate-400, .no-print { 
       display: none !important; 
     }
     
@@ -38,6 +37,12 @@
       color: #000000 !important;
       page-break-inside: avoid;
       margin-bottom: 20px;
+    }
+
+    /* Keep the teller slip boxes looking clean on paper */
+    .teller-box {
+      border: 1px solid #cbd5e1 !important;
+      background: #ffffff !important;
     }
 
     .text-slate-200, .text-slate-300, .text-slate-400, .text-slate-500, 
@@ -87,7 +92,7 @@
     </div>
 
     <!-- Main grid -->
-    <main class="grid lg:grid-cols-2 gap-6 lg:gap-8 items-start">
+    <main class="grid lg:grid-cols-2 gap-6 lg:gap-8 items-start mb-6">
 
       <!-- INPUT PANELS -->
       <div class="relative flex flex-col gap-6">
@@ -99,7 +104,7 @@
             <label for="income-num" class="text-sm font-medium text-slate-300">Total Monthly Income</label>
             <div class="flex items-center gap-0.5 w-32">
               <span class="text-slate-500 font-mono text-sm">$</span>
-              <input type="number" id="income-num" class="val-input text-base" value="4500" min="0" step="0.01" aria-label="Total Monthly Income" />
+              <input type="number" id="income-num" class="val-input text-base" value="2800" min="0" step="0.01" aria-label="Total Monthly Income" />
             </div>
           </div>
         </section>
@@ -134,10 +139,8 @@
         <section class="mode-panel bg-gradient-to-b from-ink-900 to-ink-950 border border-gold-500/25 rounded-2xl p-7 sm:p-8 shadow-2xl shadow-black/40">
           
           <div class="flex flex-col sm:flex-row items-center gap-6 mb-8">
-            <!-- Hardcoded Pie Chart Dimensions to prevent shrinking -->
             <div id="donut-chart" style="width: 120px; height: 120px; min-width: 120px; min-height: 120px;" class="shrink-0 relative rounded-full flex items-center justify-center transition-all duration-300 shadow-lg shadow-black/50 bg-ink-700"></div>
             
-            <!-- Remaining Text -->
             <div class="text-center sm:text-left">
               <p class="text-xs font-semibold tracking-widest text-slate-400 uppercase mb-2">Left to Allocate</p>
               <div class="flex items-baseline justify-center sm:justify-start gap-2 mb-1">
@@ -147,7 +150,6 @@
             </div>
           </div>
 
-          <!-- Macro Category Legends -->
           <div class="space-y-3">
             <div class="flex justify-between text-sm">
               <div class="flex items-center gap-2">
@@ -187,6 +189,46 @@
       </div>
     </main>
 
+    <!-- TELLER SLIP & AFFILIATE LINKS -->
+    <div class="w-full mb-10 sm:mb-14">
+      <section class="mode-panel bg-ink-900 border border-ink-700 rounded-2xl p-6 sm:p-7">
+        <div class="flex items-center justify-between mb-6">
+          <div>
+            <h2 class="text-lg font-semibold tracking-tight text-slate-100">Bank Teller Withdrawal Slip</h2>
+            <p class="text-sm text-slate-500 mt-1">Exact denominations needed to stuff your categories.</p>
+          </div>
+        </div>
+        
+        <!-- Denomination Grid -->
+        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-3 mb-8" id="teller-slip">
+          <!-- Populated by JavaScript -->
+        </div>
+
+        <!-- Affiliate Product Recommendations (Hidden in Print Mode) -->
+        <div class="pt-6 border-t border-ink-800 no-print">
+          <p class="text-xs font-semibold tracking-widest text-gold-500 uppercase mb-4">Creator Recommended Tools</p>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+            
+            <a href="#" target="_blank" class="block p-4 rounded-xl border border-ink-700 bg-ink-950 hover:border-gold-500/50 transition-colors group">
+              <span class="block text-sm font-medium text-slate-200 group-hover:text-gold-400 mb-1">Clear A6 Zipper Envelopes &rarr;</span>
+              <span class="block text-xs text-slate-500">The standard for organizing category cash.</span>
+            </a>
+            
+            <a href="#" target="_blank" class="block p-4 rounded-xl border border-ink-700 bg-ink-950 hover:border-gold-500/50 transition-colors group">
+              <span class="block text-sm font-medium text-slate-200 group-hover:text-gold-400 mb-1">Aesthetic Budget Binders &rarr;</span>
+              <span class="block text-xs text-slate-500">Keep your system portable and protected.</span>
+            </a>
+            
+            <a href="#" target="_blank" class="block p-4 rounded-xl border border-ink-700 bg-ink-950 hover:border-gold-500/50 transition-colors group">
+              <span class="block text-sm font-medium text-slate-200 group-hover:text-gold-400 mb-1">Acrylic Cash Sorting Tray &rarr;</span>
+              <span class="block text-xs text-slate-500">Perfect for organizing straps and loose bills.</span>
+            </a>
+
+          </div>
+        </div>
+      </section>
+    </div>
+
     <!-- Google AdSense Slot B -->
     <div class="w-full max-w-4xl mx-auto mt-10 sm:mt-14">
       <div class="ad-slot" data-ad-slot="slot-b-below-calculator">
@@ -205,14 +247,6 @@
       <p class="text-slate-300 mb-8">
         Leaving money unassigned is usually how it disappears into impulse purchases. By breaking down large categories (like "Living Expenses") into highly specific allocations (like "Groceries," "Dining Out," and "Household Supplies"), you create a rigid boundary that protects your long-term savings goals. 
       </p>
-
-      <h3 class="text-lg sm:text-xl font-semibold text-slate-100 tracking-tight mb-4">Practical Rules for Categorization</h3>
-
-      <ul class="space-y-3 text-slate-300 mb-2">
-        <li><span class="text-slate-100 font-medium">Fund your debt and savings first.</span> Treat your future self and your creditors like utility bills. Allocate funds to debt elimination and investment accounts before categorizing discretionary spending.</li>
-        <li><span class="text-slate-100 font-medium">Be overly specific.</span> "Car" is too broad. Break it down into "Car Payment," "Gas," "Insurance," and "Maintenance Fund." Specificity prevents overspending in sub-categories.</li>
-        <li><span class="text-slate-100 font-medium">Embrace the zero.</span> If you have money left over after listing all your expenses and savings, assign the remainder to an aggressive financial goal. A remaining balance of exactly $0 means maximum efficiency.</li>
-      </ul>
     </section>
 
     <!-- Google AdSense Slot C -->
@@ -246,7 +280,6 @@
   const btnAddCategory = document.getElementById('btn-add-category');
   const btnPrint = document.getElementById('btn-print');
 
-  // A 12-color palette for the individual pie slices
   const chartColors = [
     '#3E9C82', '#D4B267', '#818CF8', '#F472B6', '#60A5FA', 
     '#FB923C', '#A78BFA', '#34D399', '#FBBF24', '#F87171', 
@@ -254,17 +287,60 @@
   ];
 
   const initialCategories = [
-    { name: "Rent / Mortgage", group: "needs", amount: 1500 },
-    { name: "Groceries", group: "needs", amount: 450 },
-    { name: "Dining Out", group: "wants", amount: 150 },
-    { name: "Car Payment", group: "needs", amount: 350 },
-    { name: "Savings Goal", group: "savings", amount: 500 },
+    { name: "Rent / Mortgage", group: "needs", amount: 300 },
+    { name: "Groceries", group: "needs", amount: 70 },
+    { name: "Dining Out", group: "wants", amount: 50 },
+    { name: "Savings Goal", group: "savings", amount: 2000 },
+    { name: "Debt Pay", group: "needs", amount: 500 },
   ];
 
   function blockLetters(e) {
     const allowedKeys = ['Backspace', 'ArrowLeft', 'ArrowRight', 'Tab', 'Delete', '.'];
     if (allowedKeys.includes(e.key)) return;
     if (!/^[0-9]$/.test(e.key)) e.preventDefault();
+  }
+
+  // Denomination Algorithm
+  function updateTellerSlip(categories) {
+    let bills = { 100: 0, 50: 0, 20: 0, 10: 0, 5: 0, 1: 0 };
+    
+    categories.forEach(amount => {
+      let remaining = Math.floor(amount); // Cash stuffing only applies to whole dollars
+      
+      bills[100] += Math.floor(remaining / 100);
+      remaining %= 100;
+      
+      bills[50] += Math.floor(remaining / 50);
+      remaining %= 50;
+      
+      bills[20] += Math.floor(remaining / 20);
+      remaining %= 20;
+      
+      bills[10] += Math.floor(remaining / 10);
+      remaining %= 10;
+      
+      bills[5] += Math.floor(remaining / 5);
+      remaining %= 5;
+      
+      bills[1] += remaining;
+    });
+
+    const slipContainer = document.getElementById('teller-slip');
+    slipContainer.innerHTML = '';
+    
+    const denominations = [100, 50, 20, 10, 5, 1];
+    denominations.forEach(denom => {
+      const count = bills[denom];
+      const total = count * denom;
+      
+      slipContainer.innerHTML += `
+        <div class="teller-box bg-ink-950 border border-ink-800 rounded-xl p-4 text-center">
+          <span class="block text-xs font-semibold tracking-widest text-slate-500 mb-1">$${denom} BILLS</span>
+          <span class="block font-mono font-tnum text-3xl text-slate-200 mb-1">${count}</span>
+          <span class="block text-sm font-mono text-gold-400">= $${total}</span>
+        </div>
+      `;
+    });
   }
 
   function calculateBudget() {
@@ -282,11 +358,9 @@
       if (group === 'wants') wants += amount;
       if (group === 'savings') savings += amount;
 
-      // Assign a color to the row's dot based on its position in the list
       const color = chartColors[index % chartColors.length];
       if (colorDot) colorDot.style.backgroundColor = color;
 
-      // Only add to the pie chart if it has a positive dollar amount
       if (amount > 0) {
         validCategories.push({ amount, color });
       }
@@ -327,7 +401,7 @@
       document.getElementById('result-sub').textContent = "Allocate the remaining balance.";
     }
 
-    // Build the dynamic Pie Chart with all individual line items
+    // Pie Chart
     const base = Math.max(income, allocated); 
     if (base === 0) {
       pieChart.style.backgroundImage = 'none'; 
@@ -336,14 +410,12 @@
       let gradientStops = [];
       let currentPct = 0;
 
-      // Loop through every valid category and calculate its slice
       validCategories.forEach(cat => {
         const slicePct = (cat.amount / base) * 100;
         gradientStops.push(`${cat.color} ${currentPct}% ${currentPct + slicePct}%`);
         currentPct += slicePct;
       });
 
-      // Fill remaining space with the unallocated/over-budget color
       const remColor = remaining < 0 ? '#F43F5E' : '#2B3542'; 
       if (currentPct < 100) {
         gradientStops.push(`${remColor} ${currentPct}% 100%`);
@@ -351,13 +423,15 @@
       
       pieChart.style.backgroundImage = `conic-gradient(${gradientStops.join(', ')})`;
     }
+
+    // Pass just the raw amounts to the teller slip generator
+    updateTellerSlip(validCategories.map(cat => cat.amount));
   }
 
   function addCategoryRow(name = '', group = 'needs', amount = '') {
     const row = document.createElement('div');
     row.className = 'flex items-center gap-2 sm:gap-3 group';
     
-    // Added a small colored dot (.cat-color-dot) next to the remove button
     row.innerHTML = `
       <div class="flex items-center gap-2 sm:gap-3 flex-1 min-w-0">
         <button class="remove-btn text-ink-600 hover:text-rose-400 transition-colors p-1 shrink-0" aria-label="Remove category" tabindex="-1">
