@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<title>Ledgr — Specific Category Budget Planner</title>
+<meta name="description" content="Use Ledgr's free, zero-based budget planner to allocate your income into specific categories and track exactly where your money goes." />
+<meta name="robots" content="index, follow" />
+<link rel="canonical" href="https://www.ledgrcalc.com/budget.html" />
+<link rel="icon" type="image/svg+xml" href="favicon.svg" />
+<meta name="theme-color" content="#0A0E13" />
+
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="Ledgr" />
+<meta property="og:title" content="Ledgr — Specific Category Budget Planner" />
+<meta property="og:description" content="Use Ledgr's free, zero-based budget planner to allocate your income into specific categories and track exactly where your money goes." />
+<meta property="og:url" content="https://www.ledgrcalc.com/budget.html" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,500;0,600;1,500;1,600&family=Inter:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+<link rel="stylesheet" href="dist/output.css" />
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9444853609964104" crossorigin="anonymous"></script>
+</head>
+
+<body class="min-h-screen font-sans text-slate-300 antialiased">
+
+  <div class="max-w-5xl mx-auto px-5 sm:px-8 py-10 sm:py-14">
+
+    <!-- Header -->
+    <header class="flex items-center justify-between mb-14 sm:mb-16">
+      <a href="index.html" class="flex items-center gap-2">
+        <span class="w-1.5 h-1.5 rounded-full bg-gold-400"></span>
+        <span class="font-display italic font-medium text-xl text-slate-100 tracking-tight">Ledgr</span>
+      </a>
+      <a href="index.html" class="text-sm text-slate-400 hover:text-gold-400 transition-colors">← Back to calculator</a>
+    </header>
+
+    <div class="text-center mb-10 sm:mb-14">
+      <h1 class="font-display italic font-medium text-2xl sm:text-3xl text-slate-100 tracking-tight mb-3">Zero-Based Budget Planner</h1>
+      <p class="text-sm sm:text-base text-slate-400 max-w-md mx-auto">Give every dollar a specific job. Allocate your total income down to zero.</p>
+    </div>
+
+    <!-- Google AdSense Slot A -->
+    <div class="w-full max-w-4xl mx-auto mb-10 sm:mb-14">
+      <div class="ad-slot" data-ad-slot="slot-a-header-banner">
+        <span class="ad-label">Advertisement</span>
+      </div>
+    </div>
+
+    <!-- Main grid -->
+    <main class="grid lg:grid-cols-2 gap-6 lg:gap-8 items-start">
+
+      <!-- INPUT PANELS -->
+      <div class="relative flex flex-col gap-6">
+
+        <!-- Income Section -->
+        <section class="mode-panel bg-ink-900 border border-ink-700 rounded-2xl p-6 sm:p-7">
+          <p class="text-xs font-semibold tracking-widest text-gold-500 uppercase mb-5">Funding</p>
+          <div class="flex items-center justify-between">
+            <label for="income-num" class="text-sm font-medium text-slate-300">Total Monthly Income</label>
+            <div class="flex items-center gap-0.5 w-32">
+              <span class="text-slate-500 font-mono text-sm">$</span>
+              <input type="number" id="income-num" class="val-input text-base" value="4500" min="0" step="50" aria-label="Total Monthly Income" />
+            </div>
+          </div>
+        </section>
+
+        <!-- Specific Categories Section -->
+        <section class="mode-panel bg-ink-900 border border-ink-700 rounded-2xl p-6 sm:p-7">
+          <div class="flex items-center justify-between mb-6">
+            <p class="text-xs font-semibold tracking-widest text-gold-500 uppercase m-0">Allocations</p>
+            <button id="btn-add-category" class="text-xs font-medium text-gold-400 hover:text-gold-300 transition-colors px-2 py-1 bg-ink-800 rounded-md border border-ink-700 hover:border-gold-500/50">
+              + Add Category
+            </button>
+          </div>
+          
+          <div class="flex justify-between text-xs text-slate-500 mb-3 px-8">
+            <span>Category Name</span>
+            <span>Amount</span>
+          </div>
+
+          <div id="category-list" class="space-y-4">
+            <!-- JavaScript will inject category rows here -->
+          </div>
+        </section>
+      </div>
+
+      <!-- RESULT PANELS -->
+      <div class="relative lg:sticky lg:top-8">
+        <section class="mode-panel bg-gradient-to-b from-ink-900 to-ink-950 border border-gold-500/25 rounded-2xl p-7 sm:p-8 shadow-2xl shadow-black/40">
+          <p class="text-xs font-semibold tracking-widest text-slate-400 uppercase mb-3">Left to Allocate</p>
+          <div class="flex items-baseline gap-2 mb-1">
+            <span id="result-remaining" class="font-mono font-tnum text-4xl sm:text-5xl font-semibold text-emerald-400">$0</span>
+          </div>
+          <p id="result-sub" class="text-sm text-slate-500 mb-7">Adjust your categories to reach zero.</p>
+
+          <div class="mb-3">
+            <div class="w-full h-2.5 rounded-full bg-ink-800 overflow-hidden flex">
+              <div id="bar-allocated" class="ledger-seg h-full bg-slate-400" style="width:0%"></div>
+              <div id="bar-remaining" class="ledger-seg h-full bg-emerald-500" style="width:100%"></div>
+            </div>
+          </div>
+          <div class="flex justify-between text-sm">
+            <div class="flex items-center gap-1.5">
+              <span class="w-2 h-2 rounded-full bg-slate-400"></span>
+              <span class="text-slate-400">Allocated</span>
+            </div>
+            <span id="legend-allocated" class="font-mono font-tnum text-slate-200">$0</span>
+          </div>
+          <div class="flex justify-between text-sm mt-1.5">
+            <div class="flex items-center gap-1.5">
+              <span class="w-2 h-2 rounded-full bg-emerald-500" id="dot-remaining"></span>
+              <span class="text-slate-400" id="label-remaining">Remaining</span>
+            </div>
+            <span id="legend-remaining" class="font-mono font-tnum text-slate-200">$0</span>
+          </div>
+
+          <div class="mt-6 pt-5 border-t border-ink-700 flex justify-between text-sm">
+            <span class="text-slate-500">Total Income</span>
+            <span id="legend-income" class="font-mono font-tnum text-slate-300">$4,500</span>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <!-- Google AdSense Slot B -->
+    <div class="w-full max-w-4xl mx-auto mt-10 sm:mt-14">
+      <div class="ad-slot" data-ad-slot="slot-b-below-calculator">
+        <span class="ad-label">Advertisement</span>
+      </div>
+    </div>
+
+    <!-- SEO / educational content -->
+    <section class="seo-copy max-w-3xl mx-auto mt-14 sm:mt-20">
+      <h2 class="text-2xl sm:text-3xl font-medium text-slate-100 tracking-tight mb-6">How to Build a Zero-Based Budget</h2>
+
+      <p class="text-slate-300 mb-5">
+        A precise budget gives every dollar a job before the month begins. Whether you are using digital tracking or a physical allocation system like binders and envelopes, the core math remains the same: your total income minus your specific categories should equal zero.
+      </p>
+
+      <p class="text-slate-300 mb-8">
+        Leaving money unassigned is usually how it disappears into impulse purchases. By breaking down large categories (like "Living Expenses") into highly specific allocations (like "Groceries," "Dining Out," and "Household Supplies"), you create a rigid boundary that protects your long-term savings goals. 
+      </p>
+
+      <h3 class="text-lg sm:text-xl font-semibold text-slate-100 tracking-tight mb-4">Practical Rules for Categorization</h3>
+
+      <ul class="space-y-3 text-slate-300 mb-2">
+        <li><span class="text-slate-100 font-medium">Fund your debt and savings first.</span> Treat your future self and your creditors like utility bills. Allocate funds to debt elimination and investment accounts before categorizing discretionary spending.</li>
+        <li><span class="text-slate-100 font-medium">Be overly specific.</span> "Car" is too broad. Break it down into "Car Payment," "Gas," "Insurance," and "Maintenance Fund." Specificity prevents overspending in sub-categories.</li>
+        <li><span class="text-slate-100 font-medium">Embrace the zero.</span> If you have money left over after listing all your expenses and savings, assign the remainder to an aggressive financial goal. A remaining balance of exactly $0 means maximum efficiency.</li>
+      </ul>
+    </section>
+
+    <!-- Google AdSense Slot C -->
+    <div class="w-full max-w-4xl mx-auto mt-14 sm:mt-16">
+      <div class="ad-slot" data-ad-slot="slot-c-page-bottom">
+        <span class="ad-label">Advertisement</span>
+      </div>
+    </div>
+
+    <footer class="text-center mt-10">
+      <div class="flex items-center justify-center gap-4 mb-3 text-xs text-slate-500">
+        <a href="about.html" class="hover:text-gold-400 transition-colors">About</a>
+        <span class="text-ink-700">•</span>
+        <a href="privacy-policy.html" class="hover:text-gold-400 transition-colors">Privacy Policy</a>
+      </div>
+      <p class="text-xs text-slate-600">© 2026 Ledgr. All calculations are for educational purposes only.</p>
+    </footer>
+
+  </div>
+
+<script>
+(function () {
+  const fmtCurrency = (n, decimals = 0) =>
+    '$' + Math.abs(n).toLocaleString('en-US', { minimumFractionDigits: decimals, maximumFractionDigits: decimals });
+
+  const incomeInput = document.getElementById('income-num');
+  const categoryList = document.getElementById('category-list');
+  const btnAddCategory = document.getElementById('btn-add-category');
+
+  // Default initial categories
+  const initialCategories = [
+    { name: "Rent / Mortgage", amount: 1500 },
+    { name: "Groceries", amount: 450 },
+    { name: "Car Payment", amount: 350 },
+    { name: "Utilities", amount: 200 },
+    { name: "Savings Goal", amount: 500 },
+  ];
+
+  function calculateBudget() {
+    const income = parseFloat(incomeInput.value) || 0;
+    let allocated = 0;
+    
+    // Sum all category inputs
+    document.querySelectorAll('.cat-amount').forEach(input => {
+      allocated += (parseFloat(input.value) || 0);
+    });
+
+    const remaining = income - allocated;
+
+    // Update Text Elements
+    document.getElementById('legend-income').textContent = fmtCurrency(income);
+    document.getElementById('legend-allocated').textContent = fmtCurrency(allocated);
+    document.getElementById('legend-remaining').textContent = fmtCurrency(remaining);
+    
+    const remEl = document.getElementById('result-remaining');
+    const dotRem = document.getElementById('dot-remaining');
+    const labelRem = document.getElementById('label-remaining');
+    const barRem = document.getElementById('bar-remaining');
+
+    remEl.textContent = fmtCurrency(remaining);
+    
+    // Update Progress Bar Width
+    let allocPct = income > 0 ? (allocated / income) * 100 : 0;
+    if (allocPct > 100) allocPct = 100;
+    
+    document.getElementById('bar-allocated').style.width = allocPct + '%';
+    barRem.style.width = (100 - allocPct) + '%';
+
+    // State Colors (Gold for perfect zero, Emerald for positive, Red for over budget)
+    remEl.classList.remove('text-emerald-400', 'text-gold-300', 'text-rose-400');
+    dotRem.classList.remove('bg-emerald-500', 'bg-gold-400', 'bg-rose-500');
+    barRem.classList.remove('bg-emerald-500', 'bg-gold-400', 'bg-rose-500');
+
+    if (remaining === 0) {
+      remEl.classList.add('text-gold-300');
+      dotRem.classList.add('bg-gold-400');
+      barRem.classList.add('bg-gold-400');
+      labelRem.textContent = "Perfectly balanced";
+      document.getElementById('result-sub').textContent = "Excellent. Every dollar has a job.";
+    } else if (remaining < 0) {
+      remEl.classList.add('text-rose-400');
+      dotRem.classList.add('bg-rose-500');
+      barRem.classList.add('bg-rose-500');
+      labelRem.textContent = "Over budget by";
+      document.getElementById('result-sub').textContent = "Reduce categories to reach zero.";
+      remEl.textContent = "-" + fmtCurrency(remaining);
+    } else {
+      remEl.classList.add('text-emerald-400');
+      dotRem.classList.add('bg-emerald-500');
+      barRem.classList.add('bg-emerald-500');
+      labelRem.textContent = "Unassigned";
+      document.getElementById('result-sub').textContent = "Allocate the remaining balance.";
+    }
+  }
+
+  function addCategoryRow(name = '', amount = '') {
+    const row = document.createElement('div');
+    row.className = 'flex items-center gap-3 group';
+    
+    row.innerHTML = `
+      <button class="remove-btn text-ink-600 hover:text-rose-400 transition-colors p-1" aria-label="Remove category">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+      </button>
+      <input type="text" class="flex-1 bg-transparent text-sm sm:text-base text-slate-200 border-b border-ink-700 focus:border-gold-500 outline-none pb-1 placeholder-slate-600 transition-colors" placeholder="e.g. Groceries" value="${name}" />
+      <div class="flex items-center gap-0.5 w-28 justify-end border-b border-ink-700 focus-within:border-gold-500 transition-colors pb-1">
+        <span class="text-slate-500 font-mono text-sm">$</span>
+        <input type="number" class="cat-amount val-input text-sm sm:text-base" value="${amount}" min="0" step="1" placeholder="0" />
+      </div>
+    `;
+
+    // Bind events
+    row.querySelector('.remove-btn').addEventListener('click', () => {
+      row.remove();
+      calculateBudget();
+    });
+
+    row.querySelectorAll('input').forEach(input => {
+      input.addEventListener('input', calculateBudget);
+    });
+
+    categoryList.appendChild(row);
+  }
+
+  // Event Listeners
+  incomeInput.addEventListener('input', calculateBudget);
+  btnAddCategory.addEventListener('click', () => addCategoryRow('', ''));
+
+  // Initialize
+  initialCategories.forEach(cat => addCategoryRow(cat.name, cat.amount));
+  calculateBudget();
+})();
+</script>
+</body>
+</html>
