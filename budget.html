@@ -20,12 +20,47 @@
 <link rel="icon" type="image/svg+xml" href="favicon.svg" />
 <meta name="theme-color" content="#0A0E13" />
 
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="Ledgr" />
+<meta property="og:title" content="Ledgr — Specific Category Budget Planner" />
+<meta property="og:description" content="Use Ledgr's free, zero-based budget planner to allocate your income into specific categories and track exactly where your money goes." />
+<meta property="og:url" content="https://www.ledgrcalc.com/budget.html" />
+
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="Ledgr — Specific Category Budget Planner" />
+<meta name="twitter:description" content="Use Ledgr's free, zero-based budget planner to allocate your income into specific categories and track exactly where your money goes." />
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Ledgr Budget Planner",
+  "url": "https://www.ledgrcalc.com/budget.html",
+  "description": "Use Ledgr's free, zero-based budget planner to allocate your income into specific categories and track exactly where your money goes.",
+  "applicationCategory": "FinanceApplication",
+  "operatingSystem": "Any",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  }
+}
+</script>
+
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,500;0,600;1,500;1,600&family=Inter:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet" />
 
 <link rel="stylesheet" href="dist/output.css" />
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9444853609964104" crossorigin="anonymous"></script>
+<!-- GOOGLE ANALYTICS-->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-LW9NNXTGK7"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-LW9NNXTGK7');
+</script>
 
 <!-- Print Styles embedded directly to bypass Tailwind compiler -->
 <style>
@@ -214,7 +249,8 @@
 
         <!-- Affiliate Product Recommendations (Hidden in Print Mode) -->
         <div class="pt-6 border-t border-ink-800 no-print">
-          <p class="text-xs font-semibold tracking-widest text-gold-500 uppercase mb-4">Creator Recommended Tools</p>
+          <p class="text-xs font-semibold tracking-widest text-gold-500 uppercase mb-2">Creator Recommended Tools</p>
+          <p class="text-xs text-slate-500 mb-4">Some links below are affiliate links. If you buy through them, we may earn a small commission at no extra cost to you.</p>
           <div class="gap-4" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));">
             
             <a href="#" target="_blank" class="block p-4 rounded-xl border border-ink-700 bg-ink-950 hover:border-gold-500/50 transition-colors group">
@@ -266,6 +302,8 @@
 
     <footer class="text-center mt-10">
       <div class="flex items-center justify-center gap-4 mb-3 text-xs text-slate-500">
+        <a href="index.html" class="hover:text-gold-400 transition-colors">Calculator</a>
+        <span class="text-ink-700">•</span>
         <a href="about.html" class="hover:text-gold-400 transition-colors">About</a>
         <span class="text-ink-700">•</span>
         <a href="privacy-policy.html" class="hover:text-gold-400 transition-colors">Privacy Policy</a>
