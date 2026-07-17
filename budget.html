@@ -242,6 +242,12 @@
           </div>
         </div>
         
+        <!-- Over-budget warning, shown/hidden by JS -->
+        <div id="overbudget-warning" class="hidden items-center gap-2 rounded-xl border border-rose-400/30 bg-rose-400/10 px-4 py-3 mb-5">
+          <span class="w-1.5 h-1.5 rounded-full bg-rose-400 shrink-0"></span>
+          <p id="overbudget-warning-text" class="text-sm text-rose-400"></p>
+        </div>
+ 
         <!-- Denomination Grid using inline native CSS to bypass uncompiled Tailwind classes -->
         <div id="teller-slip" class="gap-3 sm:gap-4 mb-8" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));">
           <!-- Populated by JavaScript -->
@@ -338,17 +344,28 @@
     if (!/^[0-9]$/.test(e.key)) e.preventDefault();
   }
  
-  function updateTellerSlip(categories) {
+  function updateTellerSlip(categories, isOverBudget, remaining) {
     let bills = { 100: 0, 50: 0, 20: 0, 10: 0, 5: 0, 1: 0 };
     categories.forEach(amount => {
-      let remaining = Math.floor(amount);
-      bills[100] += Math.floor(remaining / 100); remaining %= 100;
-      bills[50] += Math.floor(remaining / 50); remaining %= 50;
-      bills[20] += Math.floor(remaining / 20); remaining %= 20;
-      bills[10] += Math.floor(remaining / 10); remaining %= 10;
-      bills[5] += Math.floor(remaining / 5); remaining %= 5;
-      bills[1] += remaining;
+      let remainingAmount = Math.floor(amount);
+      bills[100] += Math.floor(remainingAmount / 100); remainingAmount %= 100;
+      bills[50] += Math.floor(remainingAmount / 50); remainingAmount %= 50;
+      bills[20] += Math.floor(remainingAmount / 20); remainingAmount %= 20;
+      bills[10] += Math.floor(remainingAmount / 10); remainingAmount %= 10;
+      bills[5] += Math.floor(remainingAmount / 5); remainingAmount %= 5;
+      bills[1] += remainingAmount;
     });
+ 
+    const warningBox = document.getElementById('overbudget-warning');
+    const warningText = document.getElementById('overbudget-warning-text');
+    if (isOverBudget) {
+      warningBox.classList.remove('hidden');
+      warningBox.classList.add('flex');
+      warningText.textContent = `Heads up — you're ${fmtCurrency(remaining)} over budget. This breakdown includes bills for money you haven't actually got yet.`;
+    } else {
+      warningBox.classList.add('hidden');
+      warningBox.classList.remove('flex');
+    }
  
     const slipContainer = document.getElementById('teller-slip');
     slipContainer.innerHTML = '';
@@ -394,8 +411,36 @@
     document.getElementById('legend-needs').textContent = fmtCurrency(needs);
     document.getElementById('legend-wants').textContent = fmtCurrency(wants);
     document.getElementById('legend-savings').textContent = fmtCurrency(savings);
-    document.getElementById('legend-remaining').textContent = fmtCurrency(remaining);
-    document.getElementById('result-remaining').textContent = (remaining < 0 ? "-" : "") + fmtCurrency(remaining);
+ 
+    const isOverBudget = remaining < 0;
+ 
+    const remainingText = document.getElementById('legend-remaining');
+    remainingText.textContent = (isOverBudget ? "-" : "") + fmtCurrency(remaining);
+    remainingText.classList.toggle('text-rose-400', isOverBudget);
+    remainingText.classList.toggle('text-slate-400', !isOverBudget);
+ 
+    const remainingLabel = document.getElementById('label-remaining');
+    remainingLabel.textContent = isOverBudget ? 'Over Budget' : 'Unallocated';
+    remainingLabel.classList.toggle('text-rose-400', isOverBudget);
+    remainingLabel.classList.toggle('text-slate-400', !isOverBudget);
+ 
+    const remainingDot = document.getElementById('dot-remaining');
+    remainingDot.classList.toggle('bg-rose-400', isOverBudget);
+    remainingDot.classList.toggle('bg-ink-600', !isOverBudget);
+ 
+    const resultRemaining = document.getElementById('result-remaining');
+    resultRemaining.textContent = (isOverBudget ? "-" : "") + fmtCurrency(remaining);
+    resultRemaining.classList.toggle('text-rose-400', isOverBudget);
+    resultRemaining.classList.toggle('text-emerald-400', !isOverBudget);
+ 
+    const resultSub = document.getElementById('result-sub');
+    if (isOverBudget) {
+      resultSub.textContent = `You're ${fmtCurrency(remaining)} over budget — reduce a category.`;
+    } else if (remaining === 0 && income > 0) {
+      resultSub.textContent = 'Every dollar is allocated.';
+    } else {
+      resultSub.textContent = 'Adjust your categories to reach zero.';
+    }
     
     // Updates Pie Chart
     const pieChart = document.getElementById('donut-chart');
@@ -415,8 +460,12 @@
       if (currentPct < 100) gradientStops.push(`${remColor} ${currentPct}% 100%`);
       pieChart.style.backgroundImage = `conic-gradient(${gradientStops.join(', ')})`;
     }
-    
-    updateTellerSlip(validCategories.map(cat => cat.amount));
+    pieChart.classList.toggle('ring-2', isOverBudget);
+    pieChart.classList.toggle('ring-rose-400', isOverBudget);
+    pieChart.classList.toggle('ring-offset-2', isOverBudget);
+    pieChart.classList.toggle('ring-offset-ink-900', isOverBudget);
+ 
+    updateTellerSlip(validCategories.map(cat => cat.amount), isOverBudget, remaining);
   }
  
   function addCategoryRow(name = '', group = 'needs', amount = '') {
