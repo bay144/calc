@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<title>Debt Snowball vs. Avalanche Calculator | Ledgr</title>
+<meta name="description" content="Enter your debts and see, side by side, exactly how much faster and cheaper the Debt Snowball and Debt Avalanche payoff methods each get you to zero." />
+<meta name="robots" content="index, follow" />
+<link rel="canonical" href="https://www.ledgrcalc.com/debt-snowball-avalanche-calculator.html" />
+<link rel="icon" type="image/svg+xml" href="favicon.svg" />
+<meta name="theme-color" content="#0A0E13" />
+
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="Ledgr" />
+<meta property="og:title" content="Debt Snowball vs. Avalanche Calculator" />
+<meta property="og:description" content="Enter your debts and see, side by side, exactly how much faster and cheaper the Debt Snowball and Debt Avalanche payoff methods each get you to zero." />
+<meta property="og:url" content="https://www.ledgrcalc.com/debt-snowball-avalanche-calculator.html" />
+<meta property="og:image" content="https://www.ledgrcalc.com/og-image.png" />
+
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="Debt Snowball vs. Avalanche Calculator" />
+<meta name="twitter:description" content="Enter your debts and see, side by side, exactly how much faster and cheaper the Debt Snowball and Debt Avalanche payoff methods each get you to zero." />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,500;0,600;1,500;1,600&family=Inter:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Ledgr Debt Snowball vs. Avalanche Calculator",
+  "url": "https://www.ledgrcalc.com/debt-snowball-avalanche-calculator.html",
+  "description": "Enter your debts and see, side by side, exactly how much faster and cheaper the Debt Snowball and Debt Avalanche payoff methods each get you to zero.",
+  "applicationCategory": "FinanceApplication",
+  "operatingSystem": "Any",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  }
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What is the debt snowball method?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The debt snowball method targets your smallest balance first, paying its minimum on every other debt while throwing all extra money at that one. Once it's paid off, its payment rolls into the next-smallest balance, and so on. It's built around quick wins to keep you motivated, even if it isn't always the cheapest path mathematically."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is the debt avalanche method?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The debt avalanche method targets your highest interest rate first instead of your smallest balance, again paying minimums everywhere else and rolling payments forward once a debt clears. It minimizes total interest paid over the life of the payoff, though the first debt to disappear may take longer than it would under the snowball method."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Which is better: snowball or avalanche?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Avalanche always saves the same or more in total interest, since it always attacks the most expensive debt first. Snowball can be worth the extra cost if the psychological win of erasing a full balance quickly is what keeps you actually sticking to the plan — the 'best' method is whichever one you'll follow through to zero."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Do I still pay minimums on every debt with these methods?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. Both methods only change where your extra money goes — every other debt still gets at least its minimum payment every month so nothing goes delinquent while you focus your extra payment on one target debt at a time."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What happens to a debt's minimum payment once it's paid off?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "It gets added to your extra payment pool and rolled into the next target debt — this is the 'snowball' effect the method is named for. Your total monthly payment amount stays the same throughout; it just concentrates on fewer and fewer debts as each one clears."
+      }
+    }
+  ]
+}
+</script>
+
+<link rel="stylesheet" href="dist/output.css" />
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9444853609964104" crossorigin="anonymous"></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-LW9NNXTGK7"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-LW9NNXTGK7');
+</script>
+</head>
+
+<body class="min-h-screen font-sans text-slate-300 antialiased">
+
+  <div class="max-w-5xl mx-auto px-5 sm:px-8 py-10 sm:py-14">
+
+    <header class="flex items-center justify-between mb-10 sm:mb-14">
+      <a href="index.html" class="flex items-center gap-2">
+        <span class="w-1.5 h-1.5 rounded-full bg-gold-400"></span>
+        <span class="font-display italic font-medium text-xl text-slate-100 tracking-tight">Ledgr</span>
+      </a>
+      <a href="index.html" class="text-sm text-slate-400 hover:text-gold-400 transition-colors">← Back to calculator</a>
+    </header>
+
+    <!-- Google AdSense Slot A -->
+    <div class="w-full mb-10 sm:mb-14">
+      <div class="ad-slot" data-ad-slot="debt-slot-a-header-banner">
+        <span class="ad-label">Advertisement</span>
+      </div>
+    </div>
+
+    <div class="max-w-3xl mx-auto text-center mb-10 sm:mb-14">
+      <p class="text-xs font-semibold tracking-widest text-gold-500 uppercase mb-3">Free Tool</p>
+      <h1 class="text-2xl sm:text-3xl font-medium text-slate-100 tracking-tight mb-4">Debt Snowball vs. Avalanche Calculator</h1>
+      <p class="text-sm sm:text-base text-slate-400">
+        Enter your debts once and see both payoff strategies side by side — which one gets you to zero faster, and which one costs less in total interest.
+      </p>
+    </div>
+
+    <!-- CALCULATOR -->
+    <main class="mb-10 sm:mb-14">
+
+      <!-- INPUT PANEL -->
+      <section class="bg-ink-900 border border-ink-700 rounded-2xl p-6 sm:p-7 mb-6">
+        <div class="flex items-center justify-between mb-5">
+          <p class="text-xs font-semibold tracking-widest text-gold-500 uppercase">Your Debts</p>
+          <button id="btn-add-debt" class="inline-flex items-center gap-1 px-3 py-1.5 text-xs font-medium text-slate-300 bg-ink-800 border border-ink-700 rounded-full hover:border-gold-500/50 hover:text-gold-400 transition-colors">+ Add Debt</button>
+        </div>
+
+        <div class="hidden sm:grid gap-2 mb-2 px-1" style="grid-template-columns: 1fr 110px 90px 110px 24px;">
+          <span class="text-xs text-slate-500">Name</span>
+          <span class="text-xs text-slate-500">Balance</span>
+          <span class="text-xs text-slate-500">APR %</span>
+          <span class="text-xs text-slate-500">Min Payment</span>
+          <span></span>
+        </div>
+
+        <div id="debt-list" class="space-y-2 mb-6">
+          <!-- Populated by JavaScript -->
+        </div>
+
+        <div class="pt-5 border-t border-ink-800">
+          <div class="flex items-center justify-between max-w-xs">
+            <label for="extra-payment-num" class="text-sm font-medium text-slate-300">Extra monthly payment</label>
+            <div class="flex items-center gap-0.5 w-28">
+              <span class="text-slate-500 font-mono text-sm">$</span>
+              <input type="number" id="extra-payment-num" class="val-input text-base" value="100" min="0" step="10" aria-label="Extra monthly payment beyond minimums" />
+            </div>
+          </div>
+          <p class="text-xs text-slate-500 mt-2">On top of the minimum payments above, applied to one target debt at a time.</p>
+        </div>
+      </section>
+
+      <!-- RESULT PANEL -->
+      <section class="grid sm:grid-cols-2 gap-4 mb-4">
+        <div class="bg-gradient-to-b from-ink-900 to-ink-950 border border-gold-500/25 rounded-2xl p-6 sm:p-7 shadow-xl shadow-black/30">
+          <p class="text-xs font-semibold tracking-widest text-gold-500 uppercase mb-2">Snowball</p>
+          <p class="text-xs text-slate-500 mb-4">Smallest balance first</p>
+          <span id="snowball-months" class="font-mono font-tnum text-2xl sm:text-3xl font-semibold text-gold-300">—</span>
+          <p class="text-sm text-slate-500 mb-4">to debt-free</p>
+          <div class="w-full h-2 rounded-full bg-ink-800 overflow-hidden mb-4">
+            <div id="snowball-bar" class="h-full bg-gold-400" style="width:0%"></div>
+          </div>
+          <div class="flex justify-between text-sm mb-4">
+            <span class="text-slate-400">Total interest paid</span>
+            <span id="snowball-interest" class="font-mono font-tnum text-slate-200">$0</span>
+          </div>
+          <div id="snowball-order" class="space-y-2 pt-4 border-t border-ink-800 text-sm">
+            <!-- Populated by JavaScript -->
+          </div>
+        </div>
+
+        <div class="bg-gradient-to-b from-ink-900 to-ink-950 border border-gold-500/25 rounded-2xl p-6 sm:p-7 shadow-xl shadow-black/30">
+          <p class="text-xs font-semibold tracking-widest text-emerald-400 uppercase mb-2">Avalanche</p>
+          <p class="text-xs text-slate-500 mb-4">Highest interest rate first</p>
+          <span id="avalanche-months" class="font-mono font-tnum text-2xl sm:text-3xl font-semibold text-emerald-400">—</span>
+          <p class="text-sm text-slate-500 mb-4">to debt-free</p>
+          <div class="w-full h-2 rounded-full bg-ink-800 overflow-hidden mb-4">
+            <div id="avalanche-bar" class="h-full bg-emerald-500" style="width:0%"></div>
+          </div>
+          <div class="flex justify-between text-sm mb-4">
+            <span class="text-slate-400">Total interest paid</span>
+            <span id="avalanche-interest" class="font-mono font-tnum text-slate-200">$0</span>
+          </div>
+          <div id="avalanche-order" class="space-y-2 pt-4 border-t border-ink-800 text-sm">
+            <!-- Populated by JavaScript -->
+          </div>
+        </div>
+      </section>
+
+      <!-- Comparison callout -->
+      <div id="comparison-callout" class="bg-ink-900 border border-gold-500/25 rounded-2xl p-5 sm:p-6 text-sm text-slate-300"></div>
+      <div id="cap-warning" class="hidden mt-3 items-center gap-2 rounded-xl border border-rose-400/30 bg-rose-400/10 px-4 py-3">
+        <span class="w-1.5 h-1.5 rounded-full bg-rose-400 shrink-0"></span>
+        <p class="text-sm text-rose-400">At these minimums and this extra payment, one or more debts may never fully pay off — try increasing the extra monthly payment.</p>
+      </div>
+    </main>
+
+    <!-- Google AdSense Slot B -->
+    <div class="w-full max-w-3xl mx-auto mb-10 sm:mb-14">
+      <div class="ad-slot" data-ad-slot="debt-slot-b-mid-page">
+        <span class="ad-label">Advertisement</span>
+      </div>
+    </div>
+
+    <!-- EDUCATIONAL CONTENT -->
+    <div class="max-w-3xl mx-auto seo-copy">
+      <h2 class="text-lg sm:text-xl font-semibold text-slate-100 tracking-tight mb-4">What Is the Debt Snowball Method?</h2>
+      <p class="text-slate-300 mb-8">
+        The debt snowball method sorts your debts smallest balance to largest, then throws every extra dollar at the smallest one while paying just the minimum everywhere else. Once that balance hits zero, its payment rolls into the next-smallest — a fast, visible win early on that's designed to keep you motivated through the rest of the list.
+      </p>
+
+      <h2 class="text-lg sm:text-xl font-semibold text-slate-100 tracking-tight mb-4">What Is the Debt Avalanche Method?</h2>
+      <p class="text-slate-300 mb-8">
+        The debt avalanche method sorts the same list by interest rate instead, highest to lowest, and attacks the most expensive debt first. Mathematically, this is the cheapest possible order — no other sequence pays less total interest for the same monthly payment — though the first full payoff can take longer to arrive if your highest-rate debt isn't your smallest one.
+      </p>
+
+      <h2 class="text-lg sm:text-xl font-semibold text-slate-100 tracking-tight mb-4">Which Is Better: Snowball or Avalanche?</h2>
+      <p class="text-slate-300 mb-8">
+        Avalanche wins on the math every time — it either saves money or, at worst, ties snowball if the order happens to be identical. But the method that actually gets followed to zero is the one that works, and for a lot of people, the quick psychological win of erasing a whole balance early is what keeps the plan alive. Run both numbers above and decide which trade-off — speed of motivation versus total cost — matters more for you.
+      </p>
+
+      <div class="bg-ink-900 border border-gold-500/25 rounded-2xl p-6 sm:p-7 mb-10 flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div>
+          <p class="text-slate-100 font-medium mb-1">Need to free up money for that extra payment?</p>
+          <p class="text-sm text-slate-400">Use the Zero-Based Budget Planner to find room in your monthly numbers first.</p>
+        </div>
+        <a href="budget.html" class="inline-flex items-center gap-2 px-5 py-2.5 text-sm font-medium text-ink-950 bg-gold-400 rounded-full hover:bg-gold-300 transition-colors shrink-0 whitespace-nowrap">Open the Planner</a>
+      </div>
+
+      <h2 class="text-lg sm:text-xl font-semibold text-slate-100 tracking-tight mb-6">Frequently Asked Questions</h2>
+
+      <div class="mb-6">
+        <h3 class="text-slate-100 font-medium mb-2">What is the debt snowball method?</h3>
+        <p class="text-slate-300">The debt snowball method targets your smallest balance first, paying its minimum on every other debt while throwing all extra money at that one. Once it's paid off, its payment rolls into the next-smallest balance, and so on. It's built around quick wins to keep you motivated, even if it isn't always the cheapest path mathematically.</p>
+      </div>
+      <div class="mb-6">
+        <h3 class="text-slate-100 font-medium mb-2">What is the debt avalanche method?</h3>
+        <p class="text-slate-300">The debt avalanche method targets your highest interest rate first instead of your smallest balance, again paying minimums everywhere else and rolling payments forward once a debt clears. It minimizes total interest paid over the life of the payoff, though the first debt to disappear may take longer than it would under the snowball method.</p>
+      </div>
+      <div class="mb-6">
+        <h3 class="text-slate-100 font-medium mb-2">Which is better: snowball or avalanche?</h3>
+        <p class="text-slate-300">Avalanche always saves the same or more in total interest, since it always attacks the most expensive debt first. Snowball can be worth the extra cost if the psychological win of erasing a full balance quickly is what keeps you actually sticking to the plan — the "best" method is whichever one you'll follow through to zero.</p>
+      </div>
+      <div class="mb-6">
+        <h3 class="text-slate-100 font-medium mb-2">Do I still pay minimums on every debt with these methods?</h3>
+        <p class="text-slate-300">Yes. Both methods only change where your extra money goes — every other debt still gets at least its minimum payment every month so nothing goes delinquent while you focus your extra payment on one target debt at a time.</p>
+      </div>
+      <div class="mb-10">
+        <h3 class="text-slate-100 font-medium mb-2">What happens to a debt's minimum payment once it's paid off?</h3>
+        <p class="text-slate-300">It gets added to your extra payment pool and rolled into the next target debt — this is the "snowball" effect the method is named for. Your total monthly payment amount stays the same throughout; it just concentrates on fewer and fewer debts as each one clears.</p>
+      </div>
+    </div>
+
+    <!-- Google AdSense Slot C -->
+    <div class="w-full max-w-3xl mx-auto mb-10 sm:mb-14">
+      <div class="ad-slot" data-ad-slot="debt-slot-c-page-bottom">
+        <span class="ad-label">Advertisement</span>
+      </div>
+    </div>
+
+    <footer class="text-center mt-10">
+      <div class="flex flex-wrap items-center justify-center gap-x-4 gap-y-2 mb-3 text-xs text-slate-500">
+        <a href="index.html" class="hover:text-gold-400 transition-colors">Calculator</a>
+        <span class="text-ink-700">•</span>
+        <a href="budget.html" class="hover:text-gold-400 transition-colors">Budget Planner</a>
+        <span class="text-ink-700">•</span>
+        <a href="sinking-fund-calculator.html" class="hover:text-gold-400 transition-colors">Sinking Fund Calculator</a>
+        <span class="text-ink-700">•</span>
+        <a href="emergency-fund-calculator.html" class="hover:text-gold-400 transition-colors">Emergency Fund Calculator</a>
+        <span class="text-ink-700">•</span>
+        <a href="cash-stuffing-guide.html" class="hover:text-gold-400 transition-colors">Cash Stuffing Guide</a>
+        <span class="text-ink-700">•</span>
+        <a href="about.html" class="hover:text-gold-400 transition-colors">About</a>
+        <span class="text-ink-700">•</span>
+        <a href="privacy-policy.html" class="hover:text-gold-400 transition-colors">Privacy Policy</a>
+      </div>
+      <p class="text-xs text-slate-600">© 2026 Ledgr. All calculations are estimates for educational purposes only.</p>
+    </footer>
+
+  </div>
+
+<script>
+(function () {
+  const fmtCurrency = (n) => '$' + Math.round(n).toLocaleString('en-US');
+
+  function blockLetters(e) {
+    const allowedKeys = ['Backspace', 'ArrowLeft', 'ArrowRight', 'Tab', 'Delete', '.'];
+    if (allowedKeys.includes(e.key)) return;
+    if (!/^[0-9]$/.test(e.key)) e.preventDefault();
+  }
+
+  const MAX_MONTHS = 600;
+
+  function simulatePayoff(debts, extraPerMonth, strategy) {
+    const order = debts.map(d => ({ ...d, remaining: d.balance, paidOffMonth: null }));
+    order.sort((a, b) => strategy === 'snowball' ? a.balance - b.balance : b.apr - a.apr);
+
+    let month = 0;
+    let totalInterest = 0;
+
+    while (order.some(d => d.remaining > 0.005) && month < MAX_MONTHS) {
+      month++;
+
+      order.forEach(d => {
+        if (d.remaining > 0) {
+          const interest = d.remaining * (d.apr / 100 / 12);
+          d.remaining += interest;
+          totalInterest += interest;
+        }
+      });
+
+      let pool = extraPerMonth;
+      order.forEach(d => { if (d.paidOffMonth !== null) pool += d.min; });
+
+      order.forEach(d => {
+        if (d.remaining > 0) {
+          const pay = Math.min(d.min, d.remaining);
+          d.remaining -= pay;
+        }
+      });
+
+      for (const d of order) {
+        if (pool <= 0) break;
+        if (d.remaining > 0) {
+          const pay = Math.min(pool, d.remaining);
+          d.remaining -= pay;
+          pool -= pay;
+        }
+      }
+
+      order.forEach(d => {
+        if (d.remaining <= 0.005 && d.paidOffMonth === null) {
+          d.remaining = 0;
+          d.paidOffMonth = month;
+        }
+      });
+    }
+
+    return {
+      months: month,
+      totalInterest,
+      hitCap: month >= MAX_MONTHS,
+      order: order.map(d => ({ name: d.name, monthPaidOff: d.paidOffMonth })).sort((a, b) => (a.monthPaidOff || Infinity) - (b.monthPaidOff || Infinity)),
+    };
+  }
+
+  function renderOrderList(elId, result) {
+    const el = document.getElementById(elId);
+    el.innerHTML = result.order.map(d => `
+      <div class="flex items-center justify-between gap-2">
+        <span class="text-slate-300 truncate">${d.name}</span>
+        <span class="text-slate-500 shrink-0">${d.monthPaidOff ? `month ${d.monthPaidOff}` : 'not paid off'}</span>
+      </div>
+    `).join('');
+  }
+
+  function getDebts() {
+    const debts = [];
+    document.querySelectorAll('.debt-row').forEach(row => {
+      const name = row.querySelector('.debt-name').value || 'Untitled';
+      const balance = parseFloat(row.querySelector('.debt-balance').value) || 0;
+      const apr = parseFloat(row.querySelector('.debt-apr').value) || 0;
+      const min = parseFloat(row.querySelector('.debt-min').value) || 0;
+      if (balance > 0) debts.push({ name, balance, apr, min });
+    });
+    return debts;
+  }
+
+  function calculate() {
+    const debts = getDebts();
+    const extra = parseFloat(document.getElementById('extra-payment-num').value) || 0;
+    const callout = document.getElementById('comparison-callout');
+    const capWarning = document.getElementById('cap-warning');
+
+    if (debts.length === 0) {
+      document.getElementById('snowball-months').textContent = '—';
+      document.getElementById('avalanche-months').textContent = '—';
+      document.getElementById('snowball-interest').textContent = '$0';
+      document.getElementById('avalanche-interest').textContent = '$0';
+      document.getElementById('snowball-bar').style.width = '0%';
+      document.getElementById('avalanche-bar').style.width = '0%';
+      document.getElementById('snowball-order').innerHTML = '';
+      document.getElementById('avalanche-order').innerHTML = '';
+      callout.textContent = 'Add at least one debt to see your payoff comparison.';
+      capWarning.classList.add('hidden');
+      capWarning.classList.remove('flex');
+      return;
+    }
+
+    const snowball = simulatePayoff(debts, extra, 'snowball');
+    const avalanche = simulatePayoff(debts, extra, 'avalanche');
+
+    document.getElementById('snowball-months').textContent = `${snowball.months} mo`;
+    document.getElementById('avalanche-months').textContent = `${avalanche.months} mo`;
+    document.getElementById('snowball-interest').textContent = fmtCurrency(snowball.totalInterest);
+    document.getElementById('avalanche-interest').textContent = fmtCurrency(avalanche.totalInterest);
+
+    const longest = Math.max(snowball.months, avalanche.months, 1);
+    document.getElementById('snowball-bar').style.width = `${(snowball.months / longest) * 100}%`;
+    document.getElementById('avalanche-bar').style.width = `${(avalanche.months / longest) * 100}%`;
+
+    renderOrderList('snowball-order', snowball);
+    renderOrderList('avalanche-order', avalanche);
+
+    const interestSaved = snowball.totalInterest - avalanche.totalInterest;
+    const firstSnowball = Math.min(...snowball.order.map(d => d.monthPaidOff || Infinity));
+    const firstAvalanche = Math.min(...avalanche.order.map(d => d.monthPaidOff || Infinity));
+    const monthsFaster = firstAvalanche - firstSnowball;
+
+    let text = '';
+    if (interestSaved > 1) {
+      text += `Avalanche saves you ${fmtCurrency(interestSaved)} in interest compared to Snowball. `;
+    } else {
+      text += `Both methods cost about the same in total interest for these debts. `;
+    }
+    if (monthsFaster > 0) {
+      text += `Snowball clears your first debt ${monthsFaster} month${monthsFaster === 1 ? '' : 's'} sooner.`;
+    } else if (monthsFaster < 0) {
+      text += `Avalanche also clears your first debt ${Math.abs(monthsFaster)} month${Math.abs(monthsFaster) === 1 ? '' : 's'} sooner this time.`;
+    } else {
+      text += `Both methods clear your first debt in the same month.`;
+    }
+    callout.textContent = text;
+
+    if (snowball.hitCap || avalanche.hitCap) {
+      capWarning.classList.remove('hidden');
+      capWarning.classList.add('flex');
+    } else {
+      capWarning.classList.add('hidden');
+      capWarning.classList.remove('flex');
+    }
+  }
+
+  function addDebtRow(name = '', balance = '', apr = '', min = '') {
+    const row = document.createElement('div');
+    row.className = 'debt-row grid grid-cols-1 sm:grid-cols-[1fr_110px_90px_110px_24px] items-start sm:items-center gap-3 sm:gap-2 pb-4 sm:pb-0 mb-2 sm:mb-0 border-b border-ink-800 sm:border-0 last:border-0';
+    row.innerHTML = `
+      <div>
+        <span class="sm:hidden block text-xs text-slate-500 mb-1.5">Name</span>
+        <input type="text" value="${name}" placeholder="e.g. Credit Card" class="debt-name val-input text-left text-sm sm:text-base bg-ink-800 rounded-lg px-2.5 py-2 border border-transparent focus:border-gold-500/40 w-full" />
+      </div>
+      <div>
+        <span class="sm:hidden block text-xs text-slate-500 mb-1.5">Balance</span>
+        <input type="number" value="${balance}" placeholder="0" min="0" step="1" class="debt-balance val-input text-sm sm:text-base bg-ink-800 rounded-lg px-2.5 py-2 border border-transparent focus:border-gold-500/40 w-full" />
+      </div>
+      <div>
+        <span class="sm:hidden block text-xs text-slate-500 mb-1.5">APR %</span>
+        <input type="number" value="${apr}" placeholder="0" min="0" max="100" step="0.1" class="debt-apr val-input text-sm sm:text-base bg-ink-800 rounded-lg px-2.5 py-2 border border-transparent focus:border-gold-500/40 w-full" />
+      </div>
+      <div>
+        <span class="sm:hidden block text-xs text-slate-500 mb-1.5">Min Payment</span>
+        <input type="number" value="${min}" placeholder="0" min="0" step="1" class="debt-min val-input text-sm sm:text-base bg-ink-800 rounded-lg px-2.5 py-2 border border-transparent focus:border-gold-500/40 w-full" />
+      </div>
+      <button class="remove-btn text-slate-500 hover:text-rose-400 transition-colors justify-self-end sm:justify-self-auto" aria-label="Remove debt">✕</button>
+    `;
+    document.getElementById('debt-list').appendChild(row);
+
+    row.querySelectorAll('input').forEach(el => el.addEventListener('input', calculate));
+    row.querySelector('.debt-balance').addEventListener('keydown', blockLetters);
+    row.querySelector('.debt-min').addEventListener('keydown', blockLetters);
+    row.querySelector('.remove-btn').addEventListener('click', () => { row.remove(); calculate(); });
+
+    calculate();
+  }
+
+  document.getElementById('btn-add-debt').addEventListener('click', () => {
+    if (document.querySelectorAll('.debt-row').length >= 5) return;
+    addDebtRow();
+  });
+  document.getElementById('extra-payment-num').addEventListener('input', calculate);
+
+  addDebtRow('Credit Card', 2000, 24, 50);
+  addDebtRow('Car Loan', 8000, 6, 220);
+})();
+</script>
+</body>
+</html>

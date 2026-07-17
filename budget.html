@@ -14,7 +14,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
 <title>Ledgr — Specific Category Budget Planner</title>
-<meta name="description" content="Use Ledgr's free, zero-based budget planner to allocate your income into specific categories and track exactly where your money goes." />
+<meta name="description" content="Use Ledgr's free, zero-based budget planner to allocate your income into specific categories — by month or by paycheck (weekly, bi-weekly, semi-monthly) — and track exactly where your money goes." />
 <meta name="robots" content="index, follow" />
 <link rel="canonical" href="https://www.ledgrcalc.com/budget.html" />
 <link rel="icon" type="image/svg+xml" href="favicon.svg" />
@@ -23,13 +23,13 @@
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="Ledgr" />
 <meta property="og:title" content="Ledgr — Specific Category Budget Planner" />
-<meta property="og:description" content="Use Ledgr's free, zero-based budget planner to allocate your income into specific categories and track exactly where your money goes." />
+<meta property="og:description" content="Use Ledgr's free, zero-based budget planner to allocate your income into specific categories — by month or by paycheck (weekly, bi-weekly, semi-monthly) — and track exactly where your money goes." />
 <meta property="og:url" content="https://www.ledgrcalc.com/budget.html" />
 <meta property="og:image" content="https://www.ledgrcalc.com/og-image.png" />
 
 <meta name="twitter:card" content="summary" />
 <meta name="twitter:title" content="Ledgr — Specific Category Budget Planner" />
-<meta name="twitter:description" content="Use Ledgr's free, zero-based budget planner to allocate your income into specific categories and track exactly where your money goes." />
+<meta name="twitter:description" content="Use Ledgr's free, zero-based budget planner to allocate your income into specific categories — by month or by paycheck (weekly, bi-weekly, semi-monthly) — and track exactly where your money goes." />
 
 <script type="application/ld+json">
 {
@@ -45,6 +45,47 @@
     "price": "0",
     "priceCurrency": "USD"
   }
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "How do I budget on a biweekly paycheck?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Switch the planner's pay frequency to Bi-Weekly and enter the amount from a single paycheck instead of your full monthly income. Build your Needs, Wants, and Savings categories around that one paycheck, then repeat the plan for the next one — most bills won't line up evenly with a 26-paycheck year, so this keeps each paycheck balanced on its own terms."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What's a 3-paycheck month?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Biweekly pay (every two weeks) adds up to 26 paychecks a year, not 24 — so two months a year you'll get three paychecks instead of two. That extra paycheck isn't really 'extra' income, it's just the calendar catching up, and it's a great candidate for a sinking fund contribution or debt payoff instead of new spending."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Should I budget semi-monthly or biweekly?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Use whichever matches how your employer actually pays you. Semi-monthly means fixed dates, like the 1st and 15th (24 paychecks a year); biweekly means every 14 days (26 paychecks a year, landing on a different weekday each time). The planner supports both — pick the option that matches your actual pay schedule."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Do I need to budget every paycheck the same?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. Category amounts aren't carried over automatically when you switch pay frequency or move to a new paycheck — you re-enter what's appropriate for that specific paycheck. Bills due that pay period should be fully covered before discretionary categories get funded."
+      }
+    }
+  ]
 }
 </script>
 
@@ -135,14 +176,23 @@
  
         <!-- Income Section -->
         <section class="mode-panel bg-ink-900 border border-ink-700 rounded-2xl p-6 sm:p-7">
-          <p class="text-xs font-semibold tracking-widest text-gold-500 uppercase mb-5">Funding</p>
+          <div class="flex items-center justify-between mb-5">
+            <p class="text-xs font-semibold tracking-widest text-gold-500 uppercase m-0">Funding</p>
+            <select id="pay-frequency" class="bg-ink-800 text-xs text-slate-300 rounded-md border border-ink-700 px-2 py-1.5 outline-none cursor-pointer focus:border-gold-500/50" aria-label="Pay frequency">
+              <option value="monthly" selected>Monthly</option>
+              <option value="weekly">Weekly</option>
+              <option value="biweekly">Bi-Weekly</option>
+              <option value="semimonthly">Semi-Monthly</option>
+            </select>
+          </div>
           <div class="flex items-center justify-between">
-            <label for="income-num" class="text-sm font-medium text-slate-300">Total Monthly Income</label>
+            <label for="income-num" id="income-label" class="text-sm font-medium text-slate-300">Total Monthly Income</label>
             <div class="flex items-center gap-0.5 w-32">
               <span class="text-slate-500 font-mono text-sm">$</span>
-              <input type="number" id="income-num" class="val-input text-base" value="2800" min="0" step="0.01" aria-label="Total Monthly Income" />
+              <input type="number" id="income-num" class="val-input text-base" value="2800" min="0" step="0.01" aria-label="Total income for the selected pay period" />
             </div>
           </div>
+          <p id="income-equivalent" class="text-xs text-slate-500 mt-2 text-right"></p>
         </section>
  
         <!-- Specific Categories Section -->
@@ -287,7 +337,17 @@
       </p>
  
       <p class="text-slate-300 mb-8">
-        Leaving money unassigned is usually how it disappears into impulse purchases. By breaking down large categories (like "Living Expenses") into highly specific allocations (like "Groceries," "Dining Out," and "Household Supplies"), you create a rigid boundary that protects your long-term savings goals. 
+        Leaving money unassigned is usually how it disappears into impulse purchases. By breaking down large categories (like "Living Expenses") into highly specific allocations (like "Groceries," "Dining Out," and "Household Supplies"), you create a rigid boundary that protects your long-term savings goals.
+      </p>
+
+      <h2 class="text-2xl sm:text-3xl font-medium text-slate-100 tracking-tight mb-6">Budgeting By Paycheck: Weekly, Bi-Weekly & Semi-Monthly</h2>
+
+      <p class="text-slate-300 mb-5">
+        A monthly budget assumes income lands in one predictable lump sum, but most paychecks don't work that way. Use the pay frequency selector above to switch the planner to match how you're actually paid, then allocate a single paycheck's worth of income at a time instead of guessing at a monthly average.
+      </p>
+
+      <p class="text-slate-300 mb-8">
+        Biweekly pay (every 14 days) adds up to 26 paychecks a year — two more than a simple "twice a month" schedule would give you. That means twice a year, biweekly earners get a third paycheck in the same calendar month. Semi-monthly pay, by contrast, is fixed to two dates a month (like the 1st and 15th) and always lands on 24 paychecks a year. Neither is better — they're just different math, and the planner supports both so your categories match your real pay dates instead of an average that never quite lines up.
       </p>
     </section>
  
@@ -305,6 +365,10 @@
         <a href="cash-stuffing-guide.html" class="hover:text-gold-400 transition-colors">Cash Stuffing Guide</a>
         <span class="text-ink-700">•</span>
         <a href="sinking-fund-calculator.html" class="hover:text-gold-400 transition-colors">Sinking Fund Calculator</a>
+        <span class="text-ink-700">•</span>
+        <a href="emergency-fund-calculator.html" class="hover:text-gold-400 transition-colors">Emergency Fund Calculator</a>
+        <span class="text-ink-700">•</span>
+        <a href="debt-snowball-avalanche-calculator.html" class="hover:text-gold-400 transition-colors">Debt Payoff Calculator</a>
         <span class="text-ink-700">•</span>
         <a href="about.html" class="hover:text-gold-400 transition-colors">About</a>
         <span class="text-ink-700">•</span>
@@ -327,6 +391,27 @@
   const categoryList = document.getElementById('category-list');
   const btnAddCategory = document.getElementById('btn-add-category');
   const btnPrint = document.getElementById('btn-print');
+  const payFrequencySelect = document.getElementById('pay-frequency');
+  const incomeLabel = document.getElementById('income-label');
+  const incomeEquivalent = document.getElementById('income-equivalent');
+
+  const payFrequencies = {
+    monthly: { label: 'Total Monthly Income', toMonthly: 1 },
+    weekly: { label: 'Total Weekly Income', toMonthly: 52 / 12 },
+    biweekly: { label: 'Total Bi-Weekly Income', toMonthly: 26 / 12 },
+    semimonthly: { label: 'Total Semi-Monthly Income', toMonthly: 2 },
+  };
+
+  function updateIncomeFraming() {
+    const freq = payFrequencies[payFrequencySelect.value];
+    incomeLabel.textContent = freq.label;
+    const income = parseFloat(incomeInput.value) || 0;
+    if (freq.toMonthly === 1 || income <= 0) {
+      incomeEquivalent.textContent = '';
+    } else {
+      incomeEquivalent.textContent = `≈ ${fmtCurrency(income * freq.toMonthly)}/mo average`;
+    }
+  }
  
   const chartColors = [
     '#3E9C82', '#D4B267', '#818CF8', '#F472B6', '#60A5FA', 
@@ -505,11 +590,13 @@
     calculateBudget(); // Recalculate once row is added
   }
  
-  incomeInput.addEventListener('input', calculateBudget);
+  incomeInput.addEventListener('input', () => { calculateBudget(); updateIncomeFraming(); });
+  payFrequencySelect.addEventListener('change', updateIncomeFraming);
   btnAddCategory.addEventListener('click', () => addCategoryRow('', 'needs', ''));
   btnPrint.addEventListener('click', () => window.print());
- 
+
   // Initialize
+  updateIncomeFraming();
   [
     { name: "Rent / Mortgage", group: "needs", amount: 300 },
     { name: "Groceries", group: "needs", amount: 70 },
