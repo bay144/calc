@@ -93,9 +93,9 @@
         <section class="mode-panel bg-gradient-to-b from-ink-900 to-ink-950 border border-gold-500/25 rounded-2xl p-7 sm:p-8 shadow-2xl shadow-black/40">
           
           <div class="flex flex-col sm:flex-row items-center gap-6 mb-8">
-            <!-- CSS Donut Chart -->
-            <div id="donut-chart" class="shrink-0 relative w-32 h-32 rounded-full flex items-center justify-center transition-all duration-300" style="background: #212A35;">
-              <div class="w-24 h-24 rounded-full bg-ink-950 shadow-inner"></div>
+            <!-- CSS Solid Pie Chart -->
+            <div id="donut-chart" class="shrink-0 relative w-32 h-32 rounded-full flex items-center justify-center transition-all duration-300 shadow-lg shadow-black/50" style="background: #212A35;">
+              <!-- Removed the inner circle to make it a solid Pie Chart instead of a Donut -->
             </div>
             
             <!-- Remaining Text -->
@@ -195,8 +195,7 @@
   </div>
 
 <script>
-  (function () {
-  // Smart currency formatter: uses 2 decimals if exact change exists, otherwise 0
+(function () {
   const fmtCurrency = (n) => {
     const hasDecimal = Math.round(n * 100) % 100 !== 0;
     const decimals = hasDecimal ? 2 : 0;
@@ -215,21 +214,16 @@
     { name: "Savings Goal", group: "savings", amount: 500 },
   ];
 
-  // Restricts input to only numbers, decimals, and navigation/delete keys
   function blockLetters(e) {
     const allowedKeys = ['Backspace', 'ArrowLeft', 'ArrowRight', 'Tab', 'Delete', '.'];
     if (allowedKeys.includes(e.key)) return;
-    
-    if (!/^[0-9]$/.test(e.key)) {
-        e.preventDefault();
-    }
+    if (!/^[0-9]$/.test(e.key)) e.preventDefault();
   }
 
   function calculateBudget() {
     const income = parseFloat(incomeInput.value) || 0;
     let allocated = 0, needs = 0, wants = 0, savings = 0;
     
-    // Tally up allocations by their selected macro-group
     document.querySelectorAll('.group').forEach(row => {
       const amount = parseFloat(row.querySelector('.cat-amount').value) || 0;
       const group = row.querySelector('.cat-group').value;
@@ -242,7 +236,6 @@
 
     const remaining = Math.round((income - allocated) * 100) / 100;
 
-    // Update Text Elements
     document.getElementById('legend-income').textContent = fmtCurrency(income);
     document.getElementById('legend-needs').textContent = fmtCurrency(needs);
     document.getElementById('legend-wants').textContent = fmtCurrency(wants);
@@ -252,11 +245,10 @@
     const remEl = document.getElementById('result-remaining');
     const dotRem = document.getElementById('dot-remaining');
     const labelRem = document.getElementById('label-remaining');
-    const donutChart = document.getElementById('donut-chart');
+    const pieChart = document.getElementById('donut-chart'); // Works as a pie chart now
 
     remEl.textContent = (remaining < 0 ? "-" : "") + fmtCurrency(remaining);
     
-    // Handle UI states based on balance
     remEl.classList.remove('text-emerald-400', 'text-gold-300', 'text-rose-400');
     dotRem.classList.remove('bg-ink-600', 'bg-gold-400', 'bg-rose-500');
 
@@ -277,18 +269,17 @@
       document.getElementById('result-sub').textContent = "Allocate the remaining balance.";
     }
 
-    // Build the Donut Chart using CSS conic-gradient
+    // Build the Pie Chart
     const base = Math.max(income, allocated); 
     if (base === 0) {
-      donutChart.style.background = '#212A35'; // Empty state
+      pieChart.style.background = '#212A35'; 
     } else {
       const pNeeds = (needs / base) * 100;
       const pWants = pNeeds + (wants / base) * 100;
       const pSavings = pWants + (savings / base) * 100;
+      const remColor = remaining < 0 ? '#F43F5E' : '#2B3542'; 
       
-      const remColor = remaining < 0 ? '#F43F5E' : '#2B3542'; // Red if negative, gray if positive
-      
-      donutChart.style.background = `conic-gradient(
+      pieChart.style.background = `conic-gradient(
         #3E9C82 0% ${pNeeds}%, 
         #D4B267 ${pNeeds}% ${pWants}%, 
         #818CF8 ${pWants}% ${pSavings}%, 
@@ -299,29 +290,29 @@
 
   function addCategoryRow(name = '', group = 'needs', amount = '') {
     const row = document.createElement('div');
-    row.className = 'flex flex-col sm:flex-row sm:items-center gap-3 group';
+    // Removed mobile stacking classes, locked into a single row
+    row.className = 'flex items-center gap-2 sm:gap-3 group';
     
     row.innerHTML = `
-      <div class="flex items-center gap-3 flex-1">
-        <button class="remove-btn text-ink-600 hover:text-rose-400 transition-colors p-1" aria-label="Remove category" tabindex="-1">
+      <div class="flex items-center gap-2 sm:gap-3 flex-1 min-w-0">
+        <button class="remove-btn text-ink-600 hover:text-rose-400 transition-colors p-1 shrink-0" aria-label="Remove category" tabindex="-1">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
         </button>
-        <div class="flex-1 flex gap-2 border-b border-ink-700 focus-within:border-gold-500 transition-colors pb-1">
-          <input type="text" class="cat-name w-3/5 bg-transparent text-sm sm:text-base text-slate-200 outline-none placeholder-slate-600" placeholder="e.g. Groceries" value="${name}" />
-          <select class="cat-group w-2/5 bg-transparent text-xs sm:text-sm text-slate-400 outline-none cursor-pointer appearance-none" tabindex="-1">
+        <div class="flex-1 flex gap-2 border-b border-ink-700 focus-within:border-gold-500 transition-colors pb-1 min-w-0">
+          <input type="text" class="cat-name w-1/2 sm:w-3/5 bg-transparent text-sm sm:text-base text-slate-200 outline-none placeholder-slate-600 min-w-0" placeholder="e.g. Groceries" value="${name}" />
+          <select class="cat-group w-1/2 sm:w-2/5 bg-transparent text-xs sm:text-sm text-slate-400 outline-none cursor-pointer appearance-none min-w-0" tabindex="-1">
             <option value="needs" ${group === 'needs' ? 'selected' : ''}>Need</option>
             <option value="wants" ${group === 'wants' ? 'selected' : ''}>Want</option>
             <option value="savings" ${group === 'savings' ? 'selected' : ''}>Save/Debt</option>
           </select>
         </div>
       </div>
-      <div class="flex items-center gap-0.5 w-full sm:w-28 justify-end border-b border-ink-700 focus-within:border-gold-500 transition-colors pb-1 pl-8 sm:pl-0">
+      <div class="flex items-center gap-0.5 w-24 sm:w-28 justify-end border-b border-ink-700 focus-within:border-gold-500 transition-colors pb-1 shrink-0">
         <span class="text-slate-500 font-mono text-sm">$</span>
-        <input type="number" class="cat-amount val-input text-sm sm:text-base" value="${amount}" min="0" step="0.01" placeholder="0" />
+        <input type="number" class="cat-amount val-input text-sm sm:text-base w-full" value="${amount}" min="0" step="0.01" placeholder="0" />
       </div>
     `;
 
-    // Bind event listeners
     row.querySelector('.remove-btn').addEventListener('click', () => {
       row.remove();
       calculateBudget();
@@ -336,7 +327,6 @@
     amountInput.addEventListener('input', calculateBudget);
     amountInput.addEventListener('keydown', blockLetters);
 
-    // Enter key support: Name -> Amount
     nameInput.addEventListener('keydown', (e) => {
       if (e.key === 'Enter') {
         e.preventDefault();
@@ -344,7 +334,6 @@
       }
     });
 
-    // Enter key support: Amount -> Next Row (or New Row)
     amountInput.addEventListener('keydown', (e) => {
       if (e.key === 'Enter') {
         e.preventDefault();
@@ -364,7 +353,6 @@
   incomeInput.addEventListener('input', calculateBudget);
   incomeInput.addEventListener('keydown', blockLetters);
   
-  // Hitting Enter on the Income input jumps you to the first category
   incomeInput.addEventListener('keydown', (e) => {
     if (e.key === 'Enter') {
       e.preventDefault();
@@ -379,7 +367,6 @@
 
   btnAddCategory.addEventListener('click', () => addCategoryRow('', 'needs', ''));
 
-  // Initialize
   initialCategories.forEach(cat => addCategoryRow(cat.name, cat.group, cat.amount));
   calculateBudget();
 })();
