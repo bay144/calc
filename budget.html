@@ -72,14 +72,14 @@
         <section class="mode-panel bg-ink-900 border border-ink-700 rounded-2xl p-6 sm:p-7">
           <div class="flex items-center justify-between mb-6">
             <p class="text-xs font-semibold tracking-widest text-gold-500 uppercase m-0">Allocations</p>
-            <button id="btn-add-category" class="text-xs font-medium text-gold-400 hover:text-gold-300 transition-colors px-2 py-1 bg-ink-800 rounded-md border border-ink-700 hover:border-gold-500/50">
-              + Add Category
-            </button>
-          </div>
-          
-          <div class="flex justify-between text-xs text-slate-500 mb-3 px-8">
-            <span>Category Name</span>
-            <span>Amount</span>
+            <div class="flex gap-2">
+              <button id="btn-print" class="text-xs font-medium text-slate-300 hover:text-white transition-colors px-3 py-1.5 bg-ink-800 rounded-md border border-ink-700 hover:border-slate-500">
+                Export / Print
+              </button>
+              <button id="btn-add-category" class="text-xs font-medium text-gold-400 hover:text-gold-300 transition-colors px-3 py-1.5 bg-ink-800 rounded-md border border-ink-700 hover:border-gold-500/50">
+                + Add Category
+              </button>
+            </div>
           </div>
 
           <div id="category-list" class="space-y-4">
@@ -272,19 +272,16 @@
     // Build the Pie Chart
     const base = Math.max(income, allocated); 
     if (base === 0) {
-      pieChart.style.background = '#212A35'; 
+      pieChart.style.backgroundImage = 'none'; 
+      pieChart.style.backgroundColor = '#212A35';
     } else {
       const pNeeds = (needs / base) * 100;
       const pWants = pNeeds + (wants / base) * 100;
       const pSavings = pWants + (savings / base) * 100;
       const remColor = remaining < 0 ? '#F43F5E' : '#2B3542'; 
       
-      pieChart.style.background = `conic-gradient(
-        #3E9C82 0% ${pNeeds}%, 
-        #D4B267 ${pNeeds}% ${pWants}%, 
-        #818CF8 ${pWants}% ${pSavings}%, 
-        ${remColor} ${pSavings}% 100%
-      )`;
+      // Kept on a single line to prevent browser parsing errors
+      pieChart.style.backgroundImage = `conic-gradient(#3E9C82 0% ${pNeeds}%, #D4B267 ${pNeeds}% ${pWants}%, #818CF8 ${pWants}% ${pSavings}%, ${remColor} ${pSavings}% 100%)`;
     }
   }
 
@@ -364,7 +361,9 @@
       }
     }
   });
-
+  document.getElementById('btn-print').addEventListener('click', () => {
+    window.print();
+  });
   btnAddCategory.addEventListener('click', () => addCategoryRow('', 'needs', ''));
 
   initialCategories.forEach(cat => addCategoryRow(cat.name, cat.group, cat.amount));

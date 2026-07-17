@@ -189,6 +189,51 @@ input[type="range"]:focus-visible {
   text-transform: uppercase;
   color: #6B7484;
 }
+/* Export to PDF / Print Mode Styles */
+@media print {
+  /* Force white background and black text to save ink */
+  html, body { 
+    background: #ffffff !important; 
+    color: #000000 !important; 
+  }
+  
+  /* Hide elements that shouldn't be on the final document */
+  header, footer, .ad-slot, .seo-copy, .remove-btn, #btn-add-category, #btn-print, p.text-slate-400 { 
+    display: none !important; 
+  }
+  
+  /* Flatten panels to look like a clean paper document */
+  .mode-panel { 
+    background: #ffffff !important; 
+    border: 1px solid #e2e8f0 !important; 
+    box-shadow: none !important;
+    color: #000000 !important;
+    page-break-inside: avoid;
+    margin-bottom: 20px;
+  }
+
+  /* Override Tailwind text colors for high contrast printing */
+  .text-slate-200, .text-slate-300, .text-slate-400, .text-slate-500, 
+  .text-gold-300, .text-gold-400, .text-gold-500, 
+  .text-emerald-400, .text-rose-400 {
+    color: #000000 !important;
+  }
+
+  /* Ensure input fields look like clean lines */
+  input, select { 
+    color: #000000 !important; 
+    border-bottom: 1px solid #cbd5e1 !important; 
+  }
+  
+  /* Hide placeholders so empty rows look like blank lines to write on */
+  input::placeholder { color: transparent !important; }
+
+  /* Force the browser to render the pie chart background colors */
+  * { 
+    -webkit-print-color-adjust: exact !important; 
+    print-color-adjust: exact !important; 
+  }
+}
 
 /* SEO content prose (calculator page) */
 .seo-copy h2 { font-family: 'Fraunces', serif; }
