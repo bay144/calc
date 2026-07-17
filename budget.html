@@ -246,6 +246,13 @@
   const btnAddCategory = document.getElementById('btn-add-category');
   const btnPrint = document.getElementById('btn-print');
 
+  // A 12-color palette for the individual pie slices
+  const chartColors = [
+    '#3E9C82', '#D4B267', '#818CF8', '#F472B6', '#60A5FA', 
+    '#FB923C', '#A78BFA', '#34D399', '#FBBF24', '#F87171', 
+    '#38BDF8', '#C084FC'
+  ];
+
   const initialCategories = [
     { name: "Rent / Mortgage", group: "needs", amount: 1500 },
     { name: "Groceries", group: "needs", amount: 450 },
@@ -263,15 +270,26 @@
   function calculateBudget() {
     const income = parseFloat(incomeInput.value) || 0;
     let allocated = 0, needs = 0, wants = 0, savings = 0;
+    const validCategories = [];
     
-    document.querySelectorAll('.group').forEach(row => {
+    document.querySelectorAll('.group').forEach((row, index) => {
       const amount = parseFloat(row.querySelector('.cat-amount').value) || 0;
       const group = row.querySelector('.cat-group').value;
+      const colorDot = row.querySelector('.cat-color-dot');
       
       allocated += amount;
       if (group === 'needs') needs += amount;
       if (group === 'wants') wants += amount;
       if (group === 'savings') savings += amount;
+
+      // Assign a color to the row's dot based on its position in the list
+      const color = chartColors[index % chartColors.length];
+      if (colorDot) colorDot.style.backgroundColor = color;
+
+      // Only add to the pie chart if it has a positive dollar amount
+      if (amount > 0) {
+        validCategories.push({ amount, color });
+      }
     });
 
     const remaining = Math.round((income - allocated) * 100) / 100;
@@ -309,17 +327,29 @@
       document.getElementById('result-sub').textContent = "Allocate the remaining balance.";
     }
 
-    // Build the Pie Chart
+    // Build the dynamic Pie Chart with all individual line items
     const base = Math.max(income, allocated); 
     if (base === 0) {
-      pieChart.style.background = '#212A35'; 
+      pieChart.style.backgroundImage = 'none'; 
+      pieChart.style.backgroundColor = '#212A35';
     } else {
-      const pNeeds = (needs / base) * 100;
-      const pWants = pNeeds + (wants / base) * 100;
-      const pSavings = pWants + (savings / base) * 100;
+      let gradientStops = [];
+      let currentPct = 0;
+
+      // Loop through every valid category and calculate its slice
+      validCategories.forEach(cat => {
+        const slicePct = (cat.amount / base) * 100;
+        gradientStops.push(`${cat.color} ${currentPct}% ${currentPct + slicePct}%`);
+        currentPct += slicePct;
+      });
+
+      // Fill remaining space with the unallocated/over-budget color
       const remColor = remaining < 0 ? '#F43F5E' : '#2B3542'; 
+      if (currentPct < 100) {
+        gradientStops.push(`${remColor} ${currentPct}% 100%`);
+      }
       
-      pieChart.style.background = `conic-gradient(#3E9C82 0% ${pNeeds}%, #D4B267 ${pNeeds}% ${pWants}%, #818CF8 ${pWants}% ${pSavings}%, ${remColor} ${pSavings}% 100%)`;
+      pieChart.style.backgroundImage = `conic-gradient(${gradientStops.join(', ')})`;
     }
   }
 
@@ -327,11 +357,13 @@
     const row = document.createElement('div');
     row.className = 'flex items-center gap-2 sm:gap-3 group';
     
+    // Added a small colored dot (.cat-color-dot) next to the remove button
     row.innerHTML = `
       <div class="flex items-center gap-2 sm:gap-3 flex-1 min-w-0">
         <button class="remove-btn text-ink-600 hover:text-rose-400 transition-colors p-1 shrink-0" aria-label="Remove category" tabindex="-1">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
         </button>
+        <div class="w-2 h-2 rounded-full shrink-0 cat-color-dot bg-ink-700"></div>
         <div class="flex-1 flex gap-2 border-b border-ink-700 focus-within:border-gold-500 transition-colors pb-1 min-w-0">
           <input type="text" class="cat-name w-1/2 sm:w-3/5 bg-transparent text-sm sm:text-base text-slate-200 outline-none placeholder-slate-600 min-w-0" placeholder="e.g. Groceries" value="${name}" />
           <select class="cat-group w-1/2 sm:w-2/5 bg-transparent text-xs sm:text-sm text-slate-400 outline-none cursor-pointer appearance-none min-w-0" tabindex="-1">
