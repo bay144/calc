@@ -82,25 +82,25 @@
       page-break-inside: avoid;
       margin-bottom: 20px;
     }
-
+ 
     .teller-box {
       border: 1px solid #cbd5e1 !important;
       background: #ffffff !important;
     }
-
+ 
     .text-slate-200, .text-slate-300, .text-slate-400, .text-slate-500, 
     .text-gold-300, .text-gold-400, .text-gold-500, 
     .text-emerald-400, .text-rose-400 {
       color: #000000 !important;
     }
-
+ 
     input, select { 
       color: #000000 !important; 
       border-bottom: 1px solid #94a3b8 !important; 
     }
     
     input::placeholder { color: transparent !important; }
-
+ 
     * { 
       -webkit-print-color-adjust: exact !important; 
       print-color-adjust: exact !important; 
@@ -108,11 +108,11 @@
   }
 </style>
 </head>
-
+ 
 <body class="min-h-screen font-sans text-slate-300 antialiased">
-
+ 
   <div class="max-w-5xl mx-auto px-5 sm:px-8 py-10 sm:py-14">
-
+ 
     <!-- Header -->
     <header class="flex items-center justify-between mb-14 sm:mb-16">
       <a href="index.html" class="flex items-center gap-2">
@@ -121,25 +121,25 @@
       </a>
       <a href="index.html" class="text-sm text-slate-400 hover:text-gold-400 transition-colors">← Back to calculator</a>
     </header>
-
+ 
     <div class="text-center mb-10 sm:mb-14">
       <h1 class="font-display italic font-medium text-2xl sm:text-3xl text-slate-100 tracking-tight mb-3">Zero-Based Budget Planner</h1>
       <p class="text-sm sm:text-base text-slate-400 max-w-md mx-auto">Give every dollar a specific job. Allocate your total income down to zero.</p>
     </div>
-
+ 
     <!-- Google AdSense Slot A -->
     <div class="w-full max-w-4xl mx-auto mb-10 sm:mb-14">
       <div class="ad-slot" data-ad-slot="slot-a-header-banner">
         <span class="ad-label">Advertisement</span>
       </div>
     </div>
-
+ 
     <!-- Main grid -->
     <main class="grid lg:grid-cols-2 gap-6 lg:gap-8 items-start mb-6">
-
+ 
       <!-- INPUT PANELS -->
       <div class="relative flex flex-col gap-6">
-
+ 
         <!-- Income Section -->
         <section class="mode-panel bg-ink-900 border border-ink-700 rounded-2xl p-6 sm:p-7">
           <p class="text-xs font-semibold tracking-widest text-gold-500 uppercase mb-5">Funding</p>
@@ -151,7 +151,7 @@
             </div>
           </div>
         </section>
-
+ 
         <!-- Specific Categories Section -->
         <section class="mode-panel bg-ink-900 border border-ink-700 rounded-2xl p-6 sm:p-7">
           <div class="flex items-center justify-between mb-6">
@@ -170,13 +170,13 @@
             <span>Category Name</span>
             <span>Amount</span>
           </div>
-
+ 
           <div id="category-list" class="space-y-4">
             <!-- JavaScript will inject category rows here -->
           </div>
         </section>
       </div>
-
+ 
       <!-- RESULT PANELS -->
       <div class="relative lg:sticky lg:top-8">
         <section class="mode-panel bg-gradient-to-b from-ink-900 to-ink-950 border border-gold-500/25 rounded-2xl p-7 sm:p-8 shadow-2xl shadow-black/40">
@@ -192,7 +192,7 @@
               <p id="result-sub" class="text-sm text-slate-500">Adjust your categories to reach zero.</p>
             </div>
           </div>
-
+ 
           <div class="space-y-3">
             <div class="flex justify-between text-sm">
               <div class="flex items-center gap-2">
@@ -223,7 +223,7 @@
               <span id="legend-remaining" class="font-mono font-tnum text-slate-400">$0</span>
             </div>
           </div>
-
+ 
           <div class="mt-6 pt-5 border-t border-ink-700 flex justify-between text-sm">
             <span class="text-slate-500">Total Income</span>
             <span id="legend-income" class="font-mono font-tnum text-slate-300">$4,500</span>
@@ -231,22 +231,22 @@
         </section>
       </div>
     </main>
-
+ 
     <!-- TELLER SLIP & AFFILIATE LINKS -->
-    <div class="w-full mb-10 sm:mb-14">
+    <div class="w-full mt-10 sm:mt-14 mb-10 sm:mb-14">
       <section class="mode-panel bg-ink-900 border border-ink-700 rounded-2xl p-6 sm:p-7">
         <div class="flex items-center justify-between mb-6">
           <div>
-            <h2 class="text-lg font-semibold tracking-tight text-slate-100">Bank Teller Withdrawal Slip</h2>
-            <p class="text-sm text-slate-500 mt-1">Exact denominations needed to stuff your categories.</p>
+            <h2 class="text-lg font-semibold tracking-tight text-slate-100">Cash Stuffing Breakdown</h2>
+            <p class="text-sm text-slate-500 mt-1">The exact bills you need to stuff every envelope.</p>
           </div>
         </div>
         
         <!-- Denomination Grid using inline native CSS to bypass uncompiled Tailwind classes -->
-        <div id="teller-slip" class="gap-3 mb-8" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));">
+        <div id="teller-slip" class="gap-3 sm:gap-4 mb-8" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));">
           <!-- Populated by JavaScript -->
         </div>
-
+ 
         <!-- Affiliate Product Recommendations (Hidden in Print Mode) -->
         <div class="pt-6 border-t border-ink-800 no-print">
           <p class="text-xs font-semibold tracking-widest text-gold-500 uppercase mb-2">Creator Recommended Tools</p>
@@ -267,39 +267,39 @@
               <span class="block text-sm font-medium text-slate-200 group-hover:text-gold-400 mb-1">Acrylic Cash Sorting Tray &rarr;</span>
               <span class="block text-xs text-slate-500">Perfect for organizing straps and loose bills.</span>
             </a>
-
+ 
           </div>
         </div>
       </section>
     </div>
-
+ 
     <!-- Google AdSense Slot B -->
     <div class="w-full max-w-4xl mx-auto mt-10 sm:mt-14">
       <div class="ad-slot" data-ad-slot="slot-b-below-calculator">
         <span class="ad-label">Advertisement</span>
       </div>
     </div>
-
+ 
     <!-- SEO / educational content -->
     <section class="seo-copy max-w-3xl mx-auto mt-14 sm:mt-20">
       <h2 class="text-2xl sm:text-3xl font-medium text-slate-100 tracking-tight mb-6">How to Build a Zero-Based Budget</h2>
-
+ 
       <p class="text-slate-300 mb-5">
         A precise budget gives every dollar a job before the month begins. Whether you are using digital tracking or a physical allocation system like binders and envelopes, the core math remains the same: your total income minus your specific categories should equal zero.
       </p>
-
+ 
       <p class="text-slate-300 mb-8">
         Leaving money unassigned is usually how it disappears into impulse purchases. By breaking down large categories (like "Living Expenses") into highly specific allocations (like "Groceries," "Dining Out," and "Household Supplies"), you create a rigid boundary that protects your long-term savings goals. 
       </p>
     </section>
-
+ 
     <!-- Google AdSense Slot C -->
     <div class="w-full max-w-4xl mx-auto mt-14 sm:mt-16">
       <div class="ad-slot" data-ad-slot="slot-c-page-bottom">
         <span class="ad-label">Advertisement</span>
       </div>
     </div>
-
+ 
     <footer class="text-center mt-10">
       <div class="flex items-center justify-center gap-4 mb-3 text-xs text-slate-500">
         <a href="index.html" class="hover:text-gold-400 transition-colors">Calculator</a>
@@ -310,9 +310,9 @@
       </div>
       <p class="text-xs text-slate-600">© 2026 Ledgr. All calculations are for educational purposes only.</p>
     </footer>
-
+ 
   </div>
-
+ 
 <script>
 (function () {
   const fmtCurrency = (n) => {
@@ -320,24 +320,24 @@
     const decimals = hasDecimal ? 2 : 0;
     return '$' + Math.abs(n).toLocaleString('en-US', { minimumFractionDigits: decimals, maximumFractionDigits: decimals });
   };
-
+ 
   const incomeInput = document.getElementById('income-num');
   const categoryList = document.getElementById('category-list');
   const btnAddCategory = document.getElementById('btn-add-category');
   const btnPrint = document.getElementById('btn-print');
-
+ 
   const chartColors = [
     '#3E9C82', '#D4B267', '#818CF8', '#F472B6', '#60A5FA', 
     '#FB923C', '#A78BFA', '#34D399', '#FBBF24', '#F87171', 
     '#38BDF8', '#C084FC'
   ];
-
+ 
   function blockLetters(e) {
     const allowedKeys = ['Backspace', 'ArrowLeft', 'ArrowRight', 'Tab', 'Delete', '.'];
     if (allowedKeys.includes(e.key)) return;
     if (!/^[0-9]$/.test(e.key)) e.preventDefault();
   }
-
+ 
   function updateTellerSlip(categories) {
     let bills = { 100: 0, 50: 0, 20: 0, 10: 0, 5: 0, 1: 0 };
     categories.forEach(amount => {
@@ -349,7 +349,7 @@
       bills[5] += Math.floor(remaining / 5); remaining %= 5;
       bills[1] += remaining;
     });
-
+ 
     const slipContainer = document.getElementById('teller-slip');
     slipContainer.innerHTML = '';
     const denominations = [100, 50, 20, 10, 5, 1];
@@ -357,22 +357,22 @@
       const count = bills[denom];
       if (count > 0) {
         slipContainer.innerHTML += `
-          <div class="teller-box border border-ink-800 rounded-xl p-4 text-center" style="background: #10151C;">
-            <span class="block text-xs font-semibold tracking-widest text-slate-500 mb-1">$${denom} B</span>
+          <div class="teller-box border border-ink-800 rounded-xl p-4 sm:p-5 text-center" style="background: #10151C;">
+            <span class="block text-xs font-semibold tracking-widest text-slate-500 mb-1.5">$${denom} Bills</span>
             <span class="block font-mono text-2xl text-slate-200">${count}</span>
           </div>
         `;
       }
     });
   }
-
+ 
   function calculateBudget() {
     const income = parseFloat(incomeInput.value) || 0;
     let allocated = 0, needs = 0, wants = 0, savings = 0;
     const validCategories = [];
     
     // Select all rows and recalculate
-    document.querySelectorAll('.group').forEach((row, index) => {
+    document.querySelectorAll('.cat-row').forEach((row, index) => {
       const amount = parseFloat(row.querySelector('.cat-amount').value) || 0;
       const group = row.querySelector('.cat-group').value;
       const colorDot = row.querySelector('.cat-color-dot');
@@ -381,14 +381,14 @@
       if (group === 'needs') needs += amount;
       if (group === 'wants') wants += amount;
       if (group === 'savings') savings += amount;
-
+ 
       const color = chartColors[index % chartColors.length];
       if (colorDot) colorDot.style.backgroundColor = color;
       if (amount > 0) validCategories.push({ amount, color });
     });
-
+ 
     const remaining = Math.round((income - allocated) * 100) / 100;
-
+ 
     // Updates text legends
     document.getElementById('legend-income').textContent = fmtCurrency(income);
     document.getElementById('legend-needs').textContent = fmtCurrency(needs);
@@ -418,10 +418,10 @@
     
     updateTellerSlip(validCategories.map(cat => cat.amount));
   }
-
+ 
   function addCategoryRow(name = '', group = 'needs', amount = '') {
     const row = document.createElement('div');
-    row.className = 'flex items-center gap-2 sm:gap-3 group';
+    row.className = 'flex items-center gap-2 sm:gap-3 cat-row';
     row.innerHTML = `
       <div class="flex items-center gap-2 sm:gap-3 flex-1 min-w-0">
         <button class="remove-btn text-ink-600 hover:text-rose-400 transition-colors p-1 shrink-0" tabindex="-1"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></button>
@@ -440,7 +440,7 @@
         <input type="number" class="cat-amount val-input text-sm w-full" value="${amount}" min="0" step="0.01" placeholder="0" />
       </div>
     `;
-
+ 
     // ADD EVENT LISTENERS TO NEW ROW
     row.querySelector('.remove-btn').addEventListener('click', () => { row.remove(); calculateBudget(); });
     row.querySelectorAll('input, select').forEach(el => el.addEventListener('input', calculateBudget));
@@ -455,15 +455,15 @@
         next ? next.querySelector('.cat-name').focus() : addCategoryRow('', 'needs', '');
       }
     });
-
+ 
     categoryList.appendChild(row);
     calculateBudget(); // Recalculate once row is added
   }
-
+ 
   incomeInput.addEventListener('input', calculateBudget);
   btnAddCategory.addEventListener('click', () => addCategoryRow('', 'needs', ''));
   btnPrint.addEventListener('click', () => window.print());
-
+ 
   // Initialize
   [
     { name: "Rent / Mortgage", group: "needs", amount: 300 },
