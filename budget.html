@@ -285,14 +285,6 @@
     '#38BDF8', '#C084FC'
   ];
 
-  const initialCategories = [
-    { name: "Rent / Mortgage", group: "needs", amount: 300 },
-    { name: "Groceries", group: "needs", amount: 70 },
-    { name: "Dining Out", group: "wants", amount: 50 },
-    { name: "Savings Goal", group: "savings", amount: 2000 },
-    { name: "Debt Pay", group: "needs", amount: 500 },
-  ];
-
   function blockLetters(e) {
     const allowedKeys = ['Backspace', 'ArrowLeft', 'ArrowRight', 'Tab', 'Delete', '.'];
     if (allowedKeys.includes(e.key)) return;
@@ -302,43 +294,29 @@
   // Denomination Algorithm
   function updateTellerSlip(categories) {
     let bills = { 100: 0, 50: 0, 20: 0, 10: 0, 5: 0, 1: 0 };
-    
     categories.forEach(amount => {
-      let remaining = Math.floor(amount); 
-      
-      bills[100] += Math.floor(remaining / 100);
-      remaining %= 100;
-      
-      bills[50] += Math.floor(remaining / 50);
-      remaining %= 50;
-      
-      bills[20] += Math.floor(remaining / 20);
-      remaining %= 20;
-      
-      bills[10] += Math.floor(remaining / 10);
-      remaining %= 10;
-      
-      bills[5] += Math.floor(remaining / 5);
-      remaining %= 5;
-      
+      let remaining = Math.floor(amount);
+      bills[100] += Math.floor(remaining / 100); remaining %= 100;
+      bills[50] += Math.floor(remaining / 50); remaining %= 50;
+      bills[20] += Math.floor(remaining / 20); remaining %= 20;
+      bills[10] += Math.floor(remaining / 10); remaining %= 10;
+      bills[5] += Math.floor(remaining / 5); remaining %= 5;
       bills[1] += remaining;
     });
 
     const slipContainer = document.getElementById('teller-slip');
     slipContainer.innerHTML = '';
-    
     const denominations = [100, 50, 20, 10, 5, 1];
     denominations.forEach(denom => {
       const count = bills[denom];
-      const total = count * denom;
-      
-      slipContainer.innerHTML += `
-        <div class="teller-box border border-ink-800 rounded-xl p-4 text-center" style="background: #10151C;">
-          <span class="block text-xs font-semibold tracking-widest text-slate-500 mb-1">$${denom} BILLS</span>
-          <span class="block font-mono font-tnum text-slate-200 mb-1" style="font-size: 1.5rem; line-height: 2rem;">${count}</span>
-          <span class="block text-sm font-mono text-gold-400">= $${total}</span>
-        </div>
-      `;
+      if (count > 0) {
+        slipContainer.innerHTML += `
+          <div class="teller-box border border-ink-800 rounded-xl p-4 text-center" style="background: #10151C;">
+            <span class="block text-xs font-semibold tracking-widest text-slate-500 mb-1">$${denom} B</span>
+            <span class="block font-mono text-2xl text-slate-200">${count}</span>
+          </div>
+        `;
+      }
     });
   }
 
@@ -359,48 +337,21 @@
 
       const color = chartColors[index % chartColors.length];
       if (colorDot) colorDot.style.backgroundColor = color;
-
-      if (amount > 0) {
-        validCategories.push({ amount, color });
-      }
+      if (amount > 0) validCategories.push({ amount, color });
     });
 
     const remaining = Math.round((income - allocated) * 100) / 100;
 
+    // Update legend totals dynamically
     document.getElementById('legend-income').textContent = fmtCurrency(income);
     document.getElementById('legend-needs').textContent = fmtCurrency(needs);
     document.getElementById('legend-wants').textContent = fmtCurrency(wants);
     document.getElementById('legend-savings').textContent = fmtCurrency(savings);
     document.getElementById('legend-remaining').textContent = fmtCurrency(remaining);
+    document.getElementById('result-remaining').textContent = (remaining < 0 ? "-" : "") + fmtCurrency(remaining);
     
-    const remEl = document.getElementById('result-remaining');
-    const dotRem = document.getElementById('dot-remaining');
-    const labelRem = document.getElementById('label-remaining');
+    // Build the Pie Chart
     const pieChart = document.getElementById('donut-chart');
-
-    remEl.textContent = (remaining < 0 ? "-" : "") + fmtCurrency(remaining);
-    
-    remEl.classList.remove('text-emerald-400', 'text-gold-300', 'text-rose-400');
-    dotRem.classList.remove('bg-ink-600', 'bg-gold-400', 'bg-rose-500');
-
-    if (remaining === 0) {
-      remEl.classList.add('text-gold-300');
-      dotRem.classList.add('bg-gold-400');
-      labelRem.textContent = "Perfectly balanced";
-      document.getElementById('result-sub').textContent = "Excellent. Every dollar has a job.";
-    } else if (remaining < 0) {
-      remEl.classList.add('text-rose-400');
-      dotRem.classList.add('bg-rose-500');
-      labelRem.textContent = "Over budget by";
-      document.getElementById('result-sub').textContent = "Reduce categories to reach zero.";
-    } else {
-      remEl.classList.add('text-emerald-400');
-      dotRem.classList.add('bg-ink-600');
-      labelRem.textContent = "Unallocated";
-      document.getElementById('result-sub').textContent = "Allocate the remaining balance.";
-    }
-
-    // Pie Chart
     const base = Math.max(income, allocated); 
     if (base === 0) {
       pieChart.style.backgroundImage = 'none'; 
@@ -408,107 +359,65 @@
     } else {
       let gradientStops = [];
       let currentPct = 0;
-
       validCategories.forEach(cat => {
         const slicePct = (cat.amount / base) * 100;
         gradientStops.push(`${cat.color} ${currentPct}% ${currentPct + slicePct}%`);
         currentPct += slicePct;
       });
-
       const remColor = remaining < 0 ? '#F43F5E' : '#2B3542'; 
-      if (currentPct < 100) {
-        gradientStops.push(`${remColor} ${currentPct}% 100%`);
-      }
-      
+      if (currentPct < 100) gradientStops.push(`${remColor} ${currentPct}% 100%`);
       pieChart.style.backgroundImage = `conic-gradient(${gradientStops.join(', ')})`;
     }
-
-    // Pass just the raw amounts to the teller slip generator
     updateTellerSlip(validCategories.map(cat => cat.amount));
   }
 
   function addCategoryRow(name = '', group = 'needs', amount = '') {
     const row = document.createElement('div');
     row.className = 'flex items-center gap-2 sm:gap-3 group';
-    
     row.innerHTML = `
       <div class="flex items-center gap-2 sm:gap-3 flex-1 min-w-0">
-        <button class="remove-btn text-ink-600 hover:text-rose-400 transition-colors p-1 shrink-0" aria-label="Remove category" tabindex="-1">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
-        </button>
+        <button class="remove-btn text-ink-600 hover:text-rose-400 transition-colors p-1 shrink-0" tabindex="-1"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></button>
         <div class="w-2 h-2 rounded-full shrink-0 cat-color-dot bg-ink-700"></div>
-        <div class="flex-1 flex gap-2 border-b border-ink-700 focus-within:border-gold-500 transition-colors pb-1 min-w-0">
-          <input type="text" class="cat-name w-1/2 sm:w-3/5 bg-transparent text-sm sm:text-base text-slate-200 outline-none placeholder-slate-600 min-w-0" placeholder="e.g. Groceries" value="${name}" />
-          <select class="cat-group w-1/2 sm:w-2/5 bg-transparent text-xs sm:text-sm text-slate-400 outline-none cursor-pointer appearance-none min-w-0" tabindex="-1">
+        <div class="flex-1 flex gap-2 border-b border-ink-700 focus-within:border-gold-500 pb-1 min-w-0">
+          <input type="text" class="cat-name w-1/2 sm:w-3/5 bg-transparent text-sm text-slate-200 outline-none" placeholder="Name" value="${name}" />
+          <select class="cat-group w-1/2 sm:w-2/5 bg-transparent text-xs text-slate-400 outline-none cursor-pointer" tabindex="-1">
             <option value="needs" ${group === 'needs' ? 'selected' : ''}>Need</option>
             <option value="wants" ${group === 'wants' ? 'selected' : ''}>Want</option>
             <option value="savings" ${group === 'savings' ? 'selected' : ''}>Save/Debt</option>
           </select>
         </div>
       </div>
-      <div class="flex items-center gap-0.5 w-24 sm:w-28 justify-end border-b border-ink-700 focus-within:border-gold-500 transition-colors pb-1 shrink-0">
+      <div class="flex items-center gap-0.5 w-24 justify-end border-b border-ink-700 focus-within:border-gold-500 pb-1 shrink-0">
         <span class="text-slate-500 font-mono text-sm">$</span>
-        <input type="number" class="cat-amount val-input text-sm sm:text-base w-full" value="${amount}" min="0" step="0.01" placeholder="0" />
+        <input type="number" class="cat-amount val-input text-sm w-full" value="${amount}" min="0" step="0.01" placeholder="0" />
       </div>
     `;
 
-    row.querySelector('.remove-btn').addEventListener('click', () => {
-      row.remove();
-      calculateBudget();
-    });
-
-    const nameInput = row.querySelector('.cat-name');
-    const groupSelect = row.querySelector('.cat-group');
-    const amountInput = row.querySelector('.cat-amount');
-
-    nameInput.addEventListener('input', calculateBudget);
-    groupSelect.addEventListener('change', calculateBudget);
-    amountInput.addEventListener('input', calculateBudget);
-    amountInput.addEventListener('keydown', blockLetters);
-
-    nameInput.addEventListener('keydown', (e) => {
+    row.querySelector('.remove-btn').addEventListener('click', () => { row.remove(); calculateBudget(); });
+    row.querySelectorAll('input, select').forEach(el => el.addEventListener('input', calculateBudget));
+    row.querySelector('.cat-amount').addEventListener('keydown', blockLetters);
+    row.querySelector('.cat-name').addEventListener('keydown', (e) => { if (e.key === 'Enter') { e.preventDefault(); row.querySelector('.cat-amount').focus(); } });
+    row.querySelector('.cat-amount').addEventListener('keydown', (e) => {
       if (e.key === 'Enter') {
         e.preventDefault();
-        amountInput.focus();
+        const next = row.nextElementSibling;
+        next ? next.querySelector('.cat-name').focus() : addCategoryRow('', 'needs', '');
       }
     });
-
-    amountInput.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter') {
-        e.preventDefault();
-        const nextRow = row.nextElementSibling;
-        if (nextRow) {
-          nextRow.querySelector('.cat-name').focus();
-        } else {
-          addCategoryRow('', 'needs', '');
-        }
-      }
-    });
-
     categoryList.appendChild(row);
-    if (name === '') nameInput.focus();
+    calculateBudget();
   }
 
   incomeInput.addEventListener('input', calculateBudget);
-  incomeInput.addEventListener('keydown', blockLetters);
-  
-  incomeInput.addEventListener('keydown', (e) => {
-    if (e.key === 'Enter') {
-      e.preventDefault();
-      const firstRow = categoryList.firstElementChild;
-      if (firstRow) {
-        firstRow.querySelector('.cat-name').focus();
-      } else {
-        addCategoryRow('', 'needs', '');
-      }
-    }
-  });
-
   btnAddCategory.addEventListener('click', () => addCategoryRow('', 'needs', ''));
   btnPrint.addEventListener('click', () => window.print());
-
-  initialCategories.forEach(cat => addCategoryRow(cat.name, cat.group, cat.amount));
-  calculateBudget();
+  [
+    { name: "Rent / Mortgage", group: "needs", amount: 300 },
+    { name: "Groceries", group: "needs", amount: 70 },
+    { name: "Dining Out", group: "wants", amount: 50 },
+    { name: "Savings Goal", group: "savings", amount: 2000 },
+    { name: "Debt Pay", group: "needs", amount: 500 }
+  ].forEach(cat => addCategoryRow(cat.name, cat.group, cat.amount));
 })();
 </script>
 </body>
