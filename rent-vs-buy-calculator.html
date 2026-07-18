@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<title>Rent vs. Buy Calculator: Mortgage Interest & True Housing Cost | Ledgr</title>
+<meta name="description" content="See exactly how much mortgage interest you'll pay and compare your true cost of owning — interest, property tax, insurance, maintenance — against renting over any time horizon." />
+<meta name="robots" content="index, follow" />
+<link rel="canonical" href="https://www.ledgrcalc.com/rent-vs-buy-calculator.html" />
+<link rel="icon" type="image/svg+xml" href="favicon.svg" />
+<meta name="theme-color" content="#0A0E13" />
+
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="Ledgr" />
+<meta property="og:title" content="Rent vs. Buy Calculator: Mortgage Interest & True Housing Cost" />
+<meta property="og:description" content="See exactly how much mortgage interest you'll pay and compare your true cost of owning — interest, property tax, insurance, maintenance — against renting over any time horizon." />
+<meta property="og:url" content="https://www.ledgrcalc.com/rent-vs-buy-calculator.html" />
+<meta property="og:image" content="https://www.ledgrcalc.com/og-image.png" />
+
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="Rent vs. Buy Calculator: Mortgage Interest & True Housing Cost" />
+<meta name="twitter:description" content="See exactly how much mortgage interest you'll pay and compare your true cost of owning — interest, property tax, insurance, maintenance — against renting over any time horizon." />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,500;0,600;1,500;1,600&family=Inter:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Ledgr Rent vs. Buy Calculator",
+  "url": "https://www.ledgrcalc.com/rent-vs-buy-calculator.html",
+  "description": "See exactly how much mortgage interest you'll pay and compare your true cost of owning against renting over any time horizon.",
+  "applicationCategory": "FinanceApplication",
+  "operatingSystem": "Any",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  }
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "How much interest will I pay over the life of a mortgage?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "It depends heavily on the rate and term, but on a 30-year loan it's common for total interest to add up to as much as the amount borrowed, or more — especially in the first half of the loan, when most of each payment goes to interest rather than principal."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is renting or buying cheaper?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "It depends on the home price, mortgage rate, how long you stay, and local rent levels — there's no universal answer. Buying tends to look better the longer you stay, since upfront costs get spread over more years and a fixed-rate mortgage stops rising while rent typically doesn't."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What counts as the 'true cost' of owning a home?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The mortgage interest, property tax, homeowners insurance, maintenance, and any HOA fees — the money that's genuinely spent and gone, the same way rent is. The principal portion of a mortgage payment isn't a cost in the same sense, since it converts directly into home equity you still own."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does this calculator include home appreciation or equity?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No — on purpose. Appreciation rates are unpredictable and vary enormously by market, so baking one in would make the comparison feel more precise than it actually is. This calculator sticks to costs that are already known (interest, tax, insurance, maintenance, rent) rather than guessing at future home values."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How long should I plan to stay before buying makes sense?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Longer is generally better for buying, since closing costs and the interest-heavy early years of a mortgage get spread across more time. Many rules of thumb suggest at least 3-5 years, but running your own numbers over different time horizons in the calculator above is more reliable than any fixed rule."
+      }
+    }
+  ]
+}
+</script>
+
+<link rel="stylesheet" href="dist/output.css" />
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9444853609964104" crossorigin="anonymous"></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-LW9NNXTGK7"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-LW9NNXTGK7');
+</script>
+</head>
+
+<body class="min-h-screen font-sans text-slate-300 antialiased">
+
+  <div class="max-w-5xl mx-auto px-5 sm:px-8 py-10 sm:py-14">
+
+    <header class="flex items-center justify-between mb-10 sm:mb-14">
+      <a href="index.html" class="flex items-center gap-2">
+        <span class="w-1.5 h-1.5 rounded-full bg-gold-400"></span>
+        <span class="font-display italic font-medium text-xl text-slate-100 tracking-tight">Ledgr</span>
+      </a>
+      <a href="index.html" class="text-sm text-slate-400 hover:text-gold-400 transition-colors">← Back to calculator</a>
+    </header>
+
+    <!-- Google AdSense Slot A -->
+    <div class="w-full mb-10 sm:mb-14">
+      <div class="ad-slot" data-ad-slot="rentbuy-slot-a-header-banner">
+        <span class="ad-label">Advertisement</span>
+      </div>
+    </div>
+
+    <div class="max-w-3xl mx-auto text-center mb-10 sm:mb-14">
+      <p class="text-xs font-semibold tracking-widest text-gold-500 uppercase mb-3">Free Tool</p>
+      <h1 class="text-2xl sm:text-3xl font-medium text-slate-100 tracking-tight mb-4">Rent vs. Buy Calculator</h1>
+      <p class="text-sm sm:text-base text-slate-400">
+        See exactly how much mortgage interest you'd pay, and compare the true cost of owning — interest, tax, insurance, maintenance — against renting over however many years you plan to stay.
+      </p>
+    </div>
+
+    <!-- CALCULATOR -->
+    <main class="grid lg:grid-cols-2 gap-6 lg:gap-8 items-start mb-10 sm:mb-14">
+
+      <!-- INPUT PANELS -->
+      <div class="flex flex-col gap-6">
+
+        <section class="bg-ink-900 border border-ink-700 rounded-2xl p-6 sm:p-7">
+          <p class="text-xs font-semibold tracking-widest text-gold-500 uppercase mb-5">Buying</p>
+
+          <div class="mb-5">
+            <div class="flex items-center justify-between mb-2">
+              <label for="home-price-num" class="text-sm font-medium text-slate-300">Home price</label>
+              <div class="flex items-center gap-0.5 w-32">
+                <span class="text-slate-500 font-mono text-sm">$</span>
+                <input type="number" id="home-price-num" class="val-input text-base" value="350000" min="0" max="5000000" step="1000" aria-label="Home price in dollars" />
+              </div>
+            </div>
+            <input type="range" id="home-price-slider" min="50000" max="1500000" step="5000" value="350000" class="slider" aria-hidden="true" />
+          </div>
+
+          <div class="mb-5">
+            <div class="flex items-center justify-between mb-2">
+              <label for="down-payment-num" class="text-sm font-medium text-slate-300">Down payment</label>
+              <div class="flex items-center gap-1 w-32 justify-end">
+                <input type="number" id="down-payment-num" class="val-input text-base" value="20" min="0" max="100" step="1" style="width:3rem" aria-label="Down payment percent" />
+                <span class="text-slate-500 font-mono text-sm">%</span>
+              </div>
+            </div>
+            <input type="range" id="down-payment-slider" min="0" max="50" step="1" value="20" class="slider" aria-hidden="true" />
+          </div>
+
+          <div class="mb-5">
+            <div class="flex items-center justify-between mb-2">
+              <label for="rate-num" class="text-sm font-medium text-slate-300">Mortgage rate (APR)</label>
+              <div class="flex items-center gap-1 w-32 justify-end">
+                <input type="number" id="rate-num" class="val-input text-base" value="6.5" min="0" max="15" step="0.1" style="width:3rem" aria-label="Mortgage interest rate percent" />
+                <span class="text-slate-500 font-mono text-sm">%</span>
+              </div>
+            </div>
+            <input type="range" id="rate-slider" min="0" max="12" step="0.1" value="6.5" class="slider" aria-hidden="true" />
+          </div>
+
+          <div class="mb-5">
+            <div class="flex items-center justify-between mb-2">
+              <label for="loan-term-select" class="text-sm font-medium text-slate-300">Loan term</label>
+              <select id="loan-term-select" class="bg-ink-800 text-sm text-slate-300 rounded-md border border-ink-700 px-2 py-1.5 outline-none cursor-pointer focus:border-gold-500/50">
+                <option value="15">15 years</option>
+                <option value="20">20 years</option>
+                <option value="30" selected>30 years</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="mb-5">
+            <div class="flex items-center justify-between mb-2">
+              <label for="tax-num" class="text-sm font-medium text-slate-300">Property tax</label>
+              <div class="flex items-center gap-1 w-32 justify-end">
+                <input type="number" id="tax-num" class="val-input text-base" value="1.1" min="0" max="5" step="0.05" style="width:3rem" aria-label="Property tax rate percent per year" />
+                <span class="text-slate-500 font-mono text-sm">%/yr</span>
+              </div>
+            </div>
+            <input type="range" id="tax-slider" min="0" max="3" step="0.05" value="1.1" class="slider" aria-hidden="true" />
+          </div>
+
+          <div class="mb-5">
+            <div class="flex items-center justify-between mb-2">
+              <label for="insurance-num" class="text-sm font-medium text-slate-300">Homeowners insurance</label>
+              <div class="flex items-center gap-0.5 w-32">
+                <span class="text-slate-500 font-mono text-sm">$</span>
+                <input type="number" id="insurance-num" class="val-input text-base" value="1500" min="0" max="20000" step="50" aria-label="Homeowners insurance per year in dollars" />
+              </div>
+            </div>
+            <p class="text-xs text-slate-500 mt-1">per year</p>
+          </div>
+
+          <div class="mb-5">
+            <div class="flex items-center justify-between mb-2">
+              <label for="maintenance-num" class="text-sm font-medium text-slate-300">Maintenance</label>
+              <div class="flex items-center gap-1 w-32 justify-end">
+                <input type="number" id="maintenance-num" class="val-input text-base" value="1" min="0" max="5" step="0.1" style="width:3rem" aria-label="Maintenance rate percent per year" />
+                <span class="text-slate-500 font-mono text-sm">%/yr</span>
+              </div>
+            </div>
+            <input type="range" id="maintenance-slider" min="0" max="3" step="0.1" value="1" class="slider" aria-hidden="true" />
+          </div>
+
+          <div>
+            <div class="flex items-center justify-between mb-2">
+              <label for="hoa-num" class="text-sm font-medium text-slate-300">HOA fees</label>
+              <div class="flex items-center gap-0.5 w-32">
+                <span class="text-slate-500 font-mono text-sm">$</span>
+                <input type="number" id="hoa-num" class="val-input text-base" value="0" min="0" max="2000" step="10" aria-label="HOA fees per month in dollars" />
+              </div>
+            </div>
+            <p class="text-xs text-slate-500 mt-1">per month</p>
+          </div>
+        </section>
+
+        <section class="bg-ink-900 border border-ink-700 rounded-2xl p-6 sm:p-7">
+          <p class="text-xs font-semibold tracking-widest text-gold-500 uppercase mb-5">Renting &amp; Comparison</p>
+
+          <div class="mb-5">
+            <div class="flex items-center justify-between mb-2">
+              <label for="rent-num" class="text-sm font-medium text-slate-300">Monthly rent</label>
+              <div class="flex items-center gap-0.5 w-32">
+                <span class="text-slate-500 font-mono text-sm">$</span>
+                <input type="number" id="rent-num" class="val-input text-base" value="2000" min="0" max="20000" step="25" aria-label="Monthly rent in dollars" />
+              </div>
+            </div>
+            <input type="range" id="rent-slider" min="0" max="8000" step="50" value="2000" class="slider" aria-hidden="true" />
+          </div>
+
+          <div class="mb-5">
+            <div class="flex items-center justify-between mb-2">
+              <label for="rent-increase-num" class="text-sm font-medium text-slate-300">Annual rent increase</label>
+              <div class="flex items-center gap-1 w-32 justify-end">
+                <input type="number" id="rent-increase-num" class="val-input text-base" value="3" min="0" max="15" step="0.5" style="width:3rem" aria-label="Annual rent increase percent" />
+                <span class="text-slate-500 font-mono text-sm">%/yr</span>
+              </div>
+            </div>
+            <input type="range" id="rent-increase-slider" min="0" max="10" step="0.5" value="3" class="slider" aria-hidden="true" />
+          </div>
+
+          <div>
+            <div class="flex items-center justify-between mb-2">
+              <label for="years-num" class="text-sm font-medium text-slate-300">Years to compare</label>
+              <div class="flex items-center gap-1 w-32 justify-end">
+                <input type="number" id="years-num" class="val-input text-base" value="10" min="1" max="30" step="1" style="width:2.5rem" aria-label="Years to compare" />
+                <span class="text-slate-500 font-mono text-sm">yrs</span>
+              </div>
+            </div>
+            <input type="range" id="years-slider" min="1" max="30" step="1" value="10" class="slider" aria-hidden="true" />
+          </div>
+        </section>
+      </div>
+
+      <!-- RESULT PANEL -->
+      <div class="relative lg:sticky lg:top-8">
+        <section class="bg-gradient-to-b from-ink-900 to-ink-950 border border-gold-500/25 rounded-2xl p-7 sm:p-8 shadow-2xl shadow-black/40">
+          <p class="text-xs font-semibold tracking-widest text-slate-400 uppercase mb-3">Total Mortgage Interest</p>
+          <div class="flex items-baseline gap-2 mb-1">
+            <span id="result-interest" class="font-mono font-tnum text-4xl sm:text-5xl font-semibold text-gold-300">$0</span>
+          </div>
+          <p id="result-interest-sub" class="text-sm text-slate-500 mb-7">paid over 10 years of a 30-year loan</p>
+
+          <div class="mb-3">
+            <div class="w-full h-2.5 rounded-full bg-ink-800 overflow-hidden flex">
+              <div id="bar-interest" class="ledger-seg h-full bg-rose-400" style="width:50%"></div>
+              <div id="bar-principal" class="ledger-seg h-full bg-emerald-500" style="width:50%"></div>
+            </div>
+          </div>
+          <div class="flex justify-between text-sm">
+            <div class="flex items-center gap-1.5">
+              <span class="w-2 h-2 rounded-full bg-rose-400"></span>
+              <span class="text-slate-400">Interest paid</span>
+            </div>
+            <span id="legend-interest" class="font-mono font-tnum text-slate-200">$0</span>
+          </div>
+          <div class="flex justify-between text-sm mt-1.5">
+            <div class="flex items-center gap-1.5">
+              <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+              <span class="text-slate-400">Principal paid (your equity)</span>
+            </div>
+            <span id="legend-principal" class="font-mono font-tnum text-slate-200">$0</span>
+          </div>
+
+          <div class="mt-6 pt-5 border-t border-ink-700">
+            <p class="text-xs font-semibold tracking-widest text-slate-400 uppercase mb-3">Total Cost Over The Comparison Period</p>
+
+            <div class="flex justify-between text-sm mb-2">
+              <span class="text-slate-300">Cost of owning</span>
+              <span id="legend-cost-owning" class="font-mono font-tnum text-slate-100">$0</span>
+            </div>
+            <div class="flex justify-between text-sm mb-4">
+              <span class="text-slate-300">Cost of renting</span>
+              <span id="legend-cost-renting" class="font-mono font-tnum text-slate-100">$0</span>
+            </div>
+
+            <div id="comparison-callout" class="rounded-xl border px-4 py-3 mb-5">
+              <p id="comparison-text" class="text-sm"></p>
+            </div>
+
+            <div class="space-y-1.5 text-sm">
+              <div class="flex justify-between">
+                <span class="text-slate-500">Mortgage interest</span>
+                <span id="breakdown-interest" class="font-mono font-tnum text-slate-400">$0</span>
+              </div>
+              <div class="flex justify-between">
+                <span class="text-slate-500">Property tax</span>
+                <span id="breakdown-tax" class="font-mono font-tnum text-slate-400">$0</span>
+              </div>
+              <div class="flex justify-between">
+                <span class="text-slate-500">Insurance</span>
+                <span id="breakdown-insurance" class="font-mono font-tnum text-slate-400">$0</span>
+              </div>
+              <div class="flex justify-between">
+                <span class="text-slate-500">Maintenance</span>
+                <span id="breakdown-maintenance" class="font-mono font-tnum text-slate-400">$0</span>
+              </div>
+              <div class="flex justify-between">
+                <span class="text-slate-500">HOA</span>
+                <span id="breakdown-hoa" class="font-mono font-tnum text-slate-400">$0</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="mt-6 pt-5 border-t border-ink-700 flex justify-between text-sm">
+            <span class="text-slate-500">Monthly payment (P&amp;I)</span>
+            <span id="legend-monthly-pi" class="font-mono font-tnum text-slate-300">$0/mo</span>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <!-- Google AdSense Slot B -->
+    <div class="w-full max-w-4xl mx-auto mb-10 sm:mb-14">
+      <div class="ad-slot" data-ad-slot="rentbuy-slot-b-below-calculator">
+        <span class="ad-label">Advertisement</span>
+      </div>
+    </div>
+
+    <p class="text-xs text-slate-500 text-center max-w-2xl mx-auto mt-6">Estimates assume a constant rate, tax, and rent-increase pattern. Doesn't include home appreciation, equity, or selling costs. For planning purposes only — not financial advice.</p>
+
+    <!-- SEO / educational content -->
+    <section class="seo-copy max-w-3xl mx-auto mt-14 sm:mt-20">
+      <h2 class="text-2xl sm:text-3xl font-medium text-slate-100 tracking-tight mb-6">How Much Does a Mortgage Really Cost?</h2>
+
+      <p class="text-slate-300 mb-5">
+A full monthly mortgage payment (often called <a href="budgeting-glossary.html#piti" class="text-gold-400 hover:text-gold-300 underline underline-offset-2">PITI</a>) is really two very different things bundled together: principal, which pays down what you borrowed and converts directly into home equity you still own, and interest, which is the actual price of borrowing the money — spent, gone, same as rent. Early in a loan, interest dominates each payment; only over time does the split shift toward principal. That's why the calculator above tracks interest paid specifically, not just the total payment.
+      </p>
+
+      <p class="text-slate-300 mb-8">
+        Owning also comes with costs renting doesn't: property tax, homeowners insurance, maintenance, and sometimes HOA fees. None of that builds equity — it's a genuine cost of the home, the same way rent is a genuine cost of an apartment. Add it to mortgage interest and you get what the calculator calls the "cost of owning": everything spent that doesn't come back as equity in the home.
+      </p>
+
+      <h3 class="text-lg sm:text-xl font-semibold text-slate-100 tracking-tight mb-4">Why This Calculator Skips Appreciation</h3>
+
+      <p class="text-slate-300 mb-5">
+        Plenty of rent-vs-buy calculators bake in an assumed home appreciation rate to project a future sale price and "net cost." The problem is that appreciation is genuinely unpredictable and varies enormously by market and by year — folding a guess into the math makes the output feel more precise than it really is. This calculator sticks to numbers that are already known or reasonably assumed: your rate, your tax rate, your rent, and how it tends to rise. What it can't tell you is what your home will be worth when you eventually sell — nobody can, reliably.
+      </p>
+
+      <p class="text-slate-300 mb-8">
+        That also means the "cost of owning" figure above isn't the same as your net financial outcome. Every dollar of principal paid down is still yours, sitting in the home as equity — it's just not counted as a "cost" here, the same way a rent payment would be. If you want the full picture for your own numbers, treat the comparison above as the cash you'd genuinely never see again either way, and remember that ownership's principal payments are effectively forced savings on top of that.
+      </p>
+
+      <div class="bg-ink-900 border border-gold-500/25 rounded-2xl p-6 sm:p-7 mb-10 flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div>
+          <p class="text-slate-100 font-medium mb-1">Already know your monthly numbers?</p>
+          <p class="text-sm text-slate-400">Use the Zero-Based Budget Planner to see exactly where a mortgage or rent payment fits into the rest of your budget.</p>
+        </div>
+        <a href="budget.html" class="inline-flex items-center gap-2 px-5 py-2.5 text-sm font-medium text-ink-950 bg-gold-400 rounded-full hover:bg-gold-300 transition-colors shrink-0 whitespace-nowrap">Open the Planner</a>
+      </div>
+
+      <h2 class="text-2xl sm:text-3xl font-medium text-slate-100 tracking-tight mb-6">Frequently Asked Questions</h2>
+
+      <div class="mb-6">
+        <h3 class="text-slate-100 font-medium mb-2">How much interest will I pay over the life of a mortgage?</h3>
+        <p class="text-slate-300">It depends heavily on the rate and term, but on a 30-year loan it's common for total interest to add up to as much as the amount borrowed, or more — especially in the first half of the loan, when most of each payment goes to interest rather than principal.</p>
+      </div>
+      <div class="mb-6">
+        <h3 class="text-slate-100 font-medium mb-2">Is renting or buying cheaper?</h3>
+        <p class="text-slate-300">It depends on the home price, mortgage rate, how long you stay, and local rent levels — there's no universal answer. Buying tends to look better the longer you stay, since upfront costs get spread over more years and a fixed-rate mortgage stops rising while rent typically doesn't.</p>
+      </div>
+      <div class="mb-6">
+        <h3 class="text-slate-100 font-medium mb-2">What counts as the "true cost" of owning a home?</h3>
+        <p class="text-slate-300">The mortgage interest, property tax, homeowners insurance, maintenance, and any HOA fees — the money that's genuinely spent and gone, the same way rent is. The principal portion of a mortgage payment isn't a cost in the same sense, since it converts directly into home equity you still own.</p>
+      </div>
+      <div class="mb-6">
+        <h3 class="text-slate-100 font-medium mb-2">Does this calculator include home appreciation or equity?</h3>
+        <p class="text-slate-300">No — on purpose. Appreciation rates are unpredictable and vary enormously by market, so baking one in would make the comparison feel more precise than it actually is. This calculator sticks to costs that are already known (interest, tax, insurance, maintenance, rent) rather than guessing at future home values.</p>
+      </div>
+      <div class="mb-10">
+        <h3 class="text-slate-100 font-medium mb-2">How long should I plan to stay before buying makes sense?</h3>
+        <p class="text-slate-300">Longer is generally better for buying, since closing costs and the interest-heavy early years of a mortgage get spread across more time. Many rules of thumb suggest at least 3-5 years, but running your own numbers over different time horizons in the calculator above is more reliable than any fixed rule.</p>
+      </div>
+    </section>
+
+    <!-- Google AdSense Slot C -->
+    <div class="w-full max-w-4xl mx-auto mt-14 sm:mt-16">
+      <div class="ad-slot" data-ad-slot="rentbuy-slot-c-page-bottom">
+        <span class="ad-label">Advertisement</span>
+      </div>
+    </div>
+
+    <footer class="text-center mt-10">
+      <div class="flex flex-wrap items-center justify-center gap-2 mb-3">
+        <a href="index.html" class="inline-flex items-center px-3 py-1.5 text-xs font-medium text-slate-400 bg-ink-900 border border-ink-700 rounded-full hover:text-gold-400 hover:border-gold-500/40 transition-colors">Calculator</a>
+        <a href="budget.html" class="inline-flex items-center px-3 py-1.5 text-xs font-medium text-slate-400 bg-ink-900 border border-ink-700 rounded-full hover:text-gold-400 hover:border-gold-500/40 transition-colors">Budget Planner</a>
+        <a href="sinking-fund-calculator.html" class="inline-flex items-center px-3 py-1.5 text-xs font-medium text-slate-400 bg-ink-900 border border-ink-700 rounded-full hover:text-gold-400 hover:border-gold-500/40 transition-colors">Sinking Fund Calculator</a>
+        <a href="emergency-fund-calculator.html" class="inline-flex items-center px-3 py-1.5 text-xs font-medium text-slate-400 bg-ink-900 border border-ink-700 rounded-full hover:text-gold-400 hover:border-gold-500/40 transition-colors">Emergency Fund Calculator</a>
+        <a href="debt-snowball-avalanche-calculator.html" class="inline-flex items-center px-3 py-1.5 text-xs font-medium text-slate-400 bg-ink-900 border border-ink-700 rounded-full hover:text-gold-400 hover:border-gold-500/40 transition-colors">Debt Payoff Calculator</a>
+        <a href="sneaky-expense-calculator.html" class="inline-flex items-center px-3 py-1.5 text-xs font-medium text-slate-400 bg-ink-900 border border-ink-700 rounded-full hover:text-gold-400 hover:border-gold-500/40 transition-colors">Sneaky Expense Calculator</a>
+        <a href="cash-stuffing-guide.html" class="inline-flex items-center px-3 py-1.5 text-xs font-medium text-slate-400 bg-ink-900 border border-ink-700 rounded-full hover:text-gold-400 hover:border-gold-500/40 transition-colors">Cash Stuffing Guide</a>
+        <a href="cash-stuffing-binder-planner.html" class="inline-flex items-center px-3 py-1.5 text-xs font-medium text-slate-400 bg-ink-900 border border-ink-700 rounded-full hover:text-gold-400 hover:border-gold-500/40 transition-colors">Binder Planner</a>
+        <a href="savings-challenge-tracker.html" class="inline-flex items-center px-3 py-1.5 text-xs font-medium text-slate-400 bg-ink-900 border border-ink-700 rounded-full hover:text-gold-400 hover:border-gold-500/40 transition-colors">Savings Challenge Tracker</a>
+        <a href="binder-label-studio.html" class="inline-flex items-center px-3 py-1.5 text-xs font-medium text-slate-400 bg-ink-900 border border-ink-700 rounded-full hover:text-gold-400 hover:border-gold-500/40 transition-colors">Label Studio</a>
+        <a href="budgeting-glossary.html" class="inline-flex items-center px-3 py-1.5 text-xs font-medium text-slate-400 bg-ink-900 border border-ink-700 rounded-full hover:text-gold-400 hover:border-gold-500/40 transition-colors">Glossary</a>
+        <a href="about.html" class="inline-flex items-center px-3 py-1.5 text-xs font-medium text-slate-400 bg-ink-900 border border-ink-700 rounded-full hover:text-gold-400 hover:border-gold-500/40 transition-colors">About</a>
+        <a href="privacy-policy.html" class="inline-flex items-center px-3 py-1.5 text-xs font-medium text-slate-400 bg-ink-900 border border-ink-700 rounded-full hover:text-gold-400 hover:border-gold-500/40 transition-colors">Privacy Policy</a>
+      </div>
+      <p class="text-xs text-slate-600">© 2026 Ledgr. All calculations are estimates for educational purposes only.</p>
+    </footer>
+
+  </div>
+
+<script>
+(function () {
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  const fmtCurrency = (n, decimals = 0) =>
+    '$' + Math.round(n).toLocaleString('en-US', { minimumFractionDigits: decimals, maximumFractionDigits: decimals });
+
+  function linkPair(sliderId, numId, onChange) {
+    const slider = document.getElementById(sliderId);
+    const num = document.getElementById(numId);
+
+    function setFill() {
+      const min = parseFloat(slider.min), max = parseFloat(slider.max);
+      const pct = ((parseFloat(slider.value) - min) / (max - min)) * 100;
+      slider.style.background =
+        `linear-gradient(to right, var(--gold-400) 0%, var(--gold-400) ${pct}%, var(--ink-700) ${pct}%, var(--ink-700) 100%)`;
+    }
+
+    slider.addEventListener('input', () => {
+      num.value = slider.value;
+      setFill();
+      onChange();
+    });
+
+    num.addEventListener('input', () => {
+      let v = parseFloat(num.value);
+      if (isNaN(v)) return;
+      const sliderMax = parseFloat(slider.max);
+      const clampedForSlider = Math.min(Math.max(v, parseFloat(slider.min)), sliderMax);
+      slider.value = clampedForSlider;
+      setFill();
+      onChange();
+    });
+
+    setFill();
+  }
+
+  const lastValues = {};
+  function animateNumber(elId, to) {
+    const el = document.getElementById(elId);
+    const from = lastValues[elId] !== undefined ? lastValues[elId] : 0;
+    lastValues[elId] = to;
+
+    if (reduceMotion) {
+      el.textContent = fmtCurrency(to);
+      return;
+    }
+
+    const duration = 400;
+    const start = performance.now();
+
+    function frame(now) {
+      const t = Math.min((now - start) / duration, 1);
+      const eased = 1 - Math.pow(1 - t, 3);
+      el.textContent = fmtCurrency(from + (to - from) * eased);
+      if (t < 1) requestAnimationFrame(frame);
+      else el.textContent = fmtCurrency(to);
+    }
+    requestAnimationFrame(frame);
+  }
+
+  /* ---------- Mortgage amortization ---------- */
+  function computeMortgage(loanAmount, ratePct, termYears, horizonYears) {
+    const n = termYears * 12;
+    const i = ratePct / 100 / 12;
+    const horizonMonths = Math.min(horizonYears * 12, n);
+
+    let monthlyPayment;
+    if (i === 0) {
+      monthlyPayment = loanAmount / n;
+    } else {
+      monthlyPayment = (loanAmount * i) / (1 - Math.pow(1 + i, -n));
+    }
+
+    let balance = loanAmount;
+    let totalInterest = 0;
+    let totalPrincipal = 0;
+    for (let m = 0; m < horizonMonths; m++) {
+      const interestThisMonth = i === 0 ? 0 : balance * i;
+      let principalThisMonth = monthlyPayment - interestThisMonth;
+      if (principalThisMonth > balance) principalThisMonth = balance;
+      balance -= principalThisMonth;
+      totalInterest += interestThisMonth;
+      totalPrincipal += principalThisMonth;
+    }
+
+    return { monthlyPayment, totalInterest, totalPrincipal, horizonMonths };
+  }
+
+  /* ---------- Rent with annual increases ---------- */
+  function computeRent(monthlyRent, increasePct, years) {
+    let total = 0;
+    for (let m = 0; m < years * 12; m++) {
+      const yearIndex = Math.floor(m / 12);
+      const rentThisMonth = monthlyRent * Math.pow(1 + increasePct / 100, yearIndex);
+      total += rentThisMonth;
+    }
+    return total;
+  }
+
+  function calculate() {
+    const homePrice = parseFloat(document.getElementById('home-price-num').value) || 0;
+    const downPct = parseFloat(document.getElementById('down-payment-num').value) || 0;
+    const rate = parseFloat(document.getElementById('rate-num').value) || 0;
+    const termYears = parseFloat(document.getElementById('loan-term-select').value) || 30;
+    const taxPct = parseFloat(document.getElementById('tax-num').value) || 0;
+    const insuranceYr = parseFloat(document.getElementById('insurance-num').value) || 0;
+    const maintenancePct = parseFloat(document.getElementById('maintenance-num').value) || 0;
+    const hoaMonthly = parseFloat(document.getElementById('hoa-num').value) || 0;
+
+    const rent = parseFloat(document.getElementById('rent-num').value) || 0;
+    const rentIncrease = parseFloat(document.getElementById('rent-increase-num').value) || 0;
+    const years = parseFloat(document.getElementById('years-num').value) || 1;
+
+    const loanAmount = homePrice * (1 - downPct / 100);
+    const { monthlyPayment, totalInterest, totalPrincipal } = computeMortgage(loanAmount, rate, termYears, years);
+
+    const totalTax = homePrice * (taxPct / 100) * years;
+    const totalInsurance = insuranceYr * years;
+    const totalMaintenance = homePrice * (maintenancePct / 100) * years;
+    const totalHoa = hoaMonthly * 12 * years;
+
+    const costOfOwning = totalInterest + totalTax + totalInsurance + totalMaintenance + totalHoa;
+    const costOfRenting = computeRent(rent, rentIncrease, years);
+
+    animateNumber('result-interest', totalInterest);
+    document.getElementById('result-interest-sub').textContent =
+      years >= termYears
+        ? `paid over the full ${termYears}-year loan`
+        : `paid over ${years} year${years == 1 ? '' : 's'} of a ${termYears}-year loan`;
+
+    const paidTotal = totalInterest + totalPrincipal;
+    const interestPct = paidTotal > 0 ? (totalInterest / paidTotal) * 100 : 50;
+    const principalPct = 100 - interestPct;
+    document.getElementById('bar-interest').style.width = interestPct + '%';
+    document.getElementById('bar-principal').style.width = principalPct + '%';
+    document.getElementById('legend-interest').textContent = fmtCurrency(totalInterest);
+    document.getElementById('legend-principal').textContent = fmtCurrency(totalPrincipal);
+
+    document.getElementById('legend-cost-owning').textContent = fmtCurrency(costOfOwning);
+    document.getElementById('legend-cost-renting').textContent = fmtCurrency(costOfRenting);
+
+    const diff = costOfOwning - costOfRenting;
+    const callout = document.getElementById('comparison-callout');
+    const calloutText = document.getElementById('comparison-text');
+    if (diff < 0) {
+      callout.className = 'rounded-xl border px-4 py-3 mb-5 border-emerald-400/30 bg-emerald-400/10';
+      calloutText.className = 'text-sm text-emerald-400';
+      calloutText.textContent = `Buying costs ${fmtCurrency(Math.abs(diff))} less than renting over ${years} year${years == 1 ? '' : 's'} — plus you'd have ${fmtCurrency(totalPrincipal)} in home equity from principal paid down.`;
+    } else {
+      callout.className = 'rounded-xl border px-4 py-3 mb-5 border-gold-500/30 bg-gold-500/10';
+      calloutText.className = 'text-sm text-gold-400';
+      calloutText.textContent = `Renting costs ${fmtCurrency(Math.abs(diff))} less than owning over ${years} year${years == 1 ? '' : 's'} — though owning would still build ${fmtCurrency(totalPrincipal)} in home equity.`;
+    }
+
+    document.getElementById('breakdown-interest').textContent = fmtCurrency(totalInterest);
+    document.getElementById('breakdown-tax').textContent = fmtCurrency(totalTax);
+    document.getElementById('breakdown-insurance').textContent = fmtCurrency(totalInsurance);
+    document.getElementById('breakdown-maintenance').textContent = fmtCurrency(totalMaintenance);
+    document.getElementById('breakdown-hoa').textContent = fmtCurrency(totalHoa);
+
+    document.getElementById('legend-monthly-pi').textContent = fmtCurrency(monthlyPayment) + '/mo';
+  }
+
+  linkPair('home-price-slider', 'home-price-num', calculate);
+  linkPair('down-payment-slider', 'down-payment-num', calculate);
+  linkPair('rate-slider', 'rate-num', calculate);
+  linkPair('tax-slider', 'tax-num', calculate);
+  linkPair('maintenance-slider', 'maintenance-num', calculate);
+  linkPair('rent-slider', 'rent-num', calculate);
+  linkPair('rent-increase-slider', 'rent-increase-num', calculate);
+  linkPair('years-slider', 'years-num', calculate);
+
+  document.getElementById('loan-term-select').addEventListener('change', calculate);
+  document.getElementById('insurance-num').addEventListener('input', calculate);
+  document.getElementById('hoa-num').addEventListener('input', calculate);
+
+  calculate();
+})();
+</script>
+</body>
+</html>
