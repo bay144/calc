@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Ledgr Subscriptions</title>
+<link rel="stylesheet" href="popup.css" />
+</head>
+<body>
+  <header class="header">
+    <div class="brand">
+      <span class="dot"></span>
+      <span class="wordmark">Ledgr</span>
+      <span class="dot"></span>
+    </div>
+    <p class="label">Subscriptions</p>
+    <div class="total-row">
+      <span id="total-monthly" class="total-value font-tnum">$0</span>
+      <span class="total-unit">/mo</span>
+    </div>
+    <button id="btn-add" class="btn-add" type="button">+ Add subscription</button>
+  </header>
+
+  <main id="list-view" class="list-view">
+    <ul id="sub-list" class="sub-list"></ul>
+    <div id="empty-state" class="empty-state" hidden>
+      <span class="dot"></span>
+      <p>No subscriptions yet — add your first one. Netflix, Spotify, that gym membership you forgot about.</p>
+    </div>
+  </main>
+
+  <section id="form-panel" class="form-panel" hidden>
+    <h2 id="form-title" class="form-title">Add subscription</h2>
+    <form id="sub-form">
+      <label class="field">
+        <span>Name</span>
+        <input type="text" id="f-name" required maxlength="60" />
+      </label>
+      <label class="field">
+        <span>Amount</span>
+        <input type="number" id="f-amount" required min="0" step="0.01" placeholder="0.00" />
+      </label>
+      <label class="field">
+        <span>Billing cycle</span>
+        <select id="f-cycle">
+          <option value="monthly">Monthly</option>
+          <option value="weekly">Weekly</option>
+          <option value="yearly">Yearly</option>
+          <option value="custom">Every N days</option>
+        </select>
+      </label>
+      <label class="field" id="f-custom-days-field" hidden>
+        <span>Every how many days</span>
+        <input type="number" id="f-custom-days" min="1" step="1" />
+      </label>
+      <label class="field">
+        <span>Next renewal</span>
+        <input type="date" id="f-renewal" required />
+      </label>
+      <label class="field">
+        <span>Category (optional)</span>
+        <input type="text" id="f-category" maxlength="40" placeholder="Streaming, Software, ..." />
+      </label>
+      <label class="field">
+        <span>Notes (optional)</span>
+        <input type="text" id="f-notes" maxlength="140" />
+      </label>
+      <div class="form-actions">
+        <button type="button" id="btn-cancel" class="btn-secondary">Cancel</button>
+        <button type="submit" class="btn-primary">Save</button>
+      </div>
+    </form>
+  </section>
+
+  <footer class="footer">
+    <a href="https://www.ledgrcalc.com/" target="_blank" rel="noopener" class="footer-link">Ledgr — the full budgeting toolkit ↗</a>
+  </footer>
+
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>
