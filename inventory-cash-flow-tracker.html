@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<title>Inventory & Cash Flow Tracker: Reorder Points & Capital Tied Up | Ledgr</title>
+<meta name="description" content="Track stock levels, sales velocity, and reorder points across every product you sell — see exactly how much cash is tied up in inventory and what needs reordering before you run out." />
+<meta name="robots" content="index, follow" />
+<link rel="canonical" href="https://www.ledgrcalc.com/inventory-cash-flow-tracker.html" />
+<link rel="icon" type="image/svg+xml" href="favicon.svg" />
+<meta name="theme-color" content="#0A0E13" />
+
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="Ledgr" />
+<meta property="og:title" content="Inventory & Cash Flow Tracker: Reorder Points & Capital Tied Up" />
+<meta property="og:description" content="Track stock levels, sales velocity, and reorder points across every product you sell — see exactly how much cash is tied up in inventory and what needs reordering before you run out." />
+<meta property="og:url" content="https://www.ledgrcalc.com/inventory-cash-flow-tracker.html" />
+<meta property="og:image" content="https://www.ledgrcalc.com/og-image.png" />
+
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="Inventory & Cash Flow Tracker: Reorder Points & Capital Tied Up" />
+<meta name="twitter:description" content="Track stock levels, sales velocity, and reorder points across every product you sell — see exactly how much cash is tied up in inventory and what needs reordering before you run out." />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,500;0,600;1,500;1,600&family=Inter:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Ledgr Inventory & Cash Flow Tracker",
+  "url": "https://www.ledgrcalc.com/inventory-cash-flow-tracker.html",
+  "description": "Track stock levels, sales velocity, and reorder points across every product you sell — see exactly how much cash is tied up in inventory and what needs reordering before you run out.",
+  "applicationCategory": "FinanceApplication",
+  "operatingSystem": "Any",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  }
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What counts as \"cash tied up\" in inventory?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "It's the landed cost of everything currently sitting in stock — units on hand multiplied by what each unit actually cost you (product plus shipping, duty, and prep). That money is spent and locked into physical goods until it sells; it isn't available for a new order, an ad budget, or anything else until it converts back to cash."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How is \"days of stock left\" calculated?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Units currently on hand divided by your average daily sales velocity. It's only as accurate as that velocity number, so it's worth updating it periodically as actual sales data comes in rather than setting it once and forgetting it."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What's a safe lead time buffer before reordering?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "At minimum, place a reorder while you still have at least as many days of stock left as your supplier's lead time — otherwise you'll sell out before the new order arrives. Many sellers add a buffer on top of that (this tracker flags \"Reorder Soon\" at 1.5x lead time) to absorb shipping delays or a sales spike."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does this tracker save my data?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes — everything you enter is saved automatically in this browser's local storage, so it's still there next time you visit from the same device and browser. Nothing is sent anywhere or stored on a server; clearing your browser data will also clear this tracker."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What if I don't know my daily sales velocity yet?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Leave it at zero until you have a few days of real sales to average — the tracker will flag the product as \"No sales data\" instead of guessing. Once you have even a week of numbers, total units sold divided by days is a reasonable starting estimate."
+      }
+    }
+  ]
+}
+</script>
+
+<link rel="stylesheet" href="dist/output.css" />
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9444853609964104" crossorigin="anonymous"></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-LW9NNXTGK7"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-LW9NNXTGK7');
+</script>
+</head>
+
+<body class="min-h-screen font-sans text-slate-300 antialiased">
+
+  <div class="max-w-4xl mx-auto px-5 sm:px-8 py-10 sm:py-14">
+
+    <header class="flex items-center justify-between mb-10 sm:mb-14">
+      <a href="index.html" class="flex items-center gap-2">
+        <span class="w-1.5 h-1.5 rounded-full bg-gold-400"></span>
+        <span class="font-display italic font-medium text-xl text-slate-100 tracking-tight">Ledgr</span>
+      </a>
+      <a href="index.html" class="text-sm text-slate-400 hover:text-gold-400 transition-colors">← Back to calculator</a>
+    </header>
+
+    <!-- Google AdSense Slot A -->
+    <div class="w-full mb-10 sm:mb-14">
+      <div class="ad-slot" data-ad-slot="inventory-slot-a-header-banner">
+        <span class="ad-label">Advertisement</span>
+      </div>
+    </div>
+
+    <div class="max-w-2xl mx-auto text-center mb-8 sm:mb-10">
+      <p class="text-xs font-semibold tracking-widest text-gold-500 uppercase mb-3">Free Tool</p>
+      <h1 class="text-2xl sm:text-3xl font-medium text-slate-100 tracking-tight mb-4">Inventory &amp; Cash Flow Tracker</h1>
+      <p class="text-sm sm:text-base text-slate-400">
+        Track stock, sales velocity, and reorder points for every product you sell — see how much cash is tied up in inventory right now, and what needs reordering before you run out.
+      </p>
+    </div>
+
+    <!-- SUMMARY -->
+    <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 mb-6">
+      <div class="bg-ink-900 border border-ink-700 rounded-xl p-4">
+        <p class="text-xs text-slate-500 mb-1">Cash tied up</p>
+        <p id="summary-cash" class="font-mono font-tnum text-xl sm:text-2xl font-semibold text-gold-300">$0</p>
+      </div>
+      <div class="bg-ink-900 border border-ink-700 rounded-xl p-4">
+        <p class="text-xs text-slate-500 mb-1">Units in stock</p>
+        <p id="summary-units" class="font-mono font-tnum text-xl sm:text-2xl font-semibold text-slate-100">0</p>
+      </div>
+      <div class="bg-ink-900 border border-ink-700 rounded-xl p-4">
+        <p class="text-xs text-slate-500 mb-1">Needs reorder now</p>
+        <p id="summary-reorder" class="font-mono font-tnum text-xl sm:text-2xl font-semibold text-rose-400">0</p>
+      </div>
+      <div class="bg-ink-900 border border-ink-700 rounded-xl p-4">
+        <p class="text-xs text-slate-500 mb-1">Next reorder cost</p>
+        <p id="summary-next-cost" class="font-mono font-tnum text-xl sm:text-2xl font-semibold text-slate-100">$0</p>
+      </div>
+    </div>
+
+    <!-- TRACKER -->
+    <main class="bg-ink-900 border border-ink-700 rounded-2xl p-6 sm:p-7 mb-10 sm:mb-14">
+      <div class="flex flex-wrap items-center justify-between gap-3 mb-5">
+        <p class="text-xs font-semibold tracking-widest text-gold-500 uppercase">Your Products</p>
+        <div class="flex items-center gap-2">
+          <button id="btn-add-inv" class="inline-flex items-center gap-1 px-3 py-1.5 text-xs font-medium text-slate-300 bg-ink-800 border border-ink-700 rounded-full hover:border-gold-500/50 hover:text-gold-400 transition-colors">+ Add Product</button>
+          <button id="btn-clear-inv" class="text-xs font-medium text-slate-500 hover:text-rose-400 transition-colors px-2 py-1.5">Clear all</button>
+        </div>
+      </div>
+
+      <div id="product-list" class="space-y-3"></div>
+      <p id="empty-state" class="text-sm text-slate-500 text-center py-8">No products yet — add one to get started.</p>
+    </main>
+
+    <!-- Google AdSense Slot B -->
+    <div class="w-full max-w-3xl mx-auto mb-10 sm:mb-14">
+      <div class="ad-slot" data-ad-slot="inventory-slot-b-mid-page">
+        <span class="ad-label">Advertisement</span>
+      </div>
+    </div>
+
+    <p class="text-xs text-slate-500 text-center max-w-2xl mx-auto -mt-6 mb-10 sm:mb-14">Saved automatically in this browser only — nothing is sent to a server. Estimates only, not business or tax advice.</p>
+
+    <!-- SEO / educational content -->
+    <div class="max-w-2xl mx-auto seo-copy">
+      <h2 class="text-lg sm:text-xl font-semibold text-slate-100 tracking-tight mb-4">Why Cash Tied Up Matters As Much As Profit Margin</h2>
+      <p class="text-slate-300 mb-8">
+        The <a href="tiktok-shop-profit-calculator.html" class="text-gold-400 hover:text-gold-300 underline underline-offset-2">TikTok Shop Profit Calculator</a> answers "is this product worth ordering." This tracker answers the question that comes after: once you're actually running multiple products, how much of your cash is sitting on a shelf as unsold inventory at any given moment? A healthy margin on paper doesn't help if every dollar you have is tied up in stock and none of it is free to reorder your best seller.
+      </p>
+
+      <h2 class="text-lg sm:text-xl font-semibold text-slate-100 tracking-tight mb-4">Reading the Reorder Status</h2>
+      <p class="text-slate-300 mb-8">
+        Each product is flagged <span class="text-emerald-400">Stocked</span> when there's comfortable runway left, <span class="text-gold-300">Reorder Soon</span> once stock will run out around the time a new order would arrive, and <span class="text-rose-400">Reorder Now</span> once it's already past that window — placing an order today would still mean a stockout before it lands. The buffer exists because supplier lead times are estimates, not guarantees.
+      </p>
+
+      <h2 class="text-lg sm:text-xl font-semibold text-slate-100 tracking-tight mb-6">Estimating Daily Sales Velocity When You're Just Starting Out</h2>
+      <p class="text-slate-300 mb-6">
+        A brand-new product has no sales history to average, so any velocity number at first is a guess — that's fine. Once real orders start coming in, total units sold divided by days live gives a working estimate, and it's worth revisiting weekly since velocity on TikTok Shop can swing hard with a single video taking off. If cash is tight across multiple reorders at once, the <a href="budget.html" class="text-gold-400 hover:text-gold-300 underline underline-offset-2">Zero-Based Budget Planner</a> can help figure out what's actually available to spend.
+      </p>
+
+      <h2 class="text-lg sm:text-xl font-semibold text-slate-100 tracking-tight mb-6">Frequently Asked Questions</h2>
+
+      <div class="mb-6">
+        <h3 class="text-slate-100 font-medium mb-2">What counts as "cash tied up" in inventory?</h3>
+        <p class="text-slate-300">It's the landed cost of everything currently sitting in stock — units on hand multiplied by what each unit actually cost you (product plus shipping, duty, and prep). That money is spent and locked into physical goods until it sells; it isn't available for a new order, an ad budget, or anything else until it converts back to cash.</p>
+      </div>
+      <div class="mb-6">
+        <h3 class="text-slate-100 font-medium mb-2">How is "days of stock left" calculated?</h3>
+        <p class="text-slate-300">Units currently on hand divided by your average daily sales velocity. It's only as accurate as that velocity number, so it's worth updating it periodically as actual sales data comes in rather than setting it once and forgetting it.</p>
+      </div>
+      <div class="mb-6">
+        <h3 class="text-slate-100 font-medium mb-2">What's a safe lead time buffer before reordering?</h3>
+        <p class="text-slate-300">At minimum, place a reorder while you still have at least as many days of stock left as your supplier's lead time — otherwise you'll sell out before the new order arrives. Many sellers add a buffer on top of that (this tracker flags "Reorder Soon" at 1.5x lead time) to absorb shipping delays or a sales spike.</p>
+      </div>
+      <div class="mb-6">
+        <h3 class="text-slate-100 font-medium mb-2">Does this tracker save my data?</h3>
+        <p class="text-slate-300">Yes — everything you enter is saved automatically in this browser's local storage, so it's still there next time you visit from the same device and browser. Nothing is sent anywhere or stored on a server; clearing your browser data will also clear this tracker.</p>
+      </div>
+      <div class="mb-10">
+        <h3 class="text-slate-100 font-medium mb-2">What if I don't know my daily sales velocity yet?</h3>
+        <p class="text-slate-300">Leave it at zero until you have a few days of real sales to average — the tracker will flag the product as "No sales data" instead of guessing. Once you have even a week of numbers, total units sold divided by days is a reasonable starting estimate.</p>
+      </div>
+    </div>
+
+    <!-- Google AdSense Slot C -->
+    <div class="w-full max-w-3xl mx-auto mt-4 mb-10 sm:mb-14">
+      <div class="ad-slot" data-ad-slot="inventory-slot-c-page-bottom">
+        <span class="ad-label">Advertisement</span>
+      </div>
+    </div>
+
+    <footer class="text-center mt-10">
+      <div class="flex flex-wrap items-center justify-center gap-2 mb-3">
+        <a href="index.html" class="inline-flex items-center px-3 py-1.5 text-xs font-medium text-slate-400 bg-ink-900 border border-ink-700 rounded-full hover:text-gold-400 hover:border-gold-500/40 transition-colors">Calculator</a>
+        <a href="budget.html" class="inline-flex items-center px-3 py-1.5 text-xs font-medium text-slate-400 bg-ink-900 border border-ink-700 rounded-full hover:text-gold-400 hover:border-gold-500/40 transition-colors">Budget Planner</a>
+        <a href="tiktok-shop-profit-calculator.html" class="inline-flex items-center px-3 py-1.5 text-xs font-medium text-slate-400 bg-ink-900 border border-ink-700 rounded-full hover:text-gold-400 hover:border-gold-500/40 transition-colors">TikTok Shop Profit Calculator</a>
+        <a href="sinking-fund-calculator.html" class="inline-flex items-center px-3 py-1.5 text-xs font-medium text-slate-400 bg-ink-900 border border-ink-700 rounded-full hover:text-gold-400 hover:border-gold-500/40 transition-colors">Sinking Fund Calculator</a>
+        <a href="emergency-fund-calculator.html" class="inline-flex items-center px-3 py-1.5 text-xs font-medium text-slate-400 bg-ink-900 border border-ink-700 rounded-full hover:text-gold-400 hover:border-gold-500/40 transition-colors">Emergency Fund Calculator</a>
+        <a href="debt-snowball-avalanche-calculator.html" class="inline-flex items-center px-3 py-1.5 text-xs font-medium text-slate-400 bg-ink-900 border border-ink-700 rounded-full hover:text-gold-400 hover:border-gold-500/40 transition-colors">Debt Payoff Calculator</a>
+        <a href="sneaky-expense-calculator.html" class="inline-flex items-center px-3 py-1.5 text-xs font-medium text-slate-400 bg-ink-900 border border-ink-700 rounded-full hover:text-gold-400 hover:border-gold-500/40 transition-colors">Sneaky Expense Calculator</a>
+        <a href="cash-stuffing-guide.html" class="inline-flex items-center px-3 py-1.5 text-xs font-medium text-slate-400 bg-ink-900 border border-ink-700 rounded-full hover:text-gold-400 hover:border-gold-500/40 transition-colors">Cash Stuffing Guide</a>
+        <a href="about.html" class="inline-flex items-center px-3 py-1.5 text-xs font-medium text-slate-400 bg-ink-900 border border-ink-700 rounded-full hover:text-gold-400 hover:border-gold-500/40 transition-colors">About</a>
+        <a href="privacy-policy.html" class="inline-flex items-center px-3 py-1.5 text-xs font-medium text-slate-400 bg-ink-900 border border-ink-700 rounded-full hover:text-gold-400 hover:border-gold-500/40 transition-colors">Privacy Policy</a>
+        <a href="budgeting-glossary.html" class="inline-flex items-center px-3 py-1.5 text-xs font-medium text-slate-400 bg-ink-900 border border-ink-700 rounded-full hover:text-gold-400 hover:border-gold-500/40 transition-colors">Glossary</a>
+        <a href="savings-challenge-tracker.html" class="inline-flex items-center px-3 py-1.5 text-xs font-medium text-slate-400 bg-ink-900 border border-ink-700 rounded-full hover:text-gold-400 hover:border-gold-500/40 transition-colors">Savings Challenge Tracker</a>
+        <a href="rent-vs-buy-calculator.html" class="inline-flex items-center px-3 py-1.5 text-xs font-medium text-slate-400 bg-ink-900 border border-ink-700 rounded-full hover:text-gold-400 hover:border-gold-500/40 transition-colors">Rent vs. Buy Calculator</a>
+      </div>
+      <p class="text-xs text-slate-600">© 2026 Ledgr. All calculations are estimates for educational purposes only.</p>
+    </footer>
+
+  </div>
+
+<script>
+(function () {
+  const STORAGE_KEY = 'ledgr-inventory-tracker-v1';
+
+  const fmtCurrency = (n, decimals = 0) =>
+    '$' + Math.round(n).toLocaleString('en-US', { minimumFractionDigits: decimals, maximumFractionDigits: decimals });
+  const fmtWhole = (n) => Math.round(n).toLocaleString('en-US');
+
+  const DEFAULT_PRODUCTS = [
+    { name: 'Product A', unitCost: 7.18, stock: 320, dailySales: 8, leadTime: 21, reorderQty: 500 },
+    { name: 'Product B', unitCost: 4.43, stock: 60, dailySales: 5, leadTime: 18, reorderQty: 500 },
+  ];
+
+  const listEl = document.getElementById('product-list');
+  const emptyState = document.getElementById('empty-state');
+
+  function loadProducts() {
+    try {
+      const saved = JSON.parse(localStorage.getItem(STORAGE_KEY));
+      if (Array.isArray(saved)) return saved;
+    } catch (e) { /* ignore */ }
+    return DEFAULT_PRODUCTS;
+  }
+
+  function saveProducts() {
+    const products = [];
+    document.querySelectorAll('.product-row').forEach(row => {
+      products.push({
+        name: row.querySelector('.inv-name').value,
+        unitCost: parseFloat(row.querySelector('[data-key="unitCost"]').value) || 0,
+        stock: parseFloat(row.querySelector('[data-key="stock"]').value) || 0,
+        dailySales: parseFloat(row.querySelector('[data-key="dailySales"]').value) || 0,
+        leadTime: parseFloat(row.querySelector('[data-key="leadTime"]').value) || 0,
+        reorderQty: parseFloat(row.querySelector('[data-key="reorderQty"]').value) || 0,
+      });
+    });
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(products));
+  }
+
+  function addRow(data) {
+    const row = document.createElement('div');
+    row.className = 'product-row bg-ink-950 border border-ink-800 rounded-xl p-4 sm:p-5';
+    row.innerHTML = `
+      <div class="flex items-center justify-between gap-2 mb-3">
+        <input type="text" class="inv-name bg-transparent text-slate-100 font-medium text-base outline-none border-b border-transparent focus:border-gold-500/40 w-full" value="${data.name}" placeholder="Product name" />
+        <span class="inv-status shrink-0 text-xs font-medium px-2.5 py-1 rounded-full whitespace-nowrap"></span>
+        <button class="remove-inv-btn text-slate-500 hover:text-rose-400 transition-colors shrink-0" aria-label="Remove product">✕</button>
+      </div>
+
+      <div class="grid grid-cols-2 sm:grid-cols-5 gap-3 mb-3">
+        <div>
+          <label class="block text-xs text-slate-500 mb-1">Stock on hand</label>
+          <div class="flex items-center gap-1">
+            <input type="number" class="inv-field val-input text-sm" data-key="stock" value="${data.stock}" min="0" step="1" />
+            <span class="text-slate-500 font-mono text-xs">u</span>
+          </div>
+        </div>
+        <div>
+          <label class="block text-xs text-slate-500 mb-1">Unit cost</label>
+          <div class="flex items-center gap-1">
+            <span class="text-slate-500 font-mono text-xs">$</span>
+            <input type="number" class="inv-field val-input text-sm" data-key="unitCost" value="${data.unitCost}" min="0" step="0.05" />
+          </div>
+        </div>
+        <div>
+          <label class="block text-xs text-slate-500 mb-1">Daily sales</label>
+          <div class="flex items-center gap-1">
+            <input type="number" class="inv-field val-input text-sm" data-key="dailySales" value="${data.dailySales}" min="0" step="0.1" />
+            <span class="text-slate-500 font-mono text-xs">u/d</span>
+          </div>
+        </div>
+        <div>
+          <label class="block text-xs text-slate-500 mb-1">Lead time</label>
+          <div class="flex items-center gap-1">
+            <input type="number" class="inv-field val-input text-sm" data-key="leadTime" value="${data.leadTime}" min="0" step="1" />
+            <span class="text-slate-500 font-mono text-xs">days</span>
+          </div>
+        </div>
+        <div>
+          <label class="block text-xs text-slate-500 mb-1">Reorder qty</label>
+          <div class="flex items-center gap-1">
+            <input type="number" class="inv-field val-input text-sm" data-key="reorderQty" value="${data.reorderQty}" min="0" step="10" />
+            <span class="text-slate-500 font-mono text-xs">u</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="flex flex-wrap items-center justify-between gap-x-4 gap-y-1 pt-3 border-t border-ink-800 text-xs">
+        <span class="inv-timing text-slate-400"></span>
+        <span class="inv-cash text-slate-500"></span>
+      </div>
+    `;
+
+    listEl.appendChild(row);
+
+    row.querySelectorAll('.inv-field, .inv-name').forEach(input => {
+      input.addEventListener('input', calculate);
+    });
+    row.querySelector('.remove-inv-btn').addEventListener('click', () => {
+      row.remove();
+      calculate();
+    });
+  }
+
+  function calculate() {
+    const rows = document.querySelectorAll('.product-row');
+    emptyState.classList.toggle('hidden', rows.length > 0);
+
+    let totalCash = 0, totalUnits = 0, reorderCount = 0, nextReorderCost = 0;
+
+    rows.forEach(row => {
+      const get = (key) => parseFloat(row.querySelector(`[data-key="${key}"]`).value) || 0;
+      const stock = get('stock');
+      const unitCost = get('unitCost');
+      const dailySales = get('dailySales');
+      const leadTime = get('leadTime');
+      const reorderQty = get('reorderQty');
+
+      const cashTiedUp = stock * unitCost;
+      totalCash += cashTiedUp;
+      totalUnits += stock;
+
+      const daysLeft = dailySales > 0 ? stock / dailySales : Infinity;
+
+      let status, badgeClass, timingClass, timingMsg;
+      if (dailySales <= 0) {
+        status = 'No sales data';
+        badgeClass = 'bg-ink-800 text-slate-400';
+        timingClass = 'text-slate-500';
+        timingMsg = 'Add a daily sales estimate to calculate reorder timing.';
+      } else if (daysLeft <= leadTime) {
+        status = 'Reorder Now';
+        badgeClass = 'bg-rose-500/15 text-rose-400';
+        timingClass = 'text-rose-400';
+        timingMsg = `${Math.floor(daysLeft)}d of stock left — order now, lead time is ${fmtWhole(leadTime)}d.`;
+        reorderCount++;
+        nextReorderCost += reorderQty * unitCost;
+      } else if (daysLeft <= leadTime * 1.5) {
+        status = 'Reorder Soon';
+        badgeClass = 'bg-gold-500/15 text-gold-300';
+        timingClass = 'text-gold-300';
+        const daysUntilOrder = Math.floor(daysLeft - leadTime);
+        const orderByDate = new Date(Date.now() + daysUntilOrder * 86400000);
+        const dateStr = orderByDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+        timingMsg = `${Math.floor(daysLeft)}d of stock left — reorder by ~${dateStr}.`;
+      } else {
+        status = 'Stocked';
+        badgeClass = 'bg-emerald-500/15 text-emerald-400';
+        timingClass = 'text-slate-400';
+        timingMsg = `${Math.floor(daysLeft)}d of stock left.`;
+      }
+
+      const statusEl = row.querySelector('.inv-status');
+      statusEl.textContent = status;
+      statusEl.className = 'inv-status shrink-0 text-xs font-medium px-2.5 py-1 rounded-full whitespace-nowrap ' + badgeClass;
+
+      const timingEl = row.querySelector('.inv-timing');
+      timingEl.textContent = timingMsg;
+      timingEl.className = 'inv-timing ' + timingClass;
+
+      row.querySelector('.inv-cash').textContent = `${fmtCurrency(cashTiedUp)} tied up`;
+    });
+
+    document.getElementById('summary-cash').textContent = fmtCurrency(totalCash);
+    document.getElementById('summary-units').textContent = fmtWhole(totalUnits);
+    document.getElementById('summary-reorder').textContent = reorderCount;
+    document.getElementById('summary-next-cost').textContent = fmtCurrency(nextReorderCost);
+
+    saveProducts();
+  }
+
+  document.getElementById('btn-add-inv').addEventListener('click', () => {
+    addRow({ name: `Product ${document.querySelectorAll('.product-row').length + 1}`, unitCost: 5, stock: 0, dailySales: 0, leadTime: 21, reorderQty: 500 });
+    calculate();
+  });
+
+  document.getElementById('btn-clear-inv').addEventListener('click', () => {
+    if (!confirm('Remove all products from the tracker? This clears everything saved in this browser.')) return;
+    listEl.innerHTML = '';
+    localStorage.removeItem(STORAGE_KEY);
+    calculate();
+  });
+
+  loadProducts().forEach(p => addRow(p));
+  calculate();
+})();
+</script>
+</body>
+</html>
